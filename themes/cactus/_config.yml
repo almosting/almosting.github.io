@@ -47,6 +47,7 @@ nav:
   home: /
   articles: /archives/
   category: /categories/
+  tag: /tags/
   about: /about/
   search: /search/
 
