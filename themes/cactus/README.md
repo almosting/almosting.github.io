@@ -1,5 +1,7 @@
 # Cactus
 
+[中文说明](README_zh.md)
+
 A responsive, clean and simple [Hexo](http://hexo.io) theme for a personal website.
 
 :cactus: [Demo](https://probberechts.github.io/hexo-theme-cactus/)
@@ -254,29 +256,6 @@ umami_analytics:
   host: https://analytics.domain.com
 ```
 
-### CDN
-
-Load Javascript and CSS resources from a CDN. Enabled by default, loads all resources from [cdnjs](https://cdnjs.com/).
-
-```yml
-cdn:
-  enable: true
-  jquery: 'url'
-  clipboard: 'url'
-  font_awesome: 'url'
-  justified_gallery_css: 'url'
-  justified_gallery_js: 'url'
-```
-
-Set `enable: false` to completely disable CDN and load all resources from your domain. If you want to disable it only for specific resource(s) then just remove the corresponding entry(s).
-
-```yml
-cdn:
-  enable: true
-  jquery: 'url'
-```
-
-Only JQuery will be loaded from the specified CDN.
 
 ### Comments
 
@@ -371,6 +350,7 @@ Finally, edit the `_config.yml` and add a link to the navigation menu.
 nav:
   search: /search/
 ```
+
 
 ## License
 MIT
