@@ -133,7 +133,7 @@
                   itemprop="datePublished">2019-08-10</time>
             
                 (Updated:
-                <time datetime="2022-01-26T02:58:02.065Z"
+                <time datetime="2022-01-26T03:25:09.763Z"
                       itemprop="dateModified">2022-01-26</time>)
             
         
@@ -156,11 +156,11 @@
     
     <div class="content" itemprop="articleBody">
         <h2 id="RTSP-协议"><a href="#RTSP-协议" class="headerlink" title="RTSP 协议"></a>RTSP 协议</h2><blockquote>
-<p>实时流协议（Real Time Streaming Protocol，RTSP）是一种网络应用协议，专为娱乐和通信系统的使用，以控制流媒体服务器。该协议用于创建和控制终端之间的媒体会话。媒体服务器的客户端发布 VCR 命令，例如播放，录制和暂停，以便于实时控制从服务器到客户端（视频点播）或从客户端到服务器（语音录音）的媒体流。是 TCP/IP 协议体系中的一个应用层协议, 由哥伦比亚大学, 网景和 RealNetworks 公司提交的 IETF RFC 标准. 对应的 RFC 编号是 2326，可以在这里搜索 <a target="_blank" rel="noopener" href="http://www.rfc-editor.org/search/rfc_search_detail.php">RFC Editor</a></p>
+<p>实时流协议（Real Time Streaming Protocol，RTSP）是一种网络应用协议，专为娱乐和通信系统的使用，以控制流媒体服务器。该协议用于创建和控制终端之间的媒体会话。媒体服务器的客户端发布 VCR 命令，例如播放，录制和暂停，以便于实时控制从服务器到客户端（视频点播）或从客户端到服务器（语音录音）的媒体流。是 TCP/IP 协议体系中的一个应用层协议，由哥伦比亚大学，网景和 RealNetworks 公司提交的 IETF RFC 标准。对应的 RFC 编号是 2326，可以在这里搜索 <a target="_blank" rel="noopener" href="http://www.rfc-editor.org/search/rfc_search_detail.php">RFC Editor</a></p>
 </blockquote>
-<p>该协议定义了一对多应用程序如何有效地通过 IP 网络传送多媒体数据. RTSP 在体系结构上位于 RTP 和 RTCP 之上, 它使用 TCP 或 RTP 完成数据传输. RTSP 被用于建立的控制媒体流的传输，它为多媒体服务扮演“网络远程控制”的角色。尽管有时<strong>可以把 RTSP 控制信息和媒体数据流交织在一起传送</strong>，但一般情况 RTSP 本身并不用于转送媒体流数据。媒体数据的传送可通过 RTP/RTCP 等协议来完成。</p>
-<p>该协议用于 C/S 模型, 是一个基于文本的协议, 用于在客户端和服务器端建立和协商实时流会话.</p>
-<h3 id="协议体系"><a href="#协议体系" class="headerlink" title="协议体系"></a>协议体系</h3><p><strong>一次基本的 RTSP 操作过程:</strong></p>
+<p>该协议定义了一对多应用程序如何有效地通过 IP 网络传送多媒体数据。RTSP 在体系结构上位于 RTP 和 RTCP 之上，它使用 TCP 或 RTP 完成数据传输。RTSP 被用于建立的控制媒体流的传输，它为多媒体服务扮演“网络远程控制”的角色。尽管有时<strong>可以把 RTSP 控制信息和媒体数据流交织在一起传送</strong>，但一般情况 RTSP 本身并不用于转送媒体流数据。媒体数据的传送可通过 RTP/RTCP 等协议来完成。</p>
+<p>该协议用于 C/S 模型，是一个基于文本的协议，用于在客户端和服务器端建立和协商实时流会话。</p>
+<h3 id="协议体系"><a href="#协议体系" class="headerlink" title="协议体系"></a>协议体系</h3><p><strong>一次基本的 RTSP 操作过程：</strong></p>
 <ul>
 <li>首先，客户端连接到流服务器并发送一个 RTSP 描述命令（DESCRIBE）。</li>
 <li>流服务器通过一个 SDP 描述来进行反馈，反馈信息包括流数量、媒体类型等信息。</li>
@@ -168,7 +168,7 @@
 <li>客户端发送一个播放命令（PLAY），服务器就开始在 UDP 上传送媒体流（RTP 包）到客户端。 在播放过程中客户端还可以向服务器发送命令来控制快进、快退和暂停等。</li>
 <li>最后，客户端可发送一个终止命令（TERADOWN）来结束流媒体会话。</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">客户端-&gt;服务器：DESCRIBE</span><br><span class="line">服务器-&gt;客户端：200 OK (SDP)</span><br><span class="line">客户端-&gt;服务器：SETUP</span><br><span class="line">服务器-&gt;客户端：200 OK</span><br><span class="line">客户端-&gt;服务器：PLAY</span><br><span class="line">服务器-&gt;客户端：(RTP 包)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">客户端-&gt;服务器：DESCRIBE</span><br><span class="line">服务器-&gt;客户端：200 OK (SDP)</span><br><span class="line">客户端-&gt;服务器：SETUP</span><br><span class="line">服务器-&gt;客户端：200 OK</span><br><span class="line">客户端-&gt;服务器：PLAY</span><br><span class="line">服务器-&gt;客户端：(RTP 包）</span><br></pre></td></tr></table></figure>
 
 <h3 id="协议特点"><a href="#协议特点" class="headerlink" title="协议特点"></a>协议特点</h3><ul>
 <li>可扩展性：新方法和参数很容易加入 RTSP。</li>
@@ -185,7 +185,7 @@
 <li>传输协调：实际处理连续媒体流前，用户可协调传输方法。</li>
 <li>性能协调：如基本特征无效，必须有一些清理机制让用户决定哪种方法没生效。</li>
 </ul>
-<h2 id="报文结构"><a href="#报文结构" class="headerlink" title="报文结构"></a>报文结构</h2><h3 id="RTSP-URL"><a href="#RTSP-URL" class="headerlink" title="RTSP URL"></a>RTSP URL</h3><p>一个终端用户是通过在播放器中输入 URL 地址开始进行观看流媒体业务的第一步，而对于使用RTSP协议的移动流媒体点播而言，URL 的一般写法如下：</p>
+<h2 id="报文结构"><a href="#报文结构" class="headerlink" title="报文结构"></a>报文结构</h2><h3 id="RTSP-URL"><a href="#RTSP-URL" class="headerlink" title="RTSP URL"></a>RTSP URL</h3><p>一个终端用户是通过在播放器中输入 URL 地址开始进行观看流媒体业务的第一步，而对于使用 RTSP 协议的移动流媒体点播而言，URL 的一般写法如下：</p>
 <p>一个以 “rtsp” 或是 “rtspu” 开始的 URL 链接用于指定当前使用的是 RTSP 协议。RTSP URL 的语法结构如下： <code>rtsp_url = (“rtsp:”| “rtspu:”) “//” host [“:”port”] /[abs_path]/content_name</code></p>
 <ul>
 <li>host：可以是一个有效的域名或是 IP 地址。</li>
@@ -242,7 +242,7 @@
 <blockquote>
 <p>Response Header Fields</p>
 </blockquote>
-<p>在响应消息的域中存放的是无法放在 Status-Line 中,而又需要传送给请求者的一些附加信息。</p>
+<p>在响应消息的域中存放的是无法放在 Status-Line 中，而又需要传送给请求者的一些附加信息。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response-header = Location</span><br><span class="line">Proxy-Authenticate</span><br><span class="line">Public</span><br><span class="line">Retry-After</span><br><span class="line">Server</span><br><span class="line">Vary</span><br><span class="line">WWW-Authenticate</span><br></pre></td></tr></table></figure>
 
 <h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><table>
@@ -274,7 +274,7 @@
 <td align="left">C-&gt;S   S-&gt;C</td>
 <td align="left">P  S</td>
 <td>可选</td>
-<td align="center">请求检查RUL指定的演示与媒体的参数值</td>
+<td align="center">请求检查 RUL 指定的演示与媒体的参数值</td>
 </tr>
 <tr>
 <td align="left">OPTIONS</td>
@@ -333,17 +333,17 @@
 <td align="center">TEARDOWN 请求停止给定 URL 流发送，释放相关资源</td>
 </tr>
 </tbody></table>
-<p>注：P—演示，C—客户端,S—服务器，S（对象栏）—流</p>
+<p>注：P—演示，C—客户端，S—服务器，S（对象栏）—流</p>
 <p>信令指的是在 Request-URI 中指定的需要被接收者完成的操作。信令（The method）大小写敏感，不能以字符 ”$” 开始，并且一定要是一个标记符。</p>
 <h2 id="RTSP-Header-参数"><a href="#RTSP-Header-参数" class="headerlink" title="RTSP Header 参数"></a>RTSP Header 参数</h2><ol>
-<li>Accept：用于指定客户端可以接受的媒体描述信息类型。比如: <code>Accept: application/rtsl, application/sdp;level=2</code>。</li>
+<li>Accept：用于指定客户端可以接受的媒体描述信息类型。比如：<code>Accept: application/rtsl, application/sdp;level=2</code>。</li>
 <li>Bandwidth：用于描述客户端可用的带宽值。</li>
 <li>CSeq：指定了 RTSP 请求回应对的序列号，在每个请求或回应中都必须包括这个头字段。对每个包含一个给定序列号的请求消息，都会有一个相同序列号的回应消息。</li>
 <li>Range：用于指定一个时间范围，可以使用 SMPTE、NTP 或 clock 时间单元。</li>
 <li>Session：Session 头字段标识了一个 RTSP 会话。Session ID 是由服务器在 SETUP 的回应中选择的，客户端一当得到 Session ID 后，在以后的对 Session 的操作请求消息中都要包含 Session ID。</li>
-<li>Transport: Transport 头字段包含客户端可以接受的转输选项列表，包括传输协议，地址端口，TTL 等。服务器端也通过这个头字段返回实际选择的具体选项。如: <code>Transport:RTP/AVP;multicast;ttl=127;mode=&quot;PLAY&quot;</code>, <code>RTP/AVP;unicast;client_port=1289-1290;mode=&quot;PLAY&quot;</code></li>
+<li>Transport: Transport 头字段包含客户端可以接受的转输选项列表，包括传输协议，地址端口，TTL 等。服务器端也通过这个头字段返回实际选择的具体选项。如：<code>Transport:RTP/AVP;multicast;ttl=127;mode=&quot;PLAY&quot;</code>, <code>RTP/AVP;unicast;client_port=1289-1290;mode=&quot;PLAY&quot;</code></li>
 </ol>
-<h2 id="简单的-RTSP-消息交互过程"><a href="#简单的-RTSP-消息交互过程" class="headerlink" title="简单的 RTSP 消息交互过程"></a>简单的 RTSP 消息交互过程</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C 表示 RTSP 客户端,S 表示 RTSP 服务端</span><br><span class="line">第一步：查询服务器端可用方法 </span><br><span class="line">C-&gt;S OPTION request  	询问 S 有哪些方法可用</span><br><span class="line">S-&gt;C OPTION response 	S 回应信息的 public 头字段中包括提供的所有可用方法</span><br><span class="line">第二步：得到媒体描述信息 </span><br><span class="line">C-&gt;S DESCRIBE request  	要求得到 S 提供的媒体描述信息</span><br><span class="line">S-&gt;C DESCRIBE response  S 回应媒体描述信息一般是sdp信息</span><br><span class="line">第三步：建立 RTSP 会话 </span><br><span class="line">C-&gt;S SETUP request 	Transport 头字段列出可接受的传输选项，请求S建立会话</span><br><span class="line">S-&gt;C SETUP response S 建立会话通过 Transport 头字段返回选择的具体转输选项，并返回建立的 Session ID</span><br><span class="line">第四步：请求开始传送数据</span><br><span class="line">C-&gt;S PLAY request 	C 请求 S 开始发送数据</span><br><span class="line">S-&gt;C PLAY response	S 回应该请求的信息</span><br><span class="line">第五步： 数据传送播放中 </span><br><span class="line">S-&gt;C 发送流媒体数据 	通过 RTP 协议传送数据</span><br><span class="line">第六步：关闭会话，退出</span><br><span class="line">C-&gt;S EARDOWN request 	C 请求关闭会话</span><br><span class="line">S-&gt;C TEARDOWN response 	S 回应该请求</span><br></pre></td></tr></table></figure>
+<h2 id="简单的-RTSP-消息交互过程"><a href="#简单的-RTSP-消息交互过程" class="headerlink" title="简单的 RTSP 消息交互过程"></a>简单的 RTSP 消息交互过程</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C 表示 RTSP 客户端，S 表示 RTSP 服务端</span><br><span class="line">第一步：查询服务器端可用方法 </span><br><span class="line">C-&gt;S OPTION request  	询问 S 有哪些方法可用</span><br><span class="line">S-&gt;C OPTION response 	S 回应信息的 public 头字段中包括提供的所有可用方法</span><br><span class="line">第二步：得到媒体描述信息 </span><br><span class="line">C-&gt;S DESCRIBE request  	要求得到 S 提供的媒体描述信息</span><br><span class="line">S-&gt;C DESCRIBE response  S 回应媒体描述信息一般是 sdp 信息</span><br><span class="line">第三步：建立 RTSP 会话 </span><br><span class="line">C-&gt;S SETUP request 	Transport 头字段列出可接受的传输选项，请求 S 建立会话</span><br><span class="line">S-&gt;C SETUP response S 建立会话通过 Transport 头字段返回选择的具体转输选项，并返回建立的 Session ID</span><br><span class="line">第四步：请求开始传送数据</span><br><span class="line">C-&gt;S PLAY request 	C 请求 S 开始发送数据</span><br><span class="line">S-&gt;C PLAY response	S 回应该请求的信息</span><br><span class="line">第五步： 数据传送播放中 </span><br><span class="line">S-&gt;C 发送流媒体数据 	通过 RTP 协议传送数据</span><br><span class="line">第六步：关闭会话，退出</span><br><span class="line">C-&gt;S EARDOWN request 	C 请求关闭会话</span><br><span class="line">S-&gt;C TEARDOWN response 	S 回应该请求</span><br></pre></td></tr></table></figure>
 <p>上述的过程只是标准的、友好的 RTSP 流程，但实际的需求中并不一定按此过程。 其中第三和第四步是必需的！第一步，只要服务器和客户端约定好有哪些方法可用，则 option 请求可以不要。第二步，如果我们有其他途径得到媒体初始化描述信息（比如 http 请求等等），则我们也不需要通过 RTSP 中的 describe 请求来完成。</p>
 
     </div>

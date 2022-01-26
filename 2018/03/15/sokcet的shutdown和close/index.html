@@ -25,7 +25,7 @@
         
     
     <!-- title -->
-    <title>shutdown和close</title>
+    <title>shutdown 和 close</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -88,14 +88,14 @@
     <div id="share" style="display: none">
       <ul>
     <li><a class="icon"
-           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown和close"><i
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown 和 close"><i
                     class="fab fa-qq " aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown和close"><i
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown 和 close"><i
                     class="fab fa-weibo " aria-hidden="true"></i></a></li>
-    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&text=shutdown和close"><i
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&text=shutdown 和 close"><i
                     class="fab fa-twitter " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=shutdown和close&body=Check out this article: http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/"><i
+    <li><a class="icon" href="mailto:?subject=shutdown 和 close&body=Check out this article: http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/"><i
                     class="fas fa-envelope " aria-hidden="true"></i></a></li>
 </ul>
     </div>
@@ -111,7 +111,7 @@
     <header>
         
     <h1 class="posttitle" itemprop="name headline">
-        shutdown和close
+        shutdown 和 close
     </h1>
 
         <div class="meta">
@@ -128,7 +128,7 @@
                   itemprop="datePublished">2018-03-15</time>
             
                 (Updated:
-                <time datetime="2022-01-26T02:58:02.066Z"
+                <time datetime="2022-01-26T03:25:15.138Z"
                       itemprop="dateModified">2022-01-26</time>)
             
         
@@ -150,7 +150,7 @@
     </header>
     
     <div class="content" itemprop="articleBody">
-        <h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>转载自:<a target="_blank" rel="noopener" href="http://www.cnblogs.com/wainiwann/p/3942203.html">http://www.cnblogs.com/wainiwann/p/3942203.html</a></p>
+        <h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>转载自：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/wainiwann/p/3942203.html">http://www.cnblogs.com/wainiwann/p/3942203.html</a></p>
 <p>在开发的一个基于 rtmp 聊天的程序时发现了一个很奇怪的现象。</p>
 <p>在 windows 下当我们执行 closesocket 的操作之后，阻塞的 recv 会立即返回 -1 。</p>
 <p>而在 linux 下当我们执行 close 操作之后阻塞的 recv 会出现不能立即返回的现象。后来在网上一搜发现很多遇到类似这种现象的情况，大致意思应该是</p>
@@ -161,9 +161,9 @@
 <p>下面是对譬如 “CLOSE_WAIT” 现象的一些解释</p>
 </blockquote>
 <p>主动关闭方和被动方经历的状态：</p>
-<p>FIN_WAIT_1（主动关闭一方）：当 SOCKET 在 ESTABLISHED 状态时，它想主动关闭连接，向对方发送了 FIN 报文，此时该 SOCKET 即进入到FIN_WAIT_1 状态。而当对方回应 ACK 报文后，则进入到 FIN_WAIT_2 状态，</p>
+<p>FIN_WAIT_1（主动关闭一方）：当 SOCKET 在 ESTABLISHED 状态时，它想主动关闭连接，向对方发送了 FIN 报文，此时该 SOCKET 即进入到 FIN_WAIT_1 状态。而当对方回应 ACK 报文后，则进入到 FIN_WAIT_2 状态，</p>
 <p>FIN_WAIT_2（主动关闭一方）：上面已经详细解释了这种状态，实际上 FIN_WAIT_2 状态下的 SOCKET，表示半连接，也即有一方要求 close 连接，但另外还告诉对方，我暂时还有点数据需要传送给你，稍后再关闭连接。</p>
-<p>TIME_WAIT（主动关闭一方）：表示收到了对方的 FIN 报文，并发送出了 ACK 报文就等 2MSL（2倍最大生存时间）后即可回到 CLOSED 可用状态了。</p>
+<p>TIME_WAIT（主动关闭一方）：表示收到了对方的 FIN 报文，并发送出了 ACK 报文就等 2MSL（2 倍最大生存时间）后即可回到 CLOSED 可用状态了。</p>
 <p>CLOSE_WAIT（被动关闭一方）：这种状态的含义其实是表示在等待关闭。当对方 close 一个 SOCKET 后发送 FIN 报文给自己，你系统毫无疑问地会回应一个 ACK 报文给对方，此时则进入到 CLOSE_WAIT 状态。接下来呢，实际上你真正需要考虑的事情是察看你是否还有数据发送给对方，如果没有的话，那么你也就可以 close 这个 SOCKET，发送 FIN 报文给对方，也即关闭连接。所以你在 CLOSE_WAIT 状态下，需要完成的事情是等待你去关闭连接。</p>
 <p>LAST_ACK（被动关闭一方）：它是被动关闭一方在发送 FIN 报文后，最后等待对方的 ACK 报文。当收到 ACK 报文后，也即可以进入到 CLOSED 可用状态</p>
 <blockquote>
@@ -186,11 +186,11 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>关闭读写。</p>
-<p>  成功则返回 0，错误返回 -1，错误码 errno：EBADF 表示 fd 不是一个有效描述符；EINTR 表示 close 函数被信号中断；EIO 表示一个 IO 错误。<br>  下面摘用网上的一段话来说明二者的区别：<br>  close–关闭本进程的 socket id，但链接还是开着的，用这 socket id 的其它进程还能用这个链接，能读或写这个 socket id<br>  shutdown–则破坏了socket 链接，读的时候可能侦探到 EOF 结束符，写的时候可能会收到一个 SIGPIPE 信号，这个信号可能直到 socket buffer 被填充了才收到，shutdown 还有一个关闭方式的参数，0 不能再读，1 不能再写，2 读写都不能。</p>
+<p>  成功则返回 0，错误返回 -1，错误码 errno：EBADF 表示 fd 不是一个有效描述符；EINTR 表示 close 函数被信号中断；EIO 表示一个 IO 错误。<br>  下面摘用网上的一段话来说明二者的区别：<br>  close–关闭本进程的 socket id，但链接还是开着的，用这 socket id 的其它进程还能用这个链接，能读或写这个 socket id<br>  shutdown–则破坏了 socket 链接，读的时候可能侦探到 EOF 结束符，写的时候可能会收到一个 SIGPIPE 信号，这个信号可能直到 socket buffer 被填充了才收到，shutdown 还有一个关闭方式的参数，0 不能再读，1 不能再写，2 读写都不能。</p>
 <blockquote>
-<p>socket 多进程中的shutdown, close使用</p>
+<p>socket 多进程中的 shutdown, close 使用</p>
 </blockquote>
-<p>  当所有的数据操作结束以后，你可以调用 close() 函数来释放该 socket，从而停止在该socket上的任何数据操作：close(sockfd);</p>
+<p>  当所有的数据操作结束以后，你可以调用 close() 函数来释放该 socket，从而停止在该 socket 上的任何数据操作：close(sockfd);</p>
 <p>  你也可以调用 shutdown() 函数来关闭该 socket。该函数允许你只停止在某个方向上的数据传输，而一个方向上的数据传输继续进行。如你可以关闭某 socket 的写操作而允许继续在该 socket 上接受数据，直至读入所有数据。</p>
 <p>  int shutdown(int sockfd,int how);</p>
 <p>  sockfd 是需要关闭的 socket 的描述符。参数 how 允许为 shutdown 操作选择以下几种方式：</p>
@@ -199,7 +199,7 @@
 </li>
 <li><p>SHUT_WR：关闭连接的写端，进程不能在对此套接字发出写操作。</p>
 </li>
-<li><p>SHUT_RDWR：相当于调用 shutdown 两次；首先是以SHUT_RD，然后以 SHUT_WR<br>使用 close 中止一个连接，但它只是减少描述符的参考数，并不直接关闭连接，只有当描述符的参考数为0时才关闭连接。<br>shutdown 可直接关闭描述符，不考虑描述符的参考数，可选择中止一个方向的连接。</p>
+<li><p>SHUT_RDWR：相当于调用 shutdown 两次；首先是以 SHUT_RD，然后以 SHUT_WR<br>使用 close 中止一个连接，但它只是减少描述符的参考数，并不直接关闭连接，只有当描述符的参考数为 0 时才关闭连接。<br>shutdown 可直接关闭描述符，不考虑描述符的参考数，可选择中止一个方向的连接。</p>
 <p><strong>注意：</strong></p>
 <p> 如果有多个进程共享一个套接字，close 每被调用一次，计数减 1，直到计数为 0 时，也就是所用进程都调用了 close，套接字将被释放。<br> 在多进程中如果一个进程中 <code>shutdown(sfd, SHUT_RDWR)</code> 后其它的进程将无法进行通信。如果一个进程 <code>close(sfd)</code> 将不会影响到其它进程，得自己理解引用计数的用法了，有 Kernel 编程知识的更好理解了。</p>
 </li>
@@ -352,14 +352,14 @@
         <div id="share-footer" style="display: none">
             <ul>
     <li><a class="icon"
-           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown和close"><i
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown 和 close"><i
                     class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown和close"><i
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown 和 close"><i
                     class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&text=shutdown和close"><i
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&text=shutdown 和 close"><i
                     class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=shutdown和close&body=Check out this article: http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/"><i
+    <li><a class="icon" href="mailto:?subject=shutdown 和 close&body=Check out this article: http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/"><i
                     class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
 </ul>
         </div>

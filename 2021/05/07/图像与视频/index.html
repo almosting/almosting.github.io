@@ -100,7 +100,7 @@
 </ul>
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">图像编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YUV-%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">YUV 颜色模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RGB-%E4%B8%8E-YUV-%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.1.</span> <span class="toc-text">RGB 与 YUV 的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%87%E6%A0%B7%E7%8E%87%E3%80%81%E7%A0%81%E7%8E%87%E3%80%81%E5%B8%A7%E4%BB%A5%E5%8F%8A%E5%9C%BA%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">采样率、码率、帧以及场的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#H264-%E7%AE%80%E4%BB%8B"><span class="toc-number">4.</span> <span class="toc-text">H264 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NAL-%E5%8D%95%E5%85%83"><span class="toc-number">4.2.</span> <span class="toc-text">NAL 单元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#H264-NAL-%E7%AE%80%E4%BB%8B%E4%B8%8E-I-%E5%B8%A7%E5%88%A4%E6%96%AD"><span class="toc-number">4.3.</span> <span class="toc-text">H264 (NAL 简介与 I 帧判断)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP%E6%89%93%E5%8C%85%E5%8F%91%E9%80%81H264%E4%B9%8B%E5%B0%81%E5%8C%85%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">RTP打包发送H264之封包详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA-NALU"><span class="toc-number">5.1.</span> <span class="toc-text">单个 NALU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E8%81%9A%E5%90%88"><span class="toc-number">5.2.</span> <span class="toc-text">包聚合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FU-A%E7%9A%84%E5%88%86%E7%89%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">5.3.</span> <span class="toc-text">FU-A的分片格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">图像编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YUV-%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">YUV 颜色模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RGB-%E4%B8%8E-YUV-%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.1.</span> <span class="toc-text">RGB 与 YUV 的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%87%E6%A0%B7%E7%8E%87%E3%80%81%E7%A0%81%E7%8E%87%E3%80%81%E5%B8%A7%E4%BB%A5%E5%8F%8A%E5%9C%BA%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">采样率、码率、帧以及场的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#H264-%E7%AE%80%E4%BB%8B"><span class="toc-number">4.</span> <span class="toc-text">H264 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NAL-%E5%8D%95%E5%85%83"><span class="toc-number">4.2.</span> <span class="toc-text">NAL 单元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#H264-NAL-%E7%AE%80%E4%BB%8B%E4%B8%8E-I-%E5%B8%A7%E5%88%A4%E6%96%AD%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">H264 (NAL 简介与 I 帧判断）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E6%89%93%E5%8C%85%E5%8F%91%E9%80%81-H264-%E4%B9%8B%E5%B0%81%E5%8C%85%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">RTP 打包发送 H264 之封包详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA-NALU"><span class="toc-number">5.1.</span> <span class="toc-text">单个 NALU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E8%81%9A%E5%90%88"><span class="toc-number">5.2.</span> <span class="toc-text">包聚合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FU-A-%E7%9A%84%E5%88%86%E7%89%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">5.3.</span> <span class="toc-text">FU-A 的分片格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -128,7 +128,7 @@
                   itemprop="datePublished">2021-05-07</time>
             
                 (Updated:
-                <time datetime="2022-01-26T02:58:02.066Z"
+                <time datetime="2022-01-26T03:24:54.747Z"
                       itemprop="dateModified">2022-01-26</time>)
             
         
@@ -159,16 +159,16 @@
 <li>16 位比特模式：分配给每种原色各为 5 比特，其中绿色为 6 比特，因为人眼对绿色分辨的色调更精确。但某些情况下每种原色各占 5 比特，余下的 1 比特不使用。</li>
 <li>32 位比特模式：同 24 位比特模式，余下的 8 比特用来表示象素的透明度（Alpha）。</li>
 </ul>
-<p>图片还有一个很重要的属性就是分辨率，采用宽x高表示。</p>
+<p>图片还有一个很重要的属性就是分辨率，采用宽 x 高表示。</p>
 <img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/resolution.png" class="" title="resolution">
 
 <p>在处理图像或视频时另一个属性是长宽比，它描述了图像或像素的宽度和高度之间的比例关系。常见的比例有 4：3、16：9、21：9，通常指显示宽高比（DAR），同样像素也有不同的宽高比，称之为像素长宽比（PAR）。</p>
 <img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/PAR.png" class="" title="PAR">
 
-<h2 id="YUV-颜色模型"><a href="#YUV-颜色模型" class="headerlink" title="YUV 颜色模型"></a>YUV 颜色模型</h2><p>RGB 诉求于人眼对色彩的感应，YUV 则着重于视觉对于亮度的敏感程度，Y 代表的是亮度（Luminance、Luma），UV代表的是色度（Chrominance/Chroma）（因此黑白电影可省略 UV，相近于 RGB），分别用 Cr 和 Cb 来表示，因此 YUV 的记录通常以 Y:UV 的格式呈现。</p>
+<h2 id="YUV-颜色模型"><a href="#YUV-颜色模型" class="headerlink" title="YUV 颜色模型"></a>YUV 颜色模型</h2><p>RGB 诉求于人眼对色彩的感应，YUV 则着重于视觉对于亮度的敏感程度，Y 代表的是亮度（Luminance、Luma），UV 代表的是色度（Chrominance/Chroma）（因此黑白电影可省略 UV，相近于 RGB），分别用 Cr 和 Cb 来表示，因此 YUV 的记录通常以 Y:UV 的格式呈现。</p>
 <img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/ycbcr.png" class="" title="ycbcr">
 
-<p>为节省带宽起见，大多数 YUV 格式平均使用的每像素位数都少于 24 位。主要的抽样（subsample）格式有 YCbCr 4:2:0、YCbCr 4:2:2、YCbCr 4:1:1和YCbCr 4:4:4。YUV 的表示法称为 A:B:C 表示法：</p>
+<p>为节省带宽起见，大多数 YUV 格式平均使用的每像素位数都少于 24 位。主要的抽样（subsample）格式有 YCbCr 4:2:0、YCbCr 4:2:2、YCbCr 4:1:1 和 YCbCr 4:4:4。YUV 的表示法称为 A:B:C 表示法：</p>
 <ul>
 <li>4:4:4 表示完全取样。</li>
 <li>4:2:2 表示 2:1 的水平取样，垂直完全采样。</li>
@@ -177,34 +177,34 @@
 </ul>
 <h3 id="RGB-与-YUV-的转换"><a href="#RGB-与-YUV-的转换" class="headerlink" title="RGB 与 YUV 的转换"></a>RGB 与 YUV 的转换</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"># 第一步计算亮度</span><br><span class="line">Y = <span class="number">0.299</span>R + <span class="number">0.587</span>G + <span class="number">0.114B</span></span><br><span class="line"># 一旦有了亮度，可以分割颜色（色度蓝色和红色）：</span><br><span class="line">Cb = <span class="number">0.564</span>(B - Y)</span><br><span class="line">Cr = <span class="number">0.713</span>(R - Y)</span><br><span class="line"># 也可以通过使用 YCbCr 进行转换，甚至获得 RGB</span><br><span class="line">R = Y + <span class="number">1.402</span>Cr</span><br><span class="line">B = Y + <span class="number">1.772</span>Cb</span><br><span class="line">G = Y - <span class="number">0.344</span>Cb - <span class="number">0.714</span>Cr</span><br></pre></td></tr></table></figure>
 <h2 id="采样率、码率、帧以及场的概念"><a href="#采样率、码率、帧以及场的概念" class="headerlink" title="采样率、码率、帧以及场的概念"></a>采样率、码率、帧以及场的概念</h2><p>图像则是对模拟信号进行采样量化后获得，而视频则是由一系列的图像组成，采集时图像的分辨率及量化位数越高，所能表达的信息越多，画面则越清晰。视频存在一个采样频率的属性，即单位时间内采样的次数。视频的采样频率也受人眼的限制，通常在每秒 20 ~ 30 帧之间。当采样频率在每秒 10<del>20 帧时，对于快速运动的图像，人眼可以感觉到不流畅，而采样频率提高到 20</del>30 帧时，人眼看起来比较流畅了。如果将采样频率在提高，人眼是很难感觉这种差异的，这也是目前电影拍摄时使用 24 帧或者 30 帧采样频率的原因。</p>
-<p>显示视频所需要的每秒位数称作为比特率，也叫码率。计算公式为 <code>比特率=宽 高 位深度 每秒帧数</code>* 例如，如果我们不采用任何类型的压缩，每秒 30 帧，每像素 24 位，480x240 分辨率的视频将需要 82,944,000位/秒 或 82.944 Mbps（30x480x240x24）。</p>
-<p>当比特率几乎恒定时，称为恒定比特率（CBR），但它也可以变化，然后称为可变比特率（VBR）。下图显示了一个受限的VBR，在帧为黑色时不会花太多位。</p>
+<p>显示视频所需要的每秒位数称作为比特率，也叫码率。计算公式为 <code>比特率=宽 高 位深度 每秒帧数</code>* 例如，如果我们不采用任何类型的压缩，每秒 30 帧，每像素 24 位，480x240 分辨率的视频将需要 82,944,000 位/秒 或 82.944 Mbps（30x480x240x24）。</p>
+<p>当比特率几乎恒定时，称为恒定比特率（CBR），但它也可以变化，然后称为可变比特率（VBR）。下图显示了一个受限的 VBR，在帧为黑色时不会花太多位。</p>
 <img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/vbr.png" class="" title="vbr">
 
-<p>视频采样中通过逐行扫描得到一幅完整的图像称之为一帧，通常帧频率为 25 帧（PAL制）、30 帧每秒（NTSC制），而通过隔行扫描（奇、偶数行），那么一帧图像就被分成两场，通常场频为 50Hz（PAL制）、60Hz（NTSC制）。这是在早起，工程师们提出的一种技术，能够在不消耗额外的带宽的情况下，使得显示器的感知帧率倍增。这种技术称为隔行视频；它基本上在 1 帧中发送一半的屏幕，而在下一帧中发送另一半。</p>
+<p>视频采样中通过逐行扫描得到一幅完整的图像称之为一帧，通常帧频率为 25 帧（PAL 制）、30 帧每秒（NTSC 制），而通过隔行扫描（奇、偶数行），那么一帧图像就被分成两场，通常场频为 50Hz（PAL 制）、60Hz（NTSC 制）。这是在早起，工程师们提出的一种技术，能够在不消耗额外的带宽的情况下，使得显示器的感知帧率倍增。这种技术称为隔行视频；它基本上在 1 帧中发送一半的屏幕，而在下一帧中发送另一半。</p>
 <img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/interlaced_vs_progressive.png" class="" title="interlaced_vs_progressive">
 
 <h2 id="H264-简介"><a href="#H264-简介" class="headerlink" title="H264 简介"></a>H264 简介</h2><blockquote>
-<p>H264是属于视频的编码层的标准格式，视频编码显然是为了压缩大小。</p>
+<p>H264 是属于视频的编码层的标准格式，视频编码显然是为了压缩大小。</p>
 </blockquote>
 <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
 <li>SODB：数据比特串 -&gt; 最原始的编码数据</li>
 <li>RBSP：原始字节序列载荷 -&gt; 在 SODB 的后面填加了结尾比特（RBSP trailing bits　一个 bit “1”）若干比特 “0”，以便字节对齐。</li>
-<li>EBSP：扩展字节序列载荷 -&gt; 在 RBSP 基础上填加了仿校验字节（0X03）它的原因是：在 NALU 加到 Annexb 上时，需要填加每组 NALU 之前的开始码 StartCodePrefix，如果该 NALU 对应的 slice 为一帧的开始则用 4 位字节表示，0x00000001，否则用3位字节表示 0x000001，为了使 NALU 主体中不包括与开始码相冲突的，在编码时，每遇到两个字节连续为 0，就插入一个字节的 0x03。解码时将 0x03 去掉，也称为脱壳操作。</li>
+<li>EBSP：扩展字节序列载荷 -&gt; 在 RBSP 基础上填加了仿校验字节（0X03）它的原因是：在 NALU 加到 Annexb 上时，需要填加每组 NALU 之前的开始码 StartCodePrefix，如果该 NALU 对应的 slice 为一帧的开始则用 4 位字节表示，0x00000001，否则用 3 位字节表示 0x000001，为了使 NALU 主体中不包括与开始码相冲突的，在编码时，每遇到两个字节连续为 0，就插入一个字节的 0x03。解码时将 0x03 去掉，也称为脱壳操作。</li>
 </ul>
 <blockquote>
-<p>H.264的功能分为两层，视频编码层（VCL）和网络提取层（NAL）</p>
+<p>H.264 的功能分为两层，视频编码层（VCL）和网络提取层（NAL）</p>
 </blockquote>
 <p>VCL 数据即被压缩编码后的视频数据序列。在 VCL 数据要封装到 NAL 单元中之后，才可以用来传输或存储。</p>
 <img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/table1.png" class="" title="table1">
 
-<p>H.264 的编码视频序列包括一系列的 NAL 单元，每个 NAL 单元包含一个 RBSP，见表1。编码片（包括数据分割片 IDR 片）和序列 RBSP 结束符被定义为 VCL NAL单元，其余为 NAL 单元。典型的 RBSP 单元序列如图 2 所示。</p>
+<p>H.264 的编码视频序列包括一系列的 NAL 单元，每个 NAL 单元包含一个 RBSP，见表 1。编码片（包括数据分割片 IDR 片）和序列 RBSP 结束符被定义为 VCL NAL 单元，其余为 NAL 单元。典型的 RBSP 单元序列如图 2 所示。</p>
 <p>​<img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/table2.png" class="" title="table2"></p>
 <p>每个单元都按独立的 NAL 单元传送。单元的信息头（一个字节）定义了 RBSP 单元的类型，NAL 单元的其余部分为 RBSP 数据。</p>
 <h3 id="NAL-单元"><a href="#NAL-单元" class="headerlink" title="NAL 单元"></a>NAL 单元</h3><blockquote>
 <p>每个 NAL 单元是一个一定语法元素的可变长字节字符串，包括包含一个字节的头信息（用来表示数据类型），以及若干整数字节的负荷数据。一个 NAL 单元可以携带一个编码片、A/B/C 型数据分割或一个序列或图像参数集。</p>
 </blockquote>
-<p>NALU 头由一个字节组成, 它的语法如下：</p>
+<p>NALU 头由一个字节组成，它的语法如下：</p>
 <p>NAL 单元按 RTP 序列号按序传送。其中，T 为负荷数据类型，占 5 bit；R 为重要性指示位，占 2 个 bit；最后的 F 为禁止位，占 1 bit。具体如下：　</p>
 <p>​<img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/table3.png" class="" title="table3"></p>
 <ol>
@@ -212,12 +212,12 @@
 <li>重要性指示位用于在重构过程中标记一个 NAL 单元的重要性，值越大，越重要。值为 0 表示这个 NAL 单元没有用于预测，因此可被解码器抛弃而不会有错误扩散；值高于 0 表示此 NAL 单元要用于无漂移重构，且值越高，对此 NAL 单元丢失的影响越大。　</li>
 <li>禁止位 编码中默认值为 0，当网络识别此单元中存在比特错误时，可将其设为 1，以便接收方丢掉该单元，主要用于适应不同种类的网络环境（比如有线无线相结合的环境）。</li>
 </ol>
-<p>264常见的帧头数据为：</p>
+<p>264 常见的帧头数据为：</p>
 <ul>
 <li>00 00 00 01 <strong>67</strong> (SPS)</li>
 <li>00 00 00 01 <strong>68</strong> (PPS)</li>
-<li>00 00 00 01 <strong>65</strong> (IDR 帧)</li>
-<li>00 00 00 01 <strong>61</strong> (P帧)</li>
+<li>00 00 00 01 <strong>65</strong> (IDR 帧）</li>
+<li>00 00 00 01 <strong>61</strong> (P 帧）</li>
 </ul>
 <p>上述的 67、68、65、61，还有 41 等，都是该 NALU 的识别级别。</p>
 <p>F：禁止为，0 表示正常，1 表示错误，一般都是 0</p>
@@ -226,11 +226,10 @@
 <p>见下表，由此可知 7 为序列参数集（SPS），8 为图像参数集（PPS），5 代表 I 帧。1 代表非 I 帧。</p>
 <p>​<img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/h264-header.png" class="" title="h264-header"></p>
 <p>由此可知，61 和 41 其实都是 P 帧（type 值为 1），只是重要级别不一样（它们的 NRI 一个是 11 BIN，一个是 10 BIN）</p>
-<h3 id="H264-NAL-简介与-I-帧判断"><a href="#H264-NAL-简介与-I-帧判断" class="headerlink" title="H264 (NAL 简介与 I 帧判断)"></a>H264 (NAL 简介与 I 帧判断)</h3><img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/h264.jpg" class="" title="h264">
+<h3 id="H264-NAL-简介与-I-帧判断）"><a href="#H264-NAL-简介与-I-帧判断）" class="headerlink" title="H264 (NAL 简介与 I 帧判断）"></a>H264 (NAL 简介与 I 帧判断）</h3><img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/h264.jpg" class="" title="h264">
 
 <p>我们还是接着看最上面图的码流对应的数据来层层分析，以 00 00 00 01 分割之后的下一个字节就是 NALU 类型，将其转为二进制数据后，</p>
-<p>解读顺序为从左往右算，如下:</p>
-<p>（1）第 1 位禁止位，值为 1 表示语法出错</p>
+<p>解读顺序为从左往右算，如下：<br>（1）第 1 位禁止位，值为 1 表示语法出错</p>
 <p>（2）第 2~3 位为参考级别</p>
 <p>（3）第 4~8 为是 nal 单元类型</p>
 <p>例如上面 00000001 后有 67、68 以及 65</p>
@@ -241,27 +240,22 @@
 <p>0110 1000 4-8 为 01000，转为十进制 8，参考第二幅图：8 对应图像参数集 PPS</p>
 <p>其中 0x65 的二进制码为：</p>
 <p>011 00101</p>
-<p>4-8 位为 00101，转为十进制 5，参考第二幅图：5 对应 IDR 图像中的片(I 帧)</p>
+<p>4-8 位为 00101，转为十进制 5，参考第二幅图：5 对应 IDR 图像中的片 (I 帧）</p>
 <p><strong>所以判断是否为 I 帧的算法为：</strong></p>
 <p>（NALU 类型 &amp; 0001 1111） = 5 即 (NALU 类型 &amp; 31) = 5 比如 0x65 &amp; 31 = 5</p>
-<h2 id="RTP打包发送H264之封包详解"><a href="#RTP打包发送H264之封包详解" class="headerlink" title="RTP打包发送H264之封包详解"></a>RTP打包发送H264之封包详解</h2><blockquote>
-<p>RFC3984是H.264的baseline码流在RTP方式下传输的规范</p>
+<h2 id="RTP-打包发送-H264-之封包详解"><a href="#RTP-打包发送-H264-之封包详解" class="headerlink" title="RTP 打包发送 H264 之封包详解"></a>RTP 打包发送 H264 之封包详解</h2><blockquote>
+<p>RFC3984 是 H.264 的 baseline 码流在 RTP 方式下传输的规范</p>
 </blockquote>
-<p><strong>H264的码流结构</strong></p>
+<p><strong>H264 的码流结构</strong></p>
 <img src="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/h264-stream.png" class="" title="h264-stream">
 
-<h3 id="单个-NALU"><a href="#单个-NALU" class="headerlink" title="单个 NALU"></a>单个 NALU</h3><p>12 字节的 RTP 头后面的就是音视频数据，比较简单。一个封装单个 NAL 单元包到 RTP 的 NAL 单元流的 RTP 序号必须符合 NAL 单元的解码顺序。 对于 NALU 的长度小于 MTU 大小的包, 一般采用单一 NAL 单元模式. 对于一个原始的 H.264 NALU 单元常由<code>[Start Code] [NALU Header] [NALU Payload]</code>三部分组成, 其中 Start Code 用于标示这是一个 NALU 单元的开始, 必须是 “00 00 00 01” 或 “00 00 01”, NALU 头仅一个字节, 其后都是 NALU 单元内容.</p>
-<p>打包时去除 “00 00 01” 或 “00 00 00 01”的开始码, 把其他数据封包的 RTP 包即可.</p>
+<h3 id="单个-NALU"><a href="#单个-NALU" class="headerlink" title="单个 NALU"></a>单个 NALU</h3><p>12 字节的 RTP 头后面的就是音视频数据，比较简单。一个封装单个 NAL 单元包到 RTP 的 NAL 单元流的 RTP 序号必须符合 NAL 单元的解码顺序。 对于 NALU 的长度小于 MTU 大小的包，一般采用单一 NAL 单元模式。对于一个原始的 H.264 NALU 单元常由<code>[Start Code] [NALU Header] [NALU Payload]</code>三部分组成，其中 Start Code 用于标示这是一个 NALU 单元的开始，必须是 “00 00 00 01” 或 “00 00 01”, NALU 头仅一个字节，其后都是 NALU 单元内容。<br>打包时去除 “00 00 01” 或 “00 00 00 01”的开始码，把其他数据封包的 RTP 包即可。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|F|NRI|  type   |                                               |</span><br><span class="line">+-+-+-+-+-+-+-+-+                                               |</span><br><span class="line">|                                                               |</span><br><span class="line">|               Bytes 2..n of a Single NAL unit                 |</span><br><span class="line">|                                                               |</span><br><span class="line">|                               +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                               :...OPTIONAL RTP padding        |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></table></figure>
 
-<p>如有一个 H.264 的 NALU 是这样的:</p>
-<p><code>[00 00 00 01 67 42 A0 1E 23 56 0E 2F …]</code></p>
-<p>这是一个序列参数集 NAL 单元. [00 00 00 01] 是四个字节的开始码, 67 是 NALU 头, 42 开始的数据是 NALU 内容.</p>
-<p>封装成 RTP 包将如下:</p>
-<p><code>[RTP Header] [67 42 A0 1E 23 56 0E 2F]</code></p>
-<p>即只要去掉 4 个字节的开始码就可以了.</p>
-<h3 id="包聚合"><a href="#包聚合" class="headerlink" title="包聚合"></a>包聚合</h3><p>当 NALU 的长度特别小时, 可以把几个 NALU 单元封在一个 RTP 包中.</p>
-<p>为了体现/应对有线网络和无线网络的 MTU 巨大差异，RTP 协议定义了包聚合策略：</p>
+<p>如有一个 H.264 的 NALU 是这样的：<br><code>[00 00 00 01 67 42 A0 1E 23 56 0E 2F …]</code></p>
+<p>这是一个序列参数集 NAL 单元。[00 00 00 01] 是四个字节的开始码，67 是 NALU 头，42 开始的数据是 NALU 内容。<br>封装成 RTP 包将如下：<br><code>[RTP Header] [67 42 A0 1E 23 56 0E 2F]</code></p>
+<p>即只要去掉 4 个字节的开始码就可以了。</p>
+<h3 id="包聚合"><a href="#包聚合" class="headerlink" title="包聚合"></a>包聚合</h3><p>当 NALU 的长度特别小时，可以把几个 NALU 单元封在一个 RTP 包中。<br>为了体现/应对有线网络和无线网络的 MTU 巨大差异，RTP 协议定义了包聚合策略：</p>
 <ul>
 <li>STAP-A：聚合的 NALU 时间戳都一样，无 DON（decoding order number）；</li>
 <li>STAP-B：聚合的 NALU 时间戳都一样，有 DON；</li>
@@ -274,13 +268,13 @@
 <p>STAP-A 示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0                   1                   2                   3</span><br><span class="line">0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                          RTP Header                           |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|STAP-A NAL HDR |         NALU 1 Size           | NALU 1 HDR    |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                         NALU 1 Data                           |</span><br><span class="line">:                                                               :</span><br><span class="line">+               +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|               | NALU 2 Size                   | NALU 2 HDR    |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                         NALU 2 Data                           |</span><br><span class="line">:                                                               :</span><br><span class="line">|                               +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                               :...OPTIONAL RTP padding        |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line"></span><br><span class="line">Figure 7.  An example of an RTP packet including an STAP-A</span><br><span class="line">containing two single-time aggregation units</span><br></pre></td></tr></table></figure>
 
-<h3 id="FU-A的分片格式"><a href="#FU-A的分片格式" class="headerlink" title="FU-A的分片格式"></a>FU-A的分片格式</h3><p>数据比较大的 H264 视频包，被 RTP 分片发送。12 字节的 RTP 头后面跟随的就是 FU-A 分片： 而当 NALU 的长度超过 MTU 时, 就必须对 NALU 单元进行分片封包. 也称为 Fragmentation Units (FUs).</p>
+<h3 id="FU-A-的分片格式"><a href="#FU-A-的分片格式" class="headerlink" title="FU-A 的分片格式"></a>FU-A 的分片格式</h3><p>数据比较大的 H264 视频包，被 RTP 分片发送。12 字节的 RTP 头后面跟随的就是 FU-A 分片： 而当 NALU 的长度超过 MTU 时，就必须对 NALU 单元进行分片封包。也称为 Fragmentation Units (FUs).</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0                   1                   2                   3</span><br><span class="line">0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">| FU indicator  |   FU header  |                               |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               |</span><br><span class="line">|                                                               |</span><br><span class="line">|                         FU payload                            |</span><br><span class="line">|                                                               |</span><br><span class="line">|                               +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                               :...OPTIONAL RTP padding        |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">Figure 14.  RTP payload format for FU-A</span><br></pre></td></tr></table></figure>
 
 <p><strong>FU indicator 有以下格式：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+---------------+</span><br><span class="line">|0|1|2|3|4|5|6|7|</span><br><span class="line">+-+-+-+-+-+-+-+-+</span><br><span class="line">|F|NRI|  Type   |</span><br><span class="line">+---------------+</span><br></pre></td></tr></table></figure>
 
-<p>FU 指示字节的类型域 Type=28 表示 FU-A。。NRI 域的值必须根据分片 NAL 单元的 NRI 域的值设置。</p>
+<p>FU 指示字节的类型域 Type=28 表示 FU-A。NRI 域的值必须根据分片 NAL 单元的 NRI 域的值设置。</p>
 <p><strong>FU header 的格式如下：</strong></p>
 <pre><code>+---------------+
 |0|1|2|3|4|5|6|7|
@@ -288,15 +282,15 @@
 |S|E|R|  Type   |
 +---------------+
 </code></pre>
-<p>S: 1 bit 当设置成1表明这是 NALU 的首个 fragmnet。当跟随的 FU 荷载不是分片 NAL 单元荷载的开始，开始位设为 0。</p>
-<p>E: 1 bit 当设置成1表明是 NALU 的最后一个 fragment，即, 荷载的最后字节也是分片 NAL 单元的最后一个字节。当跟随的 FU 荷载不是分片 NAL 单元的最后分片,结束位设置为 0。</p>
+<p>S: 1 bit 当设置成 1 表明这是 NALU 的首个 fragmnet。当跟随的 FU 荷载不是分片 NAL 单元荷载的开始，开始位设为 0。</p>
+<p>E: 1 bit 当设置成 1 表明是 NALU 的最后一个 fragment，即，荷载的最后字节也是分片 NAL 单元的最后一个字节。当跟随的 FU 荷载不是分片 NAL 单元的最后分片，结束位设置为 0。</p>
 <p>R: 1 bit 保留位必须设置为 0，接收者必须忽略该位。</p>
 <p>Type: 5 bits<br>NAL 单元荷载类型定义见下表</p>
 <p><strong>单元类型以及荷载结构总结</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.Type   Packet      Type name                       </span><br><span class="line">  ---------------------------------------------------------</span><br><span class="line">  0      undefined                                    -</span><br><span class="line">  1-23   NAL unit    Single NAL unit packet per H.264  </span><br><span class="line">  24     STAP-A     Single-time aggregation packet    </span><br><span class="line">  25     STAP-B     Single-time aggregation packet    </span><br><span class="line">  26     MTAP16    Multi-time aggregation packet     </span><br><span class="line">  27     MTAP24    Multi-time aggregation packet     </span><br><span class="line">  28     FU-A      Fragmentation unit                </span><br><span class="line">  29     FU-B      Fragmentation unit                 </span><br><span class="line">  30-31  undefined                            </span><br></pre></td></tr></table></figure>
 
 <p><strong>拆包和解包</strong></p>
-<p><strong>拆包</strong>：当编码器在编码时需要将原有一个 NAL 按照 FU-A 进行分片，原有的NAL的单元头与分片后的 FU-A 的单元头有如下关系：</p>
+<p><strong>拆包</strong>：当编码器在编码时需要将原有一个 NAL 按照 FU-A 进行分片，原有的 NAL 的单元头与分片后的 FU-A 的单元头有如下关系：</p>
 <p><strong>原始的 NAL 头的前三位为 FU indicator 的前三位，原始的 NAL 头的后五位为 FU header 的后五位，</strong></p>
 <p>FU indicator 与 FU header 的剩余位数根据实际情况决定。</p>
 <p><strong>解包：</strong>当接收端收到 FU-A 的分片数据，需要将所有的分片包组合还原成原始的 NAl 包时，FU-A 的单元头与还原后的 NAL 的关系如下：</p>
@@ -429,7 +423,7 @@
         </div>
 
         <div id="toc-footer" style="display: none">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">图像编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YUV-%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">YUV 颜色模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RGB-%E4%B8%8E-YUV-%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.1.</span> <span class="toc-text">RGB 与 YUV 的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%87%E6%A0%B7%E7%8E%87%E3%80%81%E7%A0%81%E7%8E%87%E3%80%81%E5%B8%A7%E4%BB%A5%E5%8F%8A%E5%9C%BA%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">采样率、码率、帧以及场的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#H264-%E7%AE%80%E4%BB%8B"><span class="toc-number">4.</span> <span class="toc-text">H264 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NAL-%E5%8D%95%E5%85%83"><span class="toc-number">4.2.</span> <span class="toc-text">NAL 单元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#H264-NAL-%E7%AE%80%E4%BB%8B%E4%B8%8E-I-%E5%B8%A7%E5%88%A4%E6%96%AD"><span class="toc-number">4.3.</span> <span class="toc-text">H264 (NAL 简介与 I 帧判断)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP%E6%89%93%E5%8C%85%E5%8F%91%E9%80%81H264%E4%B9%8B%E5%B0%81%E5%8C%85%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">RTP打包发送H264之封包详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA-NALU"><span class="toc-number">5.1.</span> <span class="toc-text">单个 NALU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E8%81%9A%E5%90%88"><span class="toc-number">5.2.</span> <span class="toc-text">包聚合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FU-A%E7%9A%84%E5%88%86%E7%89%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">5.3.</span> <span class="toc-text">FU-A的分片格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">图像编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YUV-%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">YUV 颜色模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RGB-%E4%B8%8E-YUV-%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.1.</span> <span class="toc-text">RGB 与 YUV 的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%87%E6%A0%B7%E7%8E%87%E3%80%81%E7%A0%81%E7%8E%87%E3%80%81%E5%B8%A7%E4%BB%A5%E5%8F%8A%E5%9C%BA%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">采样率、码率、帧以及场的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#H264-%E7%AE%80%E4%BB%8B"><span class="toc-number">4.</span> <span class="toc-text">H264 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NAL-%E5%8D%95%E5%85%83"><span class="toc-number">4.2.</span> <span class="toc-text">NAL 单元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#H264-NAL-%E7%AE%80%E4%BB%8B%E4%B8%8E-I-%E5%B8%A7%E5%88%A4%E6%96%AD%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">H264 (NAL 简介与 I 帧判断）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E6%89%93%E5%8C%85%E5%8F%91%E9%80%81-H264-%E4%B9%8B%E5%B0%81%E5%8C%85%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">RTP 打包发送 H264 之封包详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA-NALU"><span class="toc-number">5.1.</span> <span class="toc-text">单个 NALU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E8%81%9A%E5%90%88"><span class="toc-number">5.2.</span> <span class="toc-text">包聚合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FU-A-%E7%9A%84%E5%88%86%E7%89%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">5.3.</span> <span class="toc-text">FU-A 的分片格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol>
         </div>
 
         <div id="share-footer" style="display: none">
