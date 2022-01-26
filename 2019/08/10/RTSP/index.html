@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    
+    
+        
+            
+                <link rel="shortcut icon" href="/images/favicon.ico">
+            
+        
+        
+            
+                <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+            
+        
+        
+            
+                <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+            
+        
+    
+    <!-- title -->
+    <title>RTSP</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css" rel="stylesheet">
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+                class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+              <li><a href="/">首页</a></li>
+          
+              <li><a href="/archives/">归档</a></li>
+          
+              <li><a href="/categories/">分类</a></li>
+          
+              <li><a href="/tags/">标签</a></li>
+          
+              <li><a href="/about/">关于</a></li>
+          
+              <li><a href="/search/">搜索</a></li>
+          
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+          
+              <li><a class="icon" href="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/"><i class="fas fa-chevron-left"
+                                                                           aria-hidden="true"
+                                                                           onmouseover="$('#i-prev').toggle();"
+                                                                           onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+              <li><a class="icon" href="/2019/07/29/RTP/"><i class="fas fa-chevron-right"
+                                                                           aria-hidden="true"
+                                                                           onmouseover="$('#i-next').toggle();"
+                                                                           onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i
+                          class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();"
+                          onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true"
+                                        onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                                        onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2019/08/10/RTSP/&title=RTSP"><i
+                    class="fab fa-qq " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2019/08/10/RTSP/&title=RTSP"><i
+                    class="fab fa-weibo " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/08/10/RTSP/&text=RTSP"><i
+                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=RTSP&body=Check out this article: http://example.com/2019/08/10/RTSP/"><i
+                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+</ul>
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RTSP-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text">RTSP 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB"><span class="toc-number">1.1.</span> <span class="toc-text">协议体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">协议特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">报文结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTSP-URL"><span class="toc-number">2.1.</span> <span class="toc-text">RTSP URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTSP-%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.</span> <span class="toc-text">RTSP 报文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">主要方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTSP-Header-%E5%8F%82%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">RTSP Header 参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84-RTSP-%E6%B6%88%E6%81%AF%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">简单的 RTSP 消息交互过程</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+<div class="content index py4">
+    
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        RTSP
+    </h1>
+
+        <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">
+            w.feng
+            
+        </span>
+      </span>
+            
+    <div class="postdate">
+        
+            <time datetime="2019-08-10T07:37:46.000Z"
+                  itemprop="datePublished">2019-08-10</time>
+            
+                (Updated:
+                <time datetime="2022-01-26T02:58:02.065Z"
+                      itemprop="dateModified">2022-01-26</time>)
+            
+        
+    </div>
+
+            
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+    </div>
+
+            
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE/" rel="tag">流媒体协议</a>
+    </div>
+
+        </div>
+    </header>
+    
+    <div class="content" itemprop="articleBody">
+        <h2 id="RTSP-协议"><a href="#RTSP-协议" class="headerlink" title="RTSP 协议"></a>RTSP 协议</h2><blockquote>
+<p>实时流协议（Real Time Streaming Protocol，RTSP）是一种网络应用协议，专为娱乐和通信系统的使用，以控制流媒体服务器。该协议用于创建和控制终端之间的媒体会话。媒体服务器的客户端发布 VCR 命令，例如播放，录制和暂停，以便于实时控制从服务器到客户端（视频点播）或从客户端到服务器（语音录音）的媒体流。是 TCP/IP 协议体系中的一个应用层协议, 由哥伦比亚大学, 网景和 RealNetworks 公司提交的 IETF RFC 标准. 对应的 RFC 编号是 2326，可以在这里搜索 <a target="_blank" rel="noopener" href="http://www.rfc-editor.org/search/rfc_search_detail.php">RFC Editor</a></p>
+</blockquote>
+<p>该协议定义了一对多应用程序如何有效地通过 IP 网络传送多媒体数据. RTSP 在体系结构上位于 RTP 和 RTCP 之上, 它使用 TCP 或 RTP 完成数据传输. RTSP 被用于建立的控制媒体流的传输，它为多媒体服务扮演“网络远程控制”的角色。尽管有时<strong>可以把 RTSP 控制信息和媒体数据流交织在一起传送</strong>，但一般情况 RTSP 本身并不用于转送媒体流数据。媒体数据的传送可通过 RTP/RTCP 等协议来完成。</p>
+<p>该协议用于 C/S 模型, 是一个基于文本的协议, 用于在客户端和服务器端建立和协商实时流会话.</p>
+<h3 id="协议体系"><a href="#协议体系" class="headerlink" title="协议体系"></a>协议体系</h3><p><strong>一次基本的 RTSP 操作过程:</strong></p>
+<ul>
+<li>首先，客户端连接到流服务器并发送一个 RTSP 描述命令（DESCRIBE）。</li>
+<li>流服务器通过一个 SDP 描述来进行反馈，反馈信息包括流数量、媒体类型等信息。</li>
+<li>客户端再分析该 SDP 描述，并为会话中的每一个流发送一个 RTSP 建立命令（SETUP），RTSP 建立命令告诉服务器客户端用于接收媒体数据的端口。流媒体连接建立完成后，</li>
+<li>客户端发送一个播放命令（PLAY），服务器就开始在 UDP 上传送媒体流（RTP 包）到客户端。 在播放过程中客户端还可以向服务器发送命令来控制快进、快退和暂停等。</li>
+<li>最后，客户端可发送一个终止命令（TERADOWN）来结束流媒体会话。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">客户端-&gt;服务器：DESCRIBE</span><br><span class="line">服务器-&gt;客户端：200 OK (SDP)</span><br><span class="line">客户端-&gt;服务器：SETUP</span><br><span class="line">服务器-&gt;客户端：200 OK</span><br><span class="line">客户端-&gt;服务器：PLAY</span><br><span class="line">服务器-&gt;客户端：(RTP 包)</span><br></pre></td></tr></table></figure>
+
+<h3 id="协议特点"><a href="#协议特点" class="headerlink" title="协议特点"></a>协议特点</h3><ul>
+<li>可扩展性：新方法和参数很容易加入 RTSP。</li>
+<li>易解析：RTSP 可由标准 HTTP 或 MIME 解析器解析。</li>
+<li>安全：RTSP 使用网页安全机制。</li>
+<li>独立于传输：RTSP 可使用不可靠数据报协议（EDP），可靠数据报协议（RDP）；如要实现应用级可靠，可使用可靠流协议。</li>
+<li>多服务器支持：每个流可放在不同服务器上，用户端自动与不同服务器建立几个并发控制连接，媒体同步在传输层执行。</li>
+<li>记录设备控制：协议可控制记录和回放设备。</li>
+<li>流控与会议开始分离：仅要求会议初始化协议提供，或可用来创建惟一会议标识号。 特殊情况下，可用 SI 或 H.323 来邀请服务器入会。</li>
+<li>适合专业应用：通过 SMPTE 时标，RTSP 支持帧级精度，允许远程数字编辑。</li>
+<li>演示描述中立：协议没强加特殊演示或元文件，可传送所用格式类型；然而，演示描述至少必须包括一个 RTSP URL。</li>
+<li>代理友好：此处，RTSP 明智地采用 HTTP 观念，使现在结构都可重用。结构包括 Internet 内容选择平台（PICS）。由于在大多数情况下控制连续媒体需要服务器状态，RTSP 不仅仅向 HTFP 添加方法。</li>
+<li>适当的服务器控制：如用户启动一个流，必须也可以停止一个流。</li>
+<li>传输协调：实际处理连续媒体流前，用户可协调传输方法。</li>
+<li>性能协调：如基本特征无效，必须有一些清理机制让用户决定哪种方法没生效。</li>
+</ul>
+<h2 id="报文结构"><a href="#报文结构" class="headerlink" title="报文结构"></a>报文结构</h2><h3 id="RTSP-URL"><a href="#RTSP-URL" class="headerlink" title="RTSP URL"></a>RTSP URL</h3><p>一个终端用户是通过在播放器中输入 URL 地址开始进行观看流媒体业务的第一步，而对于使用RTSP协议的移动流媒体点播而言，URL 的一般写法如下：</p>
+<p>一个以 “rtsp” 或是 “rtspu” 开始的 URL 链接用于指定当前使用的是 RTSP 协议。RTSP URL 的语法结构如下： <code>rtsp_url = (“rtsp:”| “rtspu:”) “//” host [“:”port”] /[abs_path]/content_name</code></p>
+<ul>
+<li>host：可以是一个有效的域名或是 IP 地址。</li>
+<li>port：端口号，对于 RTSP 协议来说，缺省的端口号为 554。当我们在确认流媒体服务器提供的端口号为 554 时，此项可以省略。</li>
+<li>abs_path： 为 RTSP Server 中的媒体流资源标识，见下章节的录像资源命名。</li>
+</ul>
+<p>RTSP URL 用来标识 RTSP Server 的媒体流资源，可以标识单一的媒体流资源，也可以标识多个媒体流资源的集合。</p>
+<h3 id="RTSP-报文"><a href="#RTSP-报文" class="headerlink" title="RTSP 报文"></a>RTSP 报文</h3><p>RTSP 是一种基于文本的协议，用 CRLF 作为一行的结束符。</p>
+<p>RTSP 有两类报文：<strong>请求报文和响应报文</strong>。请求报文是指从客户向服务器发送请求报文，响应报文是指从服务器到客户的回答。 由于 RTSP 是面向正文的（text-oriented），因此在报文中的每一个字段都是一些 ASCII 码串，因而每个字段的长度都是不确定的。 RTSP 报文由三部分组成，即<strong>开始行、首部行和实体主体</strong>。在请求报文中，开始行就是请求行。</p>
+<p>RTSP 请求报文的方法包括：OPTIONS、DESCRIBE、SETUP、TEARDOWN、PLAY、PAUSE、GET_PARAMETER 和 SET_PARAMETER。</p>
+<p>一个请求消息（a request message）即可以由客户端向服务端发起也可以由服务端向客户端发起。请求消息的语法结构如下： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Request = Request-Line</span><br><span class="line">(general-header|request-header|entity-header)</span><br><span class="line">CRLF</span><br><span class="line">[message-body]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Request Line</p>
+</blockquote>
+<p>请求消息的第一行的语法结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Request-Line = Method 空格 Request-URI 空格 RTSP-Version CRLF</span><br></pre></td></tr></table></figure>
+
+<p>其中在消息行中出现的第一个单词即是所使用的信令标志。目前已经有的信息标志如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Method = “DESCRIBE” </span><br><span class="line">        | “ANNOUNCE”</span><br><span class="line">        | “GET_PARAMETER”</span><br><span class="line">        | “OPTIONS”</span><br><span class="line">        | “PAUSE”</span><br><span class="line">        | “PLAY”</span><br><span class="line">        | “RECORD”</span><br><span class="line">        | “REDIRECT”</span><br><span class="line">        | “SETUP”</span><br><span class="line">        | “SET_PARAMETER”</span><br><span class="line">        | “TEARDOWN”</span><br></pre></td></tr></table></figure>
+
+<p>例子： <code>DESCRIBE rtsp://example.com/media.mp4 RTSP/1.0</code></p>
+<blockquote>
+<p>Request Header Fields</p>
+</blockquote>
+<p>在消息头中除了第一行的内容外，还有一些需求提供附加信息。其中有些是一定要的，后续我们会详细介绍经常用到的几个域的含义。 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Request-header = Accept</span><br><span class="line">    |	Accept-Encoding</span><br><span class="line">    |	Accept-Language</span><br><span class="line">    |	Authorization</span><br><span class="line">    |	From</span><br><span class="line">    |	If-Modified-Since</span><br><span class="line">    |	Range</span><br><span class="line">    |	Referer</span><br><span class="line">    |	User-Agent</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>响应消息</p>
+</blockquote>
+<p>响应消息的语法结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response = Status-Line </span><br><span class="line">(general-header |response-header|entity-header) </span><br><span class="line">CRLF </span><br><span class="line">[message-body]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Status-Line</p>
+</blockquote>
+<p>响应消息的第一行是状态行（status-line），每个元素之间用空格分开。除了最后的 CRLF 之外，在此行的中间不得有 CR 或是 LF 的出现。它的语法格式如下，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Status-Line = RTSP-Version 空格 Status-Code 空格 Reason-Phrase CRLF</span><br></pre></td></tr></table></figure>
+
+<p>状态码（Status-Code）是一个三位数的整数，用于描述接收方对所收到请求消息的执行结果</p>
+<p>Status-Code 的第一位数字指定了这个回复消息的种类，一共有 5 类：</p>
+<ul>
+<li>1XX：Informational – 请求被接收到，继续处理。</li>
+<li>2XX：Success – 请求被成功的接收，解析并接受。</li>
+<li>3XX：Redirection – 为完成请求需要更多的操作。</li>
+<li>4XX：Client Error – 请求消息中包含语法错误或是不能够被有效执行。</li>
+<li>5XX：Server Error – 服务器响应失败，无法处理正确的有效的请求消息。</li>
+</ul>
+<p>我们在处理问题时经常会遇到的状态码有如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Status-Code= “200&quot;: OK ,</span><br><span class="line">             “400”: Bad Request ,</span><br><span class="line">             “404”: Not Found ,</span><br><span class="line">             “500”: Internal Server Error</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Response Header Fields</p>
+</blockquote>
+<p>在响应消息的域中存放的是无法放在 Status-Line 中,而又需要传送给请求者的一些附加信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response-header = Location</span><br><span class="line">Proxy-Authenticate</span><br><span class="line">Public</span><br><span class="line">Retry-After</span><br><span class="line">Server</span><br><span class="line">Vary</span><br><span class="line">WWW-Authenticate</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">方向</th>
+<th align="left">对象</th>
+<th>要求</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DESCRIBE</td>
+<td align="left">C-&gt;S</td>
+<td align="left">P   S</td>
+<td>推荐</td>
+<td align="center">检查演示或媒体对象的描述，DESCRIBE 的答复-响应组成媒体 RTSP 初始阶段</td>
+</tr>
+<tr>
+<td align="left">ANNOUNCE</td>
+<td align="left">C-&gt;S   S-&gt;C</td>
+<td align="left">P  S</td>
+<td>可选</td>
+<td align="center">URL 识别的对象发送给服务 ，反之，ANNOUNCE 实时更新连接描述。</td>
+</tr>
+<tr>
+<td align="left">GET_PARAMETER</td>
+<td align="left">C-&gt;S   S-&gt;C</td>
+<td align="left">P  S</td>
+<td>可选</td>
+<td align="center">请求检查RUL指定的演示与媒体的参数值</td>
+</tr>
+<tr>
+<td align="left">OPTIONS</td>
+<td align="left">C-&gt;S   S-&gt;C</td>
+<td align="left">P  S</td>
+<td>要求</td>
+<td align="center">可在任意时刻发出 OPTIONS 请求</td>
+</tr>
+<tr>
+<td align="left">PAUSE</td>
+<td align="left">C-&gt;S</td>
+<td align="left">P  S</td>
+<td>推荐</td>
+<td align="center">PAUSE 请求引起流发送临时中断</td>
+</tr>
+<tr>
+<td align="left">PLAY</td>
+<td align="left">C-&gt;S</td>
+<td align="left">P  S</td>
+<td>要求</td>
+<td align="center">PLAY 告诉服务器以 SETUP 指定的机制开始发送数据</td>
+</tr>
+<tr>
+<td align="left">RECORD</td>
+<td align="left">C-&gt;S</td>
+<td align="left">P  S</td>
+<td>可选</td>
+<td align="center">该方法根据演示描述初始化媒体数据记录范围</td>
+</tr>
+<tr>
+<td align="left">REDIRECT</td>
+<td align="left">S-&gt;C</td>
+<td align="left">P  S</td>
+<td>可选</td>
+<td align="center">重定向请求通知客户端连接到另一服务器地址</td>
+</tr>
+<tr>
+<td align="left">SETUP</td>
+<td align="left">C-&gt;S</td>
+<td align="left">S</td>
+<td>要求</td>
+<td align="center">对 URL 的 SETUP 请求指定用于流媒体的传输机制</td>
+</tr>
+<tr>
+<td align="left">SET_PARAMETER</td>
+<td align="left">C-&gt;S   S-&gt;C</td>
+<td align="left">P  S</td>
+<td>可选</td>
+<td align="center">请求设置演示或 URL 指定流的参数值</td>
+</tr>
+<tr>
+<td align="left">TEARDOWN</td>
+<td align="left">C-&gt;S</td>
+<td align="left">P  S</td>
+<td>要求</td>
+<td align="center">TEARDOWN 请求停止给定 URL 流发送，释放相关资源</td>
+</tr>
+</tbody></table>
+<p>注：P—演示，C—客户端,S—服务器，S（对象栏）—流</p>
+<p>信令指的是在 Request-URI 中指定的需要被接收者完成的操作。信令（The method）大小写敏感，不能以字符 ”$” 开始，并且一定要是一个标记符。</p>
+<h2 id="RTSP-Header-参数"><a href="#RTSP-Header-参数" class="headerlink" title="RTSP Header 参数"></a>RTSP Header 参数</h2><ol>
+<li>Accept：用于指定客户端可以接受的媒体描述信息类型。比如: <code>Accept: application/rtsl, application/sdp;level=2</code>。</li>
+<li>Bandwidth：用于描述客户端可用的带宽值。</li>
+<li>CSeq：指定了 RTSP 请求回应对的序列号，在每个请求或回应中都必须包括这个头字段。对每个包含一个给定序列号的请求消息，都会有一个相同序列号的回应消息。</li>
+<li>Range：用于指定一个时间范围，可以使用 SMPTE、NTP 或 clock 时间单元。</li>
+<li>Session：Session 头字段标识了一个 RTSP 会话。Session ID 是由服务器在 SETUP 的回应中选择的，客户端一当得到 Session ID 后，在以后的对 Session 的操作请求消息中都要包含 Session ID。</li>
+<li>Transport: Transport 头字段包含客户端可以接受的转输选项列表，包括传输协议，地址端口，TTL 等。服务器端也通过这个头字段返回实际选择的具体选项。如: <code>Transport:RTP/AVP;multicast;ttl=127;mode=&quot;PLAY&quot;</code>, <code>RTP/AVP;unicast;client_port=1289-1290;mode=&quot;PLAY&quot;</code></li>
+</ol>
+<h2 id="简单的-RTSP-消息交互过程"><a href="#简单的-RTSP-消息交互过程" class="headerlink" title="简单的 RTSP 消息交互过程"></a>简单的 RTSP 消息交互过程</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C 表示 RTSP 客户端,S 表示 RTSP 服务端</span><br><span class="line">第一步：查询服务器端可用方法 </span><br><span class="line">C-&gt;S OPTION request  	询问 S 有哪些方法可用</span><br><span class="line">S-&gt;C OPTION response 	S 回应信息的 public 头字段中包括提供的所有可用方法</span><br><span class="line">第二步：得到媒体描述信息 </span><br><span class="line">C-&gt;S DESCRIBE request  	要求得到 S 提供的媒体描述信息</span><br><span class="line">S-&gt;C DESCRIBE response  S 回应媒体描述信息一般是sdp信息</span><br><span class="line">第三步：建立 RTSP 会话 </span><br><span class="line">C-&gt;S SETUP request 	Transport 头字段列出可接受的传输选项，请求S建立会话</span><br><span class="line">S-&gt;C SETUP response S 建立会话通过 Transport 头字段返回选择的具体转输选项，并返回建立的 Session ID</span><br><span class="line">第四步：请求开始传送数据</span><br><span class="line">C-&gt;S PLAY request 	C 请求 S 开始发送数据</span><br><span class="line">S-&gt;C PLAY response	S 回应该请求的信息</span><br><span class="line">第五步： 数据传送播放中 </span><br><span class="line">S-&gt;C 发送流媒体数据 	通过 RTP 协议传送数据</span><br><span class="line">第六步：关闭会话，退出</span><br><span class="line">C-&gt;S EARDOWN request 	C 请求关闭会话</span><br><span class="line">S-&gt;C TEARDOWN response 	S 回应该请求</span><br></pre></td></tr></table></figure>
+<p>上述的过程只是标准的、友好的 RTSP 流程，但实际的需求中并不一定按此过程。 其中第三和第四步是必需的！第一步，只要服务器和客户端约定好有哪些方法可用，则 option 请求可以不要。第二步，如果我们有其他途径得到媒体初始化描述信息（比如 http 请求等等），则我们也不需要通过 RTSP 中的 describe 请求来完成。</p>
+
+    </div>
+</article>
+
+
+
+<script>
+    //检测推送
+    var pushType = "";
+    var pushLink = "";
+    var siteName = "Systrace";
+  
+    var ValineButton = document.getElementsByClassName("vsubmit vbtn")[0];
+    //分情况推送
+    if (pushType === "sc") {
+      var title = "text=" + siteName + "上又有新评论啦~!";
+      function send_valine_Server() {
+        //获取元素信息
+        var pagename = document.title;
+        var wz = pagename.indexOf("|");
+        var res = pagename.substring(0, wz);
+        var pageurl = document.URL;
+        var ptime = new Date();
+        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+        var text = "desp=";
+        var data =
+          text +
+          "|昵称：" +
+          "|邮箱：" +
+          "|网站地址：" +
+          "|当前页面：" +
+          "|评论内容：" +
+          "|跳转链接：" +
+          "|评论时间" +
+          "\n" +
+          "|----|----|----|----|" +
+          "\n" +
+          "|   " +
+          vnick +
+          "   |   " +
+          vmail +
+          "  |  " +
+          vlink +
+          "|   " +
+          res +
+          "| " +
+          veditor +
+          "| " +
+          pageurl +
+          "|" +
+          ptime.toLocaleString() +
+          "|";
+        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
+        httpRequest.open("POST", pushLink, true); //第二步：打开连接
+        httpRequest.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send(title + "&" + data); //发送请求 将情头体写在send中
+      }
+      ValineButton.onclick = send_valine_Server;
+    } else if (pushType === "qmsg") {
+      var title = "msg=" + siteName + "上又有新评论啦~!\n";
+      function send_valine_Qmsg() {
+        //获取元素信息
+        var pagename = document.title;
+        var wz = pagename.indexOf("|");
+        var res = pagename.substring(0, wz);
+        var pageurl = document.URL;
+        var ptime = new Date();
+        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+        var data =
+          "昵称：" +
+          vnick +
+          "\n邮箱：" +
+          vmail +
+          "\n网站地址：" +
+          vlink +
+          "\n当前页面：" +
+          pagename +
+          "\n评论内容：" +
+          veditor +
+          "\n跳转链接：" +
+          pageurl +
+          "\n评论时间" +
+          ptime.toLocaleString();
+        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
+        httpRequest.open("POST", pushLink, true); //第二步：打开连接
+        httpRequest.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send(title + data); //发送请求 将情头体写在send中
+      }
+      ValineButton.onclick = send_valine_Qmsg;
+    }
+  </script>
+    
+        <div id="footer-post-container">
+    <div id="footer-post">
+
+        <div id="nav-footer" style="display: none">
+            <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/categories/">分类</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于</a></li>
+                
+                    <li><a href="/search/">搜索</a></li>
+                
+            </ul>
+        </div>
+
+        <div id="toc-footer" style="display: none">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RTSP-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text">RTSP 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB"><span class="toc-number">1.1.</span> <span class="toc-text">协议体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">协议特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">报文结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTSP-URL"><span class="toc-number">2.1.</span> <span class="toc-text">RTSP URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTSP-%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.</span> <span class="toc-text">RTSP 报文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">主要方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTSP-Header-%E5%8F%82%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">RTSP Header 参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84-RTSP-%E6%B6%88%E6%81%AF%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">简单的 RTSP 消息交互过程</span></a></li></ol>
+        </div>
+
+        <div id="share-footer" style="display: none">
+            <ul>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2019/08/10/RTSP/&title=RTSP"><i
+                    class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2019/08/10/RTSP/&title=RTSP"><i
+                    class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/08/10/RTSP/&text=RTSP"><i
+                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=RTSP&body=Check out this article: http://example.com/2019/08/10/RTSP/"><i
+                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+        </div>
+
+        <div id="actions-footer">
+            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg"
+                        aria-hidden="true"></i> 菜单</a>
+            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg"
+                        aria-hidden="true"></i> 目录</a>
+            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+            <a id="top" style="display:none" class="icon" href="#"
+               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                                                                               aria-hidden="true"></i> 返回顶部
+            </a>
+        </div>
+
+    </div>
+</div>
+    
+    <footer id="footer">
+  <div class="footer-top">
+    &copy; 2022 <i class="fas fa-heart"></i>
+    w.feng 
+  </div>
+
+  <div class="footer-bottom">
+    
+    <!-- tongji -->
+    <script
+      async
+      src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+    ></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <br />
+     
+  </div>
+</footer>
+
+</div>
+<!-- styles -->
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://cdn.staticfile.org/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+    
+<script src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            // copy-btn HTML
+            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+            btn += '<i class="far fa-clone"></i>';
+            btn += '</span>';
+            // mount it!
+            $(".highlight .code pre").before(btn);
+            var clip = new ClipboardJS('.btn-copy', {
+                target: function (trigger) {
+                    return trigger.nextElementSibling;
+                }
+            });
+            clip.on('success', function (e) {
+                e.trigger.setAttribute('aria-label', "复制成功!");
+                e.clearSelection();
+            })
+        })
+    </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+</body>
+
+</html>

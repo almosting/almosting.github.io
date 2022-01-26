@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    
+    
+        
+            
+                <link rel="shortcut icon" href="/images/favicon.ico">
+            
+        
+        
+            
+                <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+            
+        
+        
+            
+                <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+            
+        
+    
+    <!-- title -->
+    <title>RTP</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css" rel="stylesheet">
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+                class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+              <li><a href="/">首页</a></li>
+          
+              <li><a href="/archives/">归档</a></li>
+          
+              <li><a href="/categories/">分类</a></li>
+          
+              <li><a href="/tags/">标签</a></li>
+          
+              <li><a href="/about/">关于</a></li>
+          
+              <li><a href="/search/">搜索</a></li>
+          
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+          
+              <li><a class="icon" href="/2019/08/10/RTSP/"><i class="fas fa-chevron-left"
+                                                                           aria-hidden="true"
+                                                                           onmouseover="$('#i-prev').toggle();"
+                                                                           onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+              <li><a class="icon" href="/2019/04/30/APK%E7%98%A6%E8%BA%AB/"><i class="fas fa-chevron-right"
+                                                                           aria-hidden="true"
+                                                                           onmouseover="$('#i-next').toggle();"
+                                                                           onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i
+                          class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();"
+                          onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true"
+                                        onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                                        onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2019/07/29/RTP/&title=RTP"><i
+                    class="fab fa-qq " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2019/07/29/RTP/&title=RTP"><i
+                    class="fab fa-weibo " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/29/RTP/&text=RTP"><i
+                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=RTP&body=Check out this article: http://example.com/2019/07/29/RTP/"><i
+                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+</ul>
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">RTP 协议介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%92%8C-RTCP"><span class="toc-number">1.1.</span> <span class="toc-text">RTP 和 RTCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.</span> <span class="toc-text">RTP的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E7%9A%84%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1"><span class="toc-number">1.3.</span> <span class="toc-text">RTP 的协议层次</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">RTP 工作机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.</span> <span class="toc-text">RTP 报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTP-%E6%89%A9%E5%B1%95%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.1.</span> <span class="toc-text">RTP 扩展头结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.</span> <span class="toc-text">RTP 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">RTP 发送过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-profile-%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">RTP profile 机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTCP"><span class="toc-number">5.</span> <span class="toc-text">RTCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">6.</span> <span class="toc-text">RTP 时间戳</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">代码</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+<div class="content index py4">
+    
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        RTP
+    </h1>
+
+        <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">
+            w.feng
+            
+        </span>
+      </span>
+            
+    <div class="postdate">
+        
+            <time datetime="2019-07-29T09:45:43.000Z"
+                  itemprop="datePublished">2019-07-29</time>
+            
+                (Updated:
+                <time datetime="2022-01-26T02:58:02.062Z"
+                      itemprop="dateModified">2022-01-26</time>)
+            
+        
+    </div>
+
+            
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+    </div>
+
+            
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE/" rel="tag">流媒体协议</a>
+    </div>
+
+        </div>
+    </header>
+    
+    <div class="content" itemprop="articleBody">
+        <h2 id="RTP-协议介绍"><a href="#RTP-协议介绍" class="headerlink" title="RTP 协议介绍"></a>RTP 协议介绍</h2><p>实时传输协议 RTP（Real-time Transport Protocol）是一个网络传输协议，它是由IETF的多媒体传输工作小组 1996 年在 RFC 1889中公布的，后在 RFC3550 中进行更新。</p>
+<p>它作为因特网标准在<a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc3550.txt"> RFC 3550 </a> 有详细说明.</p>
+<p>RTP 协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多单播应用中。RTP 协议常用于流媒体系统（配合 RTSP 协议），视频会议和一键通（Push toTalk）系统（配合 H.323 或 SIP），使它成为IP电话产业的技术基础。RTP 协议和 RTP 控制协议 RTCP 一起使用，而且它是建立在用户数据报协议上的（UDP）。</p>
+<h3 id="RTP-和-RTCP"><a href="#RTP-和-RTCP" class="headerlink" title="RTP 和 RTCP"></a>RTP 和 RTCP</h3><ul>
+<li><p>数据传输协议 RTP 用于实时传输数据。该协议提供的信息包括：时间戳（用于同步）、序列号（用于丢包和重排序检测）、以及负载格式（用于说明数据的编码格式）。</p>
+</li>
+<li><p>控制协议 RTCP，用于 QoS 反馈和同步媒体流。相对于 RTP 来说，RTCP 所占的带宽非常小，通常只有 5%。</p>
+</li>
+</ul>
+<h3 id="RTP的优势"><a href="#RTP的优势" class="headerlink" title="RTP的优势"></a>RTP的优势</h3><p>提到流媒体传输、视频监控、视频会议、语音电话（VOIP），都离不开 RTP 协议的应用，但是为什么要使用RTP来进行流媒体的传输呢？为什么一定要用 RTP？</p>
+<p>像 TCP 这样的可靠传输协议，通过超时和重传机制来保证传输数据流中的每一个 bit 的正确性，但这样会使得无论从协议的实现还是传输的过程都变得非常的复杂。而且，当传输过程中有数据丢失的时候，由于对数据丢失的检测（超时检测）和重传，会数据流的传输被迫暂停和延时。</p>
+<p>RTP 协议是一种基于UDP的传输协议，RTP 本身并不能为按顺序传送数据包提供可靠的传送机制，也不提供流量控制或拥塞控制，它依靠 RTCP 提供这些服务。这样，对于那些丢失的数据包，不存在由于超时检测而带来的延时，同时，对于那些丢弃的包，也可以由上层根据其重要性来选择性的重传。</p>
+<h3 id="RTP-的协议层次"><a href="#RTP-的协议层次" class="headerlink" title="RTP 的协议层次"></a>RTP 的协议层次</h3><p><strong>流媒体体系结构</strong></p>
+<p>流媒体应用中典型的协议体系结构。</p>
+<img src="/2019/07/29/RTP/transport.png" class="" title="transport">
+
+<p>从图中可以看出，RTP 被划分在传输层，它建立在 UDP 上。同 UDP 协议一样，为了实现其实时传输功能，RTP 也有固定的封装形式。RTP 用来为端到端的实时传输提供时间信息和流同步，但并不保证服务质量。服务质量由 RTCP 来提供。</p>
+<h2 id="RTP-工作机制"><a href="#RTP-工作机制" class="headerlink" title="RTP 工作机制"></a>RTP 工作机制</h2><p>当应用程序建立一个 RTP 会话时，应用程序将确定一对目的传输地址。目的传输地址由一个网络地址和一对端口组成，有两个端口：一个给 RTP 包，一个给 RTC P包，使得 RTP/RTCP 数据能够正确发送。RTP数据发向偶数的 UDP 端口，而对应的控制信号 RTCP 数据发向相邻的奇数 UDP 端口（偶数的 UDP 端口 + 1），这样就构成一个 UDP 端口对。 RTP 的发送过程如下，接收过程则相反。</p>
+<ol>
+<li>RTP 协议从上层接收流媒体信息码流（如 H.263），封装成 RTP 数据包；RTCP 从上层接收控制信息，封装成 RTCP 控制包。</li>
+<li>RTP 将 RTP 数据包发往 UDP 端口对中偶数端口；RTCP 将 RTCP 控制包发往 UDP 端口对中的奇数端口。</li>
+</ol>
+<p>RTP 分组只包含 RTP 数据，而控制是由 RTCP 协议提供。RTP 在 1025 到 65535 之间选择一个未使用的偶数 UDP 端口号，而在同一次会话中的 RTCP 则使用下一个奇数 UDP 端口号。端口号 5004 和 5005 分别用作 RTP 和 RTCP 的默认端口号。RTP 分组的首部格式如图 2 所示，其中前 12 个字节是必须的。</p>
+<img src="/2019/07/29/RTP/3.png" class="" title="transport">
+
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>RTP 应当是应用层的一部分。在应用的发送端，开发者必须编写用 RTP 封装分组的程序代码，然后把 RTP 分组交给 UDP。在接收端，RTP 分组通过 UDP 接口进入应用层后，还要利用开发者编写的程序代码从 RTP 分组中把应用数据块提取出来。</p>
+<h3 id="RTP-报文"><a href="#RTP-报文" class="headerlink" title="RTP 报文"></a>RTP 报文</h3><p>首先，我们看看 RTP 的包头。RTP 报文头格式（见 RFC3550 Page12）：</p>
+<img src="/2019/07/29/RTP/2.png" class="" title="transport">
+
+<ul>
+<li>版本号（V）：2 比特，用来标志使用的 RTP 版本。</li>
+<li>填充位（P）：1 比特，如果该位置位，则该 RTP 包的尾部就包含附加的填充字节。</li>
+<li>扩展位（X）：1 比特，如果该位置位的话，RTP 固定头部后面就跟有一个扩展头部。</li>
+<li>CSRC计数器（CC）：4 比特，含有固定头部后面跟着的CSRC的数目。</li>
+<li>标记位（M）：1 比特,该位的解释由配置文档（Profile）来承担。对于在 RTP 以最小的控制配置文件下在音频和视频会议下运行的音频流，标记位设置为 1，表示在一段静默期后发送的第一个数据包，否则设置为0。</li>
+<li>载荷类型（PayloadType）：7 比特，标识了 RTP 载荷的类型。</li>
+<li>序列号（SN）： 16 比特，每发送一个 RTP 数据包，序列号增加  1。接收端可以据此检测丢包和重建包序列。</li>
+<li>时间戳（Timestamp）：2 比特，记录了该包中数据的第一个字节的采样时刻。</li>
+<li>同步源标识符（SSRC）：32 比特，同步源就是指 RTP 包流的来源。在同一个 RTP 会话中不能有两个相同的 SSRC 值。该标识符是随机选取的 RFC1889 推荐了 MD5 随机算法。</li>
+<li>贡献源列表（CSRC List）：0~15 项，每项 32 比特，用来标志对一个 RTP 混合器产生的新包有贡献的所有 RTP 包的源。由混合器将这些有贡献的 SSRC 标识符插入表中。SSRC 标识符都被列出来，以便接收端能正确指出交谈双方的身份。</li>
+</ul>
+<h4 id="RTP-扩展头结构"><a href="#RTP-扩展头结构" class="headerlink" title="RTP 扩展头结构"></a>RTP 扩展头结构</h4><img src="/2019/07/29/RTP/1.png" class="" title="transport">
+
+<p>若RTP固定头中的扩展比特位置 1（注意：如果有 CSRC 列表，则在CSRC 列表之后），则一个长度可变的头扩展部分被加到 RTP 固定头之后。头扩展包含 16 比特的长度域，指示扩展项中 32 比特字的个数，不包括 4 个字节扩展头(因此零是有效值)。</p>
+<p>RTP固定头之后只允许有一个头扩展。为允许多个互操作实现独立生成不同的头扩展，或某种特定实现有多种不同的头扩展,扩展项的前 16 比特用以识别标识符或参数。这 16 比特的格式由具体实现的上层协议定义。基本的 RTP 说明并不定义任何头扩展本身。</p>
+<h2 id="RTP-会话"><a href="#RTP-会话" class="headerlink" title="RTP 会话"></a>RTP 会话</h2><p>当应用程序建立一个 RTP 会话时，应用程序将确定一对目的传输地址。目的传输地址由一个网络地址和一对端口组成，有两个端口：一个给 RTP 包，一个给 RTCP 包，使得 RTP/RTCP 数据能够正确发送。RTP 数据发向偶数的UDP端口，而对应的控制信号 RTCP 数据发向相邻的奇数 UDP 端口（偶数的 UDP 端口 + 1），这样就构成一个 UDP 端口对。</p>
+<h3 id="RTP-发送过程"><a href="#RTP-发送过程" class="headerlink" title="RTP 发送过程"></a>RTP 发送过程</h3><ol>
+<li>RTP 协议从上层接收流媒体信息码流（如 H.263），封装成RTP数据包；RTCP 从上层接收控制信息，封装成 RTCP 控制包。</li>
+<li>RTP 数据包发往UDP端口对中偶数端口；RTCP 将 RTCP 控制包发往UDP端口对中的接收端口。</li>
+</ol>
+<h2 id="RTP-profile-机制"><a href="#RTP-profile-机制" class="headerlink" title="RTP profile 机制"></a>RTP profile 机制</h2><p>RTP 为具体的应用提供了非常大的灵活性，它将传输协议与具体的应用环境、具体的控制策略分开，传输协议本身只提供完成实时传输的机制，开发者可以根据不同的应用环境，自主选择合适的配置环境、以及合适的控制策略。</p>
+<p>这里所说的控制策略指的是你可以根据自己特定的应用需求，来实现特定的一些 RTCP 控制算法，比如前面提到的丢包的检测算法、丢包的重传策略、一些视频会议应用中的控制方案等等（这些策略我可能将在后续的文章中进行描述）。</p>
+<p>对于上面说的合适的配置环境，主要是指RTP的相关配置和负载格式的定义。RTP 协议为了广泛地支持各种多媒体格式（如 H.264, MPEG-4, MJPEG, MPEG），没有在协议中体现出具体的应用配置，而是通过 profile 配置文件以及负载类型格式说明文件的形式来提供。对于任何一种特定的应用，RTP 定义了一个 profile 文件以及相关的负载格式说明。</p>
+<h2 id="RTCP"><a href="#RTCP" class="headerlink" title="RTCP"></a>RTCP</h2><p>服务质量的监视与反馈、媒体间的同步，以及多播组中成员的标识。在RTP 会话期间，各参与者周期性地传送 RTCP 包。RTCP 包中含有已发送的数据包的数量、丢失的数据包的数量等统计资料，因此，各参与者可以利用这些信息动态地改变传输速率，甚至改变有效载荷类型。RTP 和 RTCP 配合使用，它们能以有效的反馈和最小的开销使传输效率最佳化，因而特别适合传送网上的实时数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+---------------+---------------+-------------------------------+</span><br><span class="line">|V=2|P|   IC    |       PT      |             Length            |</span><br><span class="line">+---------------+---------------+-------------------------------+</span><br><span class="line">|                                                               |</span><br><span class="line">|                  Format-specific information                  |</span><br><span class="line">|                                                               |</span><br><span class="line">|                                       +-----------------------+</span><br><span class="line">|                                       |    Padding if P = 1   |</span><br><span class="line">+---------------------------------------+-----------------------+</span><br></pre></td></tr></table></figure>
+
+<p>各个字段的含义为：</p>
+<ul>
+<li>版本号，固定为 2；</li>
+<li>填充（Padding）标志位，1 表示有填充；</li>
+<li>条目数量（Item Count，简称 IC），在 RTCP 包的内容是条目列表时，用来表明条目数量；其他情况可作为别的含义；</li>
+<li>包类型（Packet Type，也简称 PT），rfc3550 定义了五种标准包类型，分别是 sender report (SR), receiver report (RR), source description (SDES), goodbye (BYE), application-specific message (APP)；</li>
+<li>长度，包头之后的内容总长度，单位是四字节，允许为 0；</li>
+</ul>
+<p>RTCP 包不会单独的被传输，它需要打包在一起形成复合包（compound packets）进行传输。每一个复合包都会被一个底层的包封装（通常是 UDP/IP 包）用来传输。如果要对复合包进行加密，那么 RTCP 的包组的前缀通常是一个 32 位的随机数。复合包的结构如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+---------------------------------------------------------------+</span><br><span class="line">|                                                               |</span><br><span class="line">|                                                               |</span><br><span class="line">|                          IP header                            |</span><br><span class="line">|                                                               |</span><br><span class="line">|                                                               |</span><br><span class="line">+---------------------------------------------------------------+</span><br><span class="line">|                                                               |</span><br><span class="line">|                          UDP header                           |</span><br><span class="line">|                                                               |</span><br><span class="line">+---------------------------------------------------------------+</span><br><span class="line">|                  Random prefix (if encrypted)                 |</span><br><span class="line">+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br><span class="line">|V=2|P|   IC    |       PT      |             Length            |</span><br><span class="line">+---------------+---------------+-------------------------------+</span><br><span class="line">|                                                               | first</span><br><span class="line">|                                                               | RTCP</span><br><span class="line">|                  Format-specific information                  | packet</span><br><span class="line">|                                                               |</span><br><span class="line">|                                                               |</span><br><span class="line">+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br><span class="line">|V=2|P|   IC    |       PT      |             Length            |</span><br><span class="line">+---------------+---------------+-------------------------------+</span><br><span class="line">|                                                               | second</span><br><span class="line">|                                                               | RTCP</span><br><span class="line">|                  Format-specific information                  | packet</span><br><span class="line">|                                                               |</span><br><span class="line">|                                                               |</span><br><span class="line">+---------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+
+
+
+<p>RTCP 也是用 UDP 来传送的，但 RTCP 封装的仅仅是一些控制信息，因而分组很短，所以可以将多个 RTCP 分组封装在一个 UDP 包中。RTCP 有如下五种分组类型。</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">缩写表示</th>
+<th align="center">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">200</td>
+<td align="center">SR(Sender  Report)</td>
+<td align="center">发送端报告</td>
+</tr>
+<tr>
+<td align="center">201</td>
+<td align="center">RR(Receiver Report)</td>
+<td align="center">接收端报告</td>
+</tr>
+<tr>
+<td align="center">202</td>
+<td align="center">SDES(Source Description Items)</td>
+<td align="center">源点描述</td>
+</tr>
+<tr>
+<td align="center">203</td>
+<td align="center">BYE</td>
+<td align="center">结束传输</td>
+</tr>
+<tr>
+<td align="center">204</td>
+<td align="center">.APP</td>
+<td align="center">特定应用</td>
+</tr>
+</tbody></table>
+<p>上述五种分组的封装大同小异，下面只讲述SR类型，而其它类型请参考 RFC3550。</p>
+<p>发送端报告分组 SR（Sender Report） 用来使发送端以多播方式向所有接收端报告发送情况。SR 分组的主要内容有：相应的 RTP 流的 SSRC，RTP 流中最新产生的 RTP 分组的时间戳和 NTP，RTP 流包含的分组数，RTP 流包含的字节数。SR 包的封装如图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 0                   1                   2                   3</span><br><span class="line"> 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|V=2|P|    RC   |   PT=SR=200   |             Length            |</span><br><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">|                     SSRC of packet sender                     |</span><br><span class="line">+---------------------------------------------------------------+</span><br><span class="line">|                        NTP timestamp                          |</span><br><span class="line">|                                                               |</span><br><span class="line">+---------------------------------------------------------------+</span><br><span class="line">|                        RTP timestamp                          |</span><br><span class="line">+---------------------------------------------------------------+</span><br><span class="line">|                    Sender&#x27;s packet count                      |</span><br><span class="line">+---------------------------------------------------------------+</span><br><span class="line">|                    Sender&#x27;s octet count                       |</span><br><span class="line">+---------------------------------------------------------------+</span><br><span class="line">|                   Receiver report block(s)                    |</span><br><span class="line">|                                                               |</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>版本（V）：同 RTP 包头域。</li>
+<li>填充（P）：同 RTP 包头域。</li>
+<li>接收报告计数器（RC）：5 比特，该 SR 包中的接收报告块的数目，可以为零。 </li>
+<li>包类型（PT）：8 比特，SR 包是 200。</li>
+<li>长度域（Length）：16 比特，其中存放的是该 SR 包以 32 比特为单位的总长度减一。</li>
+<li>同步源（SSRC）：SR 包发送者的同步源标识符。与对应 RTP 包中的 SSRC 一样。 </li>
+<li>NTP Timestamp（Network time protocol）：SR 包发送时的绝对时间值。NTP 的作用是同步不同的 RTP 媒体流。</li>
+<li>RTP Timestamp：与 NTP 时间戳对应，与 RTP 数据包中的 RTP 时间戳具有相同的单位和随机初始值。</li>
+<li>Sender’s packet count： 从开始发送包到产生这个 SR 包这段时间里，发送者发送的 RTP 数据包的总数. SSRC 改变时，这个域清零。</li>
+<li>Sender’s octet count： 从开始发送包到产生这个 SR 包这段时间里，发送者发送的净荷数据的总字节数（不包括头部和填充）。发送者改变其 SSRC 时，这个域要清零。</li>
+<li>同步源 n 的 SSRC 标识符：该报告块中包含的是从该源接收到的包的统计信息。</li>
+<li>丢失率(Fraction Lost)： 表明从上一个 SR 或 RR 包发出以来从同步源 n(SSRC_n) 来的 RTP 数据包的丢失率。</li>
+<li>累计的包丢失数目： 从开始接收到 SSRC_n 的包到发送 SR,从 SSRC_n 传过来的 RTP 数据包的丢失总数。</li>
+<li>收到的扩展最大序列号： 从 SSRC_n 收到的 RTP 数据包中最大的序列号，</li>
+<li>接收抖动(Interarrival jitter)： RTP 数据包接受时间的统计方差估计</li>
+<li>上次SR时间戳(Last SR,LSR)：取最近从 SSRC_n 收到的 SR 包中的 NTP 时间戳的中间 32 比特。如果目前还没收到 SR 包，则该域清零。</li>
+<li>上次SR以来的延时(Delay since last SR,DLSR)：上次从 SSRC_n 收到 SR 包到发送本报告的延时。</li>
+</ul>
+<h2 id="RTP-时间戳"><a href="#RTP-时间戳" class="headerlink" title="RTP 时间戳"></a>RTP 时间戳</h2><p>时间戳反映了 RTP 分组中的数据的第一个字节的采样时刻，在一次会话开始时的时间戳初值也是随机选择的。即使是没有信号发送时，时间戳的数值也要随时间不 断的增加。接收端使用时间戳可准确知道应当在什么时间还原哪一个数据块，从而消除传输中的抖动。时间戳还可用来使视频应用中声音和图像同步。</p>
+<p>在 RTP 协议中并没有规定时间戳的粒度，这取决于有效载荷的类型，如采样频率为 90000 HZ，那么时间戳单位为 1/90000,如果每秒发送 30 帧，那么时间戳增量就是 90000/30 = 3000。</p>
+<p>时间戳增量是发送第二个 RTP 包相距发送第一个 RTP 包时的时间间隔,如果是视频应该是发送每帧的间隔时间。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><blockquote>
+<p>RTP header</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * RTP header</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0   <span class="comment">//BIG_ENDIA</span></span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> version:<span class="number">2</span>;   <span class="comment">/* protocol version */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> p:<span class="number">1</span>;         <span class="comment">/* padding flag */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> x:<span class="number">1</span>;         <span class="comment">/* header extension flag */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> cc:<span class="number">4</span>;        <span class="comment">/* CSRC count */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> m:<span class="number">1</span>;         <span class="comment">/* marker bit */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> pt:<span class="number">7</span>;        <span class="comment">/* payload type */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> seq:<span class="number">16</span>;      <span class="comment">/* sequence number */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> cc:<span class="number">4</span>;        <span class="comment">/* CSRC count */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> x:<span class="number">1</span>;         <span class="comment">/* header extension flag */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> p:<span class="number">1</span>;         <span class="comment">/* padding flag */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> version:<span class="number">2</span>;   <span class="comment">/* protocol version */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> pt:<span class="number">7</span>;        <span class="comment">/* payload type */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> m:<span class="number">1</span>;         <span class="comment">/* marker bit */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> seq:<span class="number">16</span>;      <span class="comment">/* sequence number */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    u_int32 ts;               <span class="comment">/* timestamp */</span></span><br><span class="line">    u_int32 ssrc;             <span class="comment">/* synchronization source */</span></span><br><span class="line">    u_int32 csrc[<span class="number">1</span>];          <span class="comment">/* optional CSRC list */</span></span><br><span class="line">&#125; <span class="keyword">rtp_hdr_t</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>RTCP Common header</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * RTCP common header word</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0   <span class="comment">//BIG_ENDIA</span></span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> version:<span class="number">2</span>;   <span class="comment">/* protocol version */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> p:<span class="number">1</span>;         <span class="comment">/* padding flag */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> count:<span class="number">5</span>;     <span class="comment">/* varies by packet type */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> count:<span class="number">5</span>;     <span class="comment">/* varies by packet type */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> p:<span class="number">1</span>;         <span class="comment">/* padding flag */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> version:<span class="number">2</span>;   <span class="comment">/* protocol version */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> pt:<span class="number">8</span>;        <span class="comment">/* RTCP packet type */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> length;           <span class="comment">/* pkt len in words, w/o this word */</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">rtcp_common_t</span>;</span><br></pre></td></tr></table></figure>
+
+    </div>
+</article>
+
+
+
+<script>
+    //检测推送
+    var pushType = "";
+    var pushLink = "";
+    var siteName = "Systrace";
+  
+    var ValineButton = document.getElementsByClassName("vsubmit vbtn")[0];
+    //分情况推送
+    if (pushType === "sc") {
+      var title = "text=" + siteName + "上又有新评论啦~!";
+      function send_valine_Server() {
+        //获取元素信息
+        var pagename = document.title;
+        var wz = pagename.indexOf("|");
+        var res = pagename.substring(0, wz);
+        var pageurl = document.URL;
+        var ptime = new Date();
+        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+        var text = "desp=";
+        var data =
+          text +
+          "|昵称：" +
+          "|邮箱：" +
+          "|网站地址：" +
+          "|当前页面：" +
+          "|评论内容：" +
+          "|跳转链接：" +
+          "|评论时间" +
+          "\n" +
+          "|----|----|----|----|" +
+          "\n" +
+          "|   " +
+          vnick +
+          "   |   " +
+          vmail +
+          "  |  " +
+          vlink +
+          "|   " +
+          res +
+          "| " +
+          veditor +
+          "| " +
+          pageurl +
+          "|" +
+          ptime.toLocaleString() +
+          "|";
+        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
+        httpRequest.open("POST", pushLink, true); //第二步：打开连接
+        httpRequest.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send(title + "&" + data); //发送请求 将情头体写在send中
+      }
+      ValineButton.onclick = send_valine_Server;
+    } else if (pushType === "qmsg") {
+      var title = "msg=" + siteName + "上又有新评论啦~!\n";
+      function send_valine_Qmsg() {
+        //获取元素信息
+        var pagename = document.title;
+        var wz = pagename.indexOf("|");
+        var res = pagename.substring(0, wz);
+        var pageurl = document.URL;
+        var ptime = new Date();
+        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+        var data =
+          "昵称：" +
+          vnick +
+          "\n邮箱：" +
+          vmail +
+          "\n网站地址：" +
+          vlink +
+          "\n当前页面：" +
+          pagename +
+          "\n评论内容：" +
+          veditor +
+          "\n跳转链接：" +
+          pageurl +
+          "\n评论时间" +
+          ptime.toLocaleString();
+        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
+        httpRequest.open("POST", pushLink, true); //第二步：打开连接
+        httpRequest.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send(title + data); //发送请求 将情头体写在send中
+      }
+      ValineButton.onclick = send_valine_Qmsg;
+    }
+  </script>
+    
+        <div id="footer-post-container">
+    <div id="footer-post">
+
+        <div id="nav-footer" style="display: none">
+            <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/categories/">分类</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于</a></li>
+                
+                    <li><a href="/search/">搜索</a></li>
+                
+            </ul>
+        </div>
+
+        <div id="toc-footer" style="display: none">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">RTP 协议介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%92%8C-RTCP"><span class="toc-number">1.1.</span> <span class="toc-text">RTP 和 RTCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.</span> <span class="toc-text">RTP的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E7%9A%84%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1"><span class="toc-number">1.3.</span> <span class="toc-text">RTP 的协议层次</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">RTP 工作机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.</span> <span class="toc-text">RTP 报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTP-%E6%89%A9%E5%B1%95%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.1.</span> <span class="toc-text">RTP 扩展头结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.</span> <span class="toc-text">RTP 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">RTP 发送过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-profile-%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">RTP profile 机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTCP"><span class="toc-number">5.</span> <span class="toc-text">RTCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">6.</span> <span class="toc-text">RTP 时间戳</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">代码</span></a></li></ol>
+        </div>
+
+        <div id="share-footer" style="display: none">
+            <ul>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2019/07/29/RTP/&title=RTP"><i
+                    class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2019/07/29/RTP/&title=RTP"><i
+                    class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/29/RTP/&text=RTP"><i
+                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=RTP&body=Check out this article: http://example.com/2019/07/29/RTP/"><i
+                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+        </div>
+
+        <div id="actions-footer">
+            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg"
+                        aria-hidden="true"></i> 菜单</a>
+            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg"
+                        aria-hidden="true"></i> 目录</a>
+            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+            <a id="top" style="display:none" class="icon" href="#"
+               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                                                                               aria-hidden="true"></i> 返回顶部
+            </a>
+        </div>
+
+    </div>
+</div>
+    
+    <footer id="footer">
+  <div class="footer-top">
+    &copy; 2022 <i class="fas fa-heart"></i>
+    w.feng 
+  </div>
+
+  <div class="footer-bottom">
+    
+    <!-- tongji -->
+    <script
+      async
+      src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+    ></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <br />
+     
+  </div>
+</footer>
+
+</div>
+<!-- styles -->
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://cdn.staticfile.org/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+    
+<script src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            // copy-btn HTML
+            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+            btn += '<i class="far fa-clone"></i>';
+            btn += '</span>';
+            // mount it!
+            $(".highlight .code pre").before(btn);
+            var clip = new ClipboardJS('.btn-copy', {
+                target: function (trigger) {
+                    return trigger.nextElementSibling;
+                }
+            });
+            clip.on('success', function (e) {
+                e.trigger.setAttribute('aria-label', "复制成功!");
+                e.clearSelection();
+            })
+        })
+    </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+</body>
+
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    
+    
+        
+            
+                <link rel="shortcut icon" href="/images/favicon.ico">
+            
+        
+        
+            
+                <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+            
+        
+        
+            
+                <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+            
+        
+    
+    <!-- title -->
+    <title>shutdown和close</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css" rel="stylesheet">
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+                class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+              <li><a href="/">首页</a></li>
+          
+              <li><a href="/archives/">归档</a></li>
+          
+              <li><a href="/categories/">分类</a></li>
+          
+              <li><a href="/tags/">标签</a></li>
+          
+              <li><a href="/about/">关于</a></li>
+          
+              <li><a href="/search/">搜索</a></li>
+          
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+          
+              <li><a class="icon" href="/2019/04/30/APK%E7%98%A6%E8%BA%AB/"><i class="fas fa-chevron-left"
+                                                                           aria-hidden="true"
+                                                                           onmouseover="$('#i-prev').toggle();"
+                                                                           onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i
+                          class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();"
+                          onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true"
+                                        onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                                        onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown和close"><i
+                    class="fab fa-qq " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown和close"><i
+                    class="fab fa-weibo " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&text=shutdown和close"><i
+                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=shutdown和close&body=Check out this article: http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/"><i
+                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+</ul>
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">现象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shutdown-%E5%92%8C-Close"><span class="toc-number">2.</span> <span class="toc-text">Shutdown 和 Close</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+<div class="content index py4">
+    
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        shutdown和close
+    </h1>
+
+        <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">
+            w.feng
+            
+        </span>
+      </span>
+            
+    <div class="postdate">
+        
+            <time datetime="2018-03-15T06:41:21.000Z"
+                  itemprop="datePublished">2018-03-15</time>
+            
+                (Updated:
+                <time datetime="2022-01-26T02:58:02.066Z"
+                      itemprop="dateModified">2022-01-26</time>)
+            
+        
+    </div>
+
+            
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+            
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Linux/" rel="tag">Linux</a>
+    </div>
+
+        </div>
+    </header>
+    
+    <div class="content" itemprop="articleBody">
+        <h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>转载自:<a target="_blank" rel="noopener" href="http://www.cnblogs.com/wainiwann/p/3942203.html">http://www.cnblogs.com/wainiwann/p/3942203.html</a></p>
+<p>在开发的一个基于 rtmp 聊天的程序时发现了一个很奇怪的现象。</p>
+<p>在 windows 下当我们执行 closesocket 的操作之后，阻塞的 recv 会立即返回 -1 。</p>
+<p>而在 linux 下当我们执行 close 操作之后阻塞的 recv 会出现不能立即返回的现象。后来在网上一搜发现很多遇到类似这种现象的情况，大致意思应该是</p>
+<p>当 socket 被动被 close 的时候进入了 “CLOSE_WAIT（被动关闭一方）”的情况。<br>解决方法就是在你 close 之前调用一下 ：</p>
+<p><code>shutdown(socket, SHUT_RDWR)</code></p>
+<p>就是关闭 socket 的读写功能。</p>
+<h2 id="Shutdown-和-Close"><a href="#Shutdown-和-Close" class="headerlink" title="Shutdown 和 Close"></a>Shutdown 和 Close</h2><blockquote>
+<p>下面是对譬如 “CLOSE_WAIT” 现象的一些解释</p>
+</blockquote>
+<p>主动关闭方和被动方经历的状态：</p>
+<p>FIN_WAIT_1（主动关闭一方）：当 SOCKET 在 ESTABLISHED 状态时，它想主动关闭连接，向对方发送了 FIN 报文，此时该 SOCKET 即进入到FIN_WAIT_1 状态。而当对方回应 ACK 报文后，则进入到 FIN_WAIT_2 状态，</p>
+<p>FIN_WAIT_2（主动关闭一方）：上面已经详细解释了这种状态，实际上 FIN_WAIT_2 状态下的 SOCKET，表示半连接，也即有一方要求 close 连接，但另外还告诉对方，我暂时还有点数据需要传送给你，稍后再关闭连接。</p>
+<p>TIME_WAIT（主动关闭一方）：表示收到了对方的 FIN 报文，并发送出了 ACK 报文就等 2MSL（2倍最大生存时间）后即可回到 CLOSED 可用状态了。</p>
+<p>CLOSE_WAIT（被动关闭一方）：这种状态的含义其实是表示在等待关闭。当对方 close 一个 SOCKET 后发送 FIN 报文给自己，你系统毫无疑问地会回应一个 ACK 报文给对方，此时则进入到 CLOSE_WAIT 状态。接下来呢，实际上你真正需要考虑的事情是察看你是否还有数据发送给对方，如果没有的话，那么你也就可以 close 这个 SOCKET，发送 FIN 报文给对方，也即关闭连接。所以你在 CLOSE_WAIT 状态下，需要完成的事情是等待你去关闭连接。</p>
+<p>LAST_ACK（被动关闭一方）：它是被动关闭一方在发送 FIN 报文后，最后等待对方的 ACK 报文。当收到 ACK 报文后，也即可以进入到 CLOSED 可用状态</p>
+<blockquote>
+<p>下面是 socket 的 close 和 shutdown 的一些说明</p>
+</blockquote>
+<p>Linux socket 关闭连接的方法有两种分别是 shutdown 和 close，首先看一下 shutdown 的定义</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> how)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>how 的方式有三种分别是</p>
+<ul>
+<li><p>SHUT_RD（0）：关闭 sockfd 上的读功能，此选项将不允许 sockfd 进行读操作。</p>
+</li>
+<li><p>SHUT_WR（1）：关闭 sockfd 的写功能，此选项将不允许 sockfd 进行写操作。</p>
+</li>
+<li><p>SHUT_RDWR（2）：关闭 sockfd 的读写功能。</p>
+</li>
+</ul>
+<p>成功则返回 0，错误返回 -1，错误码 errno：EBADF 表示 sockfd 不是一个有效描述符；ENOTCONN 表示 sockfd 未连接；ENOTSOCK 表示 sockfd 是一个文件描述符而不是 socket 描述符。</p>
+<p>close 的定义如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>关闭读写。</p>
+<p>  成功则返回 0，错误返回 -1，错误码 errno：EBADF 表示 fd 不是一个有效描述符；EINTR 表示 close 函数被信号中断；EIO 表示一个 IO 错误。<br>  下面摘用网上的一段话来说明二者的区别：<br>  close–关闭本进程的 socket id，但链接还是开着的，用这 socket id 的其它进程还能用这个链接，能读或写这个 socket id<br>  shutdown–则破坏了socket 链接，读的时候可能侦探到 EOF 结束符，写的时候可能会收到一个 SIGPIPE 信号，这个信号可能直到 socket buffer 被填充了才收到，shutdown 还有一个关闭方式的参数，0 不能再读，1 不能再写，2 读写都不能。</p>
+<blockquote>
+<p>socket 多进程中的shutdown, close使用</p>
+</blockquote>
+<p>  当所有的数据操作结束以后，你可以调用 close() 函数来释放该 socket，从而停止在该socket上的任何数据操作：close(sockfd);</p>
+<p>  你也可以调用 shutdown() 函数来关闭该 socket。该函数允许你只停止在某个方向上的数据传输，而一个方向上的数据传输继续进行。如你可以关闭某 socket 的写操作而允许继续在该 socket 上接受数据，直至读入所有数据。</p>
+<p>  int shutdown(int sockfd,int how);</p>
+<p>  sockfd 是需要关闭的 socket 的描述符。参数 how 允许为 shutdown 操作选择以下几种方式：</p>
+<ul>
+<li><p>SHUT_RD：关闭连接的读端。也就是该套接字不再接受数据，任何当前在套接字接受缓冲区的数据将被丢弃。进程将不能对该套接字发出任何读操作。对 TCP 套接字该调用之后接受到的任何数据将被确认然后无声的丢弃掉。</p>
+</li>
+<li><p>SHUT_WR：关闭连接的写端，进程不能在对此套接字发出写操作。</p>
+</li>
+<li><p>SHUT_RDWR：相当于调用 shutdown 两次；首先是以SHUT_RD，然后以 SHUT_WR<br>使用 close 中止一个连接，但它只是减少描述符的参考数，并不直接关闭连接，只有当描述符的参考数为0时才关闭连接。<br>shutdown 可直接关闭描述符，不考虑描述符的参考数，可选择中止一个方向的连接。</p>
+<p><strong>注意：</strong></p>
+<p> 如果有多个进程共享一个套接字，close 每被调用一次，计数减 1，直到计数为 0 时，也就是所用进程都调用了 close，套接字将被释放。<br> 在多进程中如果一个进程中 <code>shutdown(sfd, SHUT_RDWR)</code> 后其它的进程将无法进行通信。如果一个进程 <code>close(sfd)</code> 将不会影响到其它进程，得自己理解引用计数的用法了，有 Kernel 编程知识的更好理解了。</p>
+</li>
+</ul>
+<blockquote>
+<p>更多关于 close 和 shutdown 的说明</p>
+</blockquote>
+<ol>
+<li>只要 TCP 栈的读缓冲里还有未读取（read）数据，则调用 close 时会直接向对端发送 RST。</li>
+<li>shutdown 与 socket 描述符没有关系，即使调用 <code>shutdown(fd, SHUT_RDWR)</code> 也不会关闭 fd，最终还需 <code>close(fd)</code>。</li>
+<li>可以认为 <code>shutdown(fd, SHUT_RD)</code> 是空操作，因为 shutdown 后还可以继续从该 socket 读取数据，这点也许还需要进一步证实。</li>
+<li>在已发送 FIN 包后 write 该 socket 描述符会引发 EPIPE/SIGPIPE。</li>
+<li>当有多个 socket 描述符指向同一 socket 对象时，调用 close 时首先会递减该对象的引用计数，计数为 0 时才会发送 FIN 包结束 TCP 连接。shutdown 不同，只要以 SHUT_WR/SHUT_RDWR 方式调用即发送 FIN 包。</li>
+<li>SO_LINGER 与 close，当 SO_LINGER 选项开启但超时值为 0 时，调用 close 直接发送 RST（这样可以避免进入 TIME_WAIT 状态，但破坏了 TCP 协议的正常工作方式），SO_LINGER 对 shutdown 无影响。</li>
+<li>TCP 连接上出现 RST 与随后可能的 TIME_WAIT 状态没有直接关系，主动发 FIN 包方必然会进入 TIME_WAIT 状态，除非不发送 FIN 而直接以发送 RST 结束连接。</li>
+</ol>
+<blockquote>
+<p>下面是对于该主题相关网络讨论资料总结</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="http://bbs.csdn.net/topics/350147238">http://bbs.csdn.net/topics/350147238</a><br><a target="_blank" rel="noopener" href="http://bbs.csdn.net/topics/350050711">http://bbs.csdn.net/topics/350050711</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/helpxs/article/details/6661951">http://blog.csdn.net/helpxs/article/details/6661951</a></p>
+
+    </div>
+</article>
+
+
+
+<script>
+    //检测推送
+    var pushType = "";
+    var pushLink = "";
+    var siteName = "Systrace";
+  
+    var ValineButton = document.getElementsByClassName("vsubmit vbtn")[0];
+    //分情况推送
+    if (pushType === "sc") {
+      var title = "text=" + siteName + "上又有新评论啦~!";
+      function send_valine_Server() {
+        //获取元素信息
+        var pagename = document.title;
+        var wz = pagename.indexOf("|");
+        var res = pagename.substring(0, wz);
+        var pageurl = document.URL;
+        var ptime = new Date();
+        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+        var text = "desp=";
+        var data =
+          text +
+          "|昵称：" +
+          "|邮箱：" +
+          "|网站地址：" +
+          "|当前页面：" +
+          "|评论内容：" +
+          "|跳转链接：" +
+          "|评论时间" +
+          "\n" +
+          "|----|----|----|----|" +
+          "\n" +
+          "|   " +
+          vnick +
+          "   |   " +
+          vmail +
+          "  |  " +
+          vlink +
+          "|   " +
+          res +
+          "| " +
+          veditor +
+          "| " +
+          pageurl +
+          "|" +
+          ptime.toLocaleString() +
+          "|";
+        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
+        httpRequest.open("POST", pushLink, true); //第二步：打开连接
+        httpRequest.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send(title + "&" + data); //发送请求 将情头体写在send中
+      }
+      ValineButton.onclick = send_valine_Server;
+    } else if (pushType === "qmsg") {
+      var title = "msg=" + siteName + "上又有新评论啦~!\n";
+      function send_valine_Qmsg() {
+        //获取元素信息
+        var pagename = document.title;
+        var wz = pagename.indexOf("|");
+        var res = pagename.substring(0, wz);
+        var pageurl = document.URL;
+        var ptime = new Date();
+        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+        var data =
+          "昵称：" +
+          vnick +
+          "\n邮箱：" +
+          vmail +
+          "\n网站地址：" +
+          vlink +
+          "\n当前页面：" +
+          pagename +
+          "\n评论内容：" +
+          veditor +
+          "\n跳转链接：" +
+          pageurl +
+          "\n评论时间" +
+          ptime.toLocaleString();
+        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
+        httpRequest.open("POST", pushLink, true); //第二步：打开连接
+        httpRequest.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send(title + data); //发送请求 将情头体写在send中
+      }
+      ValineButton.onclick = send_valine_Qmsg;
+    }
+  </script>
+    
+        <div id="footer-post-container">
+    <div id="footer-post">
+
+        <div id="nav-footer" style="display: none">
+            <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/categories/">分类</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于</a></li>
+                
+                    <li><a href="/search/">搜索</a></li>
+                
+            </ul>
+        </div>
+
+        <div id="toc-footer" style="display: none">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">现象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shutdown-%E5%92%8C-Close"><span class="toc-number">2.</span> <span class="toc-text">Shutdown 和 Close</span></a></li></ol>
+        </div>
+
+        <div id="share-footer" style="display: none">
+            <ul>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown和close"><i
+                    class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&title=shutdown和close"><i
+                    class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/&text=shutdown和close"><i
+                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=shutdown和close&body=Check out this article: http://example.com/2018/03/15/sokcet%E7%9A%84shutdown%E5%92%8Cclose/"><i
+                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+        </div>
+
+        <div id="actions-footer">
+            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg"
+                        aria-hidden="true"></i> 菜单</a>
+            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg"
+                        aria-hidden="true"></i> 目录</a>
+            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+            <a id="top" style="display:none" class="icon" href="#"
+               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                                                                               aria-hidden="true"></i> 返回顶部
+            </a>
+        </div>
+
+    </div>
+</div>
+    
+    <footer id="footer">
+  <div class="footer-top">
+    &copy; 2022 <i class="fas fa-heart"></i>
+    w.feng 
+  </div>
+
+  <div class="footer-bottom">
+    
+    <!-- tongji -->
+    <script
+      async
+      src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+    ></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <br />
+     
+  </div>
+</footer>
+
+</div>
+<!-- styles -->
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://cdn.staticfile.org/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+    
+<script src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            // copy-btn HTML
+            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+            btn += '<i class="far fa-clone"></i>';
+            btn += '</span>';
+            // mount it!
+            $(".highlight .code pre").before(btn);
+            var clip = new ClipboardJS('.btn-copy', {
+                target: function (trigger) {
+                    return trigger.nextElementSibling;
+                }
+            });
+            clip.on('success', function (e) {
+                e.trigger.setAttribute('aria-label', "复制成功!");
+                e.clearSelection();
+            })
+        })
+    </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+</body>
+
+</html>
