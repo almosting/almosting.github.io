@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    
+    
+        
+            
+                <link rel="shortcut icon" href="/images/favicon.ico">
+            
+        
+        
+            
+                <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+            
+        
+        
+            
+                <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+            
+        
+    
+    <!-- title -->
+    <title>Android 音频系统</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css" rel="stylesheet">
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+                class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+              <li><a href="/">首页</a></li>
+          
+              <li><a href="/archives/">归档</a></li>
+          
+              <li><a href="/categories/">分类</a></li>
+          
+              <li><a href="/tags/">标签</a></li>
+          
+              <li><a href="/about/">关于</a></li>
+          
+              <li><a href="/search/">搜索</a></li>
+          
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+          
+          
+              <li><a class="icon" href="/2021/05/07/%E5%9B%BE%E5%83%8F%E4%B8%8E%E8%A7%86%E9%A2%91/"><i class="fas fa-chevron-right"
+                                                                           aria-hidden="true"
+                                                                           onmouseover="$('#i-next').toggle();"
+                                                                           onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i
+                          class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();"
+                          onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true"
+                                        onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                                        onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/&title=Android 音频系统"><i
+                    class="fab fa-qq " aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/&title=Android 音频系统"><i
+                    class="fab fa-weibo " aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/&text=Android 音频系统"><i
+                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=Android 音频系统&body=Check out this article: http://example.com/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/"><i
+                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+</ul>
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Audio-%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%90%AF%E5%8A%A8"><span class="toc-number">1.</span> <span class="toc-text">Audio 服务的启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AudioTrack"><span class="toc-number">2.</span> <span class="toc-text">AudioTrack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91%E7%AD%96%E7%95%A5"><span class="toc-number">3.</span> <span class="toc-text">音频策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%AA%E5%8F%96%E9%9F%B3%E9%A2%91%E6%95%B0%E6%8D%AE"><span class="toc-number">4.</span> <span class="toc-text">截取音频数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91%E6%95%B0%E6%8D%AE%E6%B5%81%E5%90%91"><span class="toc-number">5.</span> <span class="toc-text">音频数据流向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90"><span class="toc-number">6.</span> <span class="toc-text">配置解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HAL"><span class="toc-number">7.</span> <span class="toc-text">HAL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E8%BF%9E%E6%8E%A5%E4%BE%8B%E5%AD%90"><span class="toc-number">8.</span> <span class="toc-text">蓝牙连接例子</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+<div class="content index py4">
+    
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        Android 音频系统
+    </h1>
+
+        <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">
+            w.feng
+            
+        </span>
+      </span>
+            
+    <div class="postdate">
+        
+            <time datetime="2022-03-10T02:37:51.000Z"
+                  itemprop="datePublished">2022-03-10</time>
+            
+                (Updated:
+                <time datetime="2022-03-10T03:22:07.822Z"
+                      itemprop="dateModified">2022-03-10</time>)
+            
+        
+    </div>
+
+            
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Android/">Android</a>
+    </div>
+
+            
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag">系统</a>
+    </div>
+
+        </div>
+    </header>
+    
+    <div class="content" itemprop="articleBody">
+        <ul>
+<li><p>App<br>音频应用软件</p>
+</li>
+<li><p>Framework<br>MediaPlayer 和 MediaRecorder，以及 AudioTrack、AudioRecorder、AudioMannager、AudioService 以及 AudioSystem 。</p>
+</li>
+<li><p>Libraries<br>frameorks/av/media/libmedia、libaudioflinger、libmediaplayerservice</p>
+</li>
+<li><p>HAL<br>AudioFlinger、AudioPolicyService。</p>
+</li>
+</ul>
+<img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6%E5%85%A8%E5%9B%BE.png" class="" title="音频系统框架全图">
+<ul>
+<li><p>AudioPolicyService：APS 是音频框架的服务，main_audioserver 启动，会创建 AudioCommandThread 和 AudioPolicyClient、AudioPolicyManager。它主要由 AudioSystem 通过 binder 调用，也可以由 AudioPolicyClient，AudioPolicyManager 直接调用。它的大部分操作都交给 AudioPolicyManager 来做</p>
+</li>
+<li><p>AudioPolicyClient：APC 是 AudioPolicyService 的内部类。它用于打开关闭输入输出，设置流音量，传递参数给 hal 层（如 audio_hw.cpp）等；它主要是通过 binder 跨进程调用 AudioFlinger 去完成真正的操作。可以由 AudioManager 通过 mpClientInterface 去调用它。</p>
+</li>
+<li><p>AudioPolicyManager：APM 是 AudioPolicyService 的主要工作类，AudioPolicyService 的大部分操作都由他来执行</p>
+</li>
+<li><p>AudioFlinger：AF 主要承担音频混合输出，是 Audio 系统的核心，从 AudioTrack 来的数据最终都会在这里处理，并被写入到 Audio 的 HAL。</p>
+</li>
+<li><p>DevicesFactoryHalLocal：根据名字加载对应的 hal module。比如传进去 a2dp 相关的名字，会加载到 audio.a2dp.default.so</p>
+</li>
+<li><p>DevicesFactoryHalHidl：跨进行加载 hidl hal module。</p>
+</li>
+<li><p>DevicesFactoryHalInterface：用于创建子类 DevicesFactoryHalHybrid。</p>
+</li>
+<li><p>DevicesFactoryHalHybrid：选择创建 DevicesFactoryHalLocal 或者 DevicesFactoryHalHidl，我这里只创建 DevicesFactoryHalLocal。</p>
+</li>
+<li><p>DeviceHalLocal：通过私有成员 audio_hw_device_t *mDev，直接调用 hal 代码，用来设置和获取底层参数，打开和关闭 stream。</p>
+</li>
+<li><p>StreamOutHalLocal：通过私有成员 audio_stream_out_t *mStream 直接调用 hal 代码，用于操作流，比如 start、stop、flush、puse 操作；还有调用 write 函数写音频数据到 hal 层。</p>
+</li>
+<li><p>AudioStreamOutSink：它其实是 StreamOutHalLocal 的一个 wrapper，它也有 write 函数，不过是通过 StreamOutHalLocal 来操作的。</p>
+<p>附上一张重要的类图：</p>
+<img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/audio_architecture.jpg" class="" title="audio_architecture"></li>
+</ul>
+<h2 id="Audio-服务的启动"><a href="#Audio-服务的启动" class="headerlink" title="Audio 服务的启动"></a>Audio 服务的启动</h2><img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/audio_service.png" class="" title="audio_service">
+
+<ol>
+<li>创建 AudioFlinger 和 AudioPolicyService。</li>
+<li>解析 Audio Config 文件（audio_policy_configuration.xml），获取支持的音频外设列表及各输入输出通路详细参数。</li>
+<li>根据解析得到的外设列表，加载所有的 Audio HAL 库。</li>
+<li>为所有 output 设备打开 outputStream 并创建 PlaybackThread 线程。</li>
+<li>为所有 input 设备打开 inputStream 并创建 RecordThread 线程。</li>
+</ol>
+<h2 id="AudioTrack"><a href="#AudioTrack" class="headerlink" title="AudioTrack"></a>AudioTrack</h2><img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/audiotrack.png" class="" title="audiotrack">
+
+<p>Android 声音播放都是通过 AudioTrack 进行，包括 MediaPlayer 最终也是创建 AudioTrack 来播放的。通过 AudioTrack 播放声音主要包括下面几步：</p>
+<ol>
+<li>创建 AudioTrack。</li>
+<li>调用 AudioTrack 的 play() 方法。</li>
+<li>调用 AudioTrack 的 write() 方法写入音频数据。</li>
+</ol>
+<p>创建 AudioTrack 时重点是通过 AudioPolicyManager 分配了音频路由通路，同时通知服务端 AudioFlinger 创建对应的 Track，用于接收音频数据。</p>
+<ul>
+<li>调用 play() 方法主要是将创建的 Track 加到 mActiveTracks 并激活沉睡的 PlaybackThread 线程。</li>
+<li>调用 write() 方法通过共享内存将数据写入服务端 AudioFlinger，PlaybackThread 收到数据激活线程，将数据进行混音等处理再写入对应的 Audio HAL，Audio HAL 再将数据写入驱动或其它外设。</li>
+</ul>
+<h2 id="音频策略"><a href="#音频策略" class="headerlink" title="音频策略"></a>音频策略</h2><p>音频调试参考 <a target="_blank" rel="noopener" href="https://source.android.com/devices/audio/debugging?hl=zh-cn">Android Audio</a>。</p>
+<p>首先要搞清楚 stream_type，device，strategy 三者之间的关系：</p>
+<ul>
+<li>AudioSystem::stream_type：音频流的类型</li>
+<li>AudioSystem::audio_devices：音频输入输出设备，每一个 bit 代表一种设备。</li>
+<li>AudioPolicyManagerBase::routing_strategy：音频路由策略</li>
+</ul>
+<p>AudioPolicyManagerBase.getStrategy 根据 stream type，返回对应的 routing strategy 值，AudioPolicyManagerBase.getDeviceForStrategy() 则是根据 routing strategy，返回可用的 device。<br>首先需要的是加载音频设备，音频设备的配置在 <code>system/etc/audio_policy.conf</code> 和 <code>vendor/etc/aduio_policy</code>, 配置文件中表示了各种 audio interface，通过 AudioFlinger 加载音频设备。<br>按照一定的优先级选择符合要求的 Device，然后为 Device 选择合适的 Output 通道。<br>可以通过重载 getStrategy 自己划分 Strategy。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">routing_strategy strategy = (routing_strategy) <span class="built_in">getStrategyForAttr</span>(&amp;attributes);</span><br><span class="line"><span class="keyword">audio_devices_t</span> device = <span class="built_in">getDeviceForStrategy</span>(strategy, <span class="literal">false</span> <span class="comment">/*fromCache*/</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="截取音频数据"><a href="#截取音频数据" class="headerlink" title="截取音频数据"></a>截取音频数据</h2><p>有三个地方可以获取到 PCM 数据：</p>
+<ul>
+<li>第一个地方 <code>frameworks/av/media/libmedia/AudioTrack.cpp</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">nsecs_t</span> <span class="title">AudioTrack::processAudioBuffer</span><span class="params">()</span></span>&#123;  </span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//在 releaseBuffer 之前 dump </span></span><br><span class="line"><span class="built_in">releaseBuffer</span>(&amp;audioBuffer);  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>第二个地方 <code>frameworks/av/services/audioflinger/Tracks.cpp</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">status_t</span> AudioFlinger::PlaybackThread::Track::<span class="built_in">getNextBuffer</span>(</span><br><span class="line">        AudioBufferProvider::Buffer* buffer)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// add dump method</span></span><br><span class="line">    ServerProxy::Buffer buf;</span><br><span class="line">    <span class="keyword">size_t</span> desiredFrames = buffer-&gt;frameCount;</span><br><span class="line">    buf.mFrameCount = desiredFrames;</span><br><span class="line">    <span class="keyword">status_t</span> status = mServerProxy-&gt;<span class="built_in">obtainBuffer</span>(&amp;buf);</span><br><span class="line">    buffer-&gt;frameCount = buf.mFrameCount;</span><br><span class="line">    buffer-&gt;raw = buf.mRaw;</span><br><span class="line">    <span class="keyword">if</span> (buf.mFrameCount == <span class="number">0</span> &amp;&amp; !<span class="built_in">isStopping</span>() &amp;&amp; !<span class="built_in">isStopped</span>() &amp;&amp; !<span class="built_in">isPaused</span>()) &#123;</span><br><span class="line">        <span class="built_in">ALOGV</span>(<span class="string">&quot;underrun,  framesReady(%zu) &lt; framesDesired(%zd), state: %d&quot;</span>,</span><br><span class="line">                buf.mFrameCount, desiredFrames, mState);</span><br><span class="line">        mAudioTrackServerProxy-&gt;<span class="built_in">tallyUnderrunFrames</span>(desiredFrames);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        mAudioTrackServerProxy-&gt;<span class="built_in">tallyUnderrunFrames</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第三个地方<code>hardware/xxx/audio/tinyalsa_hal/audio_hw.c</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static ssize_t out_write(struct audio_stream_out *stream, const void* buffer, size_t bytes)</span><br><span class="line">&#123;  </span><br><span class="line">	//add dump method	 </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="音频数据流向"><a href="#音频数据流向" class="headerlink" title="音频数据流向"></a>音频数据流向</h2><p>Android 系统 audio 框架中主要有三种播放模式：low latency playback、deep buffer playback 和 compressed offload playback。</p>
+<ul>
+<li>low latency / deep buffer 模式下的音频数据流向</li>
+</ul>
+<img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/ap-audio.png" class="" title="ap_audio">
+
+<ul>
+<li>compressed offload 模式下的音频数据流向</li>
+</ul>
+<img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/offload.png" class="" title="offload">
+
+<ul>
+<li><p>音频录制</p>
+<img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/recorder.png" class="" title="recorder"></li>
+<li><p>打电话</p>
+<img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/phone.png" class="" title="phone"></li>
+</ul>
+<h2 id="配置解析"><a href="#配置解析" class="headerlink" title="配置解析"></a>配置解析</h2><p>module 下面有 mixPorts、devicePorts 和 routes 子段，它们下面又分别包含多个 mixPort、devicePort 和 route 的字段，这些字段内标识为 source 和 sink 两种角色：<br>devicePorts(source)：为实际的硬件输入设备；<br>devicePorts(sink)：为实际的硬件输出设备；<br>mixPorts(source)：为经过 AudioFlinger 之后的流类型，也称“输出流设备”，是个逻辑设备而非物理设备，对应 AudioFlinger 里面的一个 PlayerThread；<br>mixPorts(sink)：为进入 AudioFlinger 之前的流类型，也称“输入流设备”，是个逻辑设备而非物理设备，对应 AudioFlinger 里面的一个 RecordThread；<br>routes：定义 devicePort 和 mixPorts 的路由策略。</p>
+<img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/module.jpg" class="" title="module">
+
+<p>profile 参数包含音频流一些信息，比如位数、采样率、通道数，它将被构建为 AudioProfile 对象，保存到 mixPort，然后在存储到 module。对于 xml 里面的 devicePort，一般没有 profile 参数，则会创建一个默认的 profile。当把 mixPort 加入到 Moudle 时，会进行分类：</p>
+<p>即 source 角色保存到 OutputProfileCollection mOutputProfiles，sink 角色保存到 InputProfileCollection mInputProfiles。<br>而 devicePort 则调用 HwModule::setDeclaredDevices() 保存到 module 的 mDeclaredDevices。</p>
+<img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/hwmodule.jpg" class="" title="hwmodule">
+
+<h2 id="HAL"><a href="#HAL" class="headerlink" title="HAL"></a>HAL</h2><img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/hal.png" class="" title="hal">
+
+<p>Audio HAL 大致的类图，hal 采用工厂模式，分为 Local 和 HIDL 模式，最后都会调用到 audio_stream_out 或者 audio_stream_in 中，对应调用到 audio_hw.c（由各个厂商实现）中。</p>
+<h2 id="蓝牙连接例子"><a href="#蓝牙连接例子" class="headerlink" title="蓝牙连接例子"></a>蓝牙连接例子</h2><img src="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/bluetooth.png" class="" title="bluetooth">
+
+<p>AudioService 的 handleDeviceConnection 调用 AudioPolicyManager 的 setDeviceConnectionStateInt。</p>
+<p>checkOutputsForDevice 会检测所有的 profile（output），查找每个 profile 是否都存在对应的线程，如果没有则进行创建checkOutputForAllStrategies 切换 AudioTrack 的写入数据源。</p>
+
+    </div>
+</article>
+
+
+
+<script>
+    //检测推送
+    var pushType = "";
+    var pushLink = "";
+    var siteName = "Almosting";
+  
+    var ValineButton = document.getElementsByClassName("vsubmit vbtn")[0];
+    //分情况推送
+    if (pushType === "sc") {
+      var title = "text=" + siteName + "上又有新评论啦~!";
+      function send_valine_Server() {
+        //获取元素信息
+        var pagename = document.title;
+        var wz = pagename.indexOf("|");
+        var res = pagename.substring(0, wz);
+        var pageurl = document.URL;
+        var ptime = new Date();
+        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+        var text = "desp=";
+        var data =
+          text +
+          "|昵称：" +
+          "|邮箱：" +
+          "|网站地址：" +
+          "|当前页面：" +
+          "|评论内容：" +
+          "|跳转链接：" +
+          "|评论时间" +
+          "\n" +
+          "|----|----|----|----|" +
+          "\n" +
+          "|   " +
+          vnick +
+          "   |   " +
+          vmail +
+          "  |  " +
+          vlink +
+          "|   " +
+          res +
+          "| " +
+          veditor +
+          "| " +
+          pageurl +
+          "|" +
+          ptime.toLocaleString() +
+          "|";
+        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
+        httpRequest.open("POST", pushLink, true); //第二步：打开连接
+        httpRequest.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send(title + "&" + data); //发送请求 将情头体写在send中
+      }
+      ValineButton.onclick = send_valine_Server;
+    } else if (pushType === "qmsg") {
+      var title = "msg=" + siteName + "上又有新评论啦~!\n";
+      function send_valine_Qmsg() {
+        //获取元素信息
+        var pagename = document.title;
+        var wz = pagename.indexOf("|");
+        var res = pagename.substring(0, wz);
+        var pageurl = document.URL;
+        var ptime = new Date();
+        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+        var data =
+          "昵称：" +
+          vnick +
+          "\n邮箱：" +
+          vmail +
+          "\n网站地址：" +
+          vlink +
+          "\n当前页面：" +
+          pagename +
+          "\n评论内容：" +
+          veditor +
+          "\n跳转链接：" +
+          pageurl +
+          "\n评论时间" +
+          ptime.toLocaleString();
+        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
+        httpRequest.open("POST", pushLink, true); //第二步：打开连接
+        httpRequest.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+        httpRequest.send(title + data); //发送请求 将情头体写在send中
+      }
+      ValineButton.onclick = send_valine_Qmsg;
+    }
+  </script>
+    
+        <div id="footer-post-container">
+    <div id="footer-post">
+
+        <div id="nav-footer" style="display: none">
+            <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/categories/">分类</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于</a></li>
+                
+                    <li><a href="/search/">搜索</a></li>
+                
+            </ul>
+        </div>
+
+        <div id="toc-footer" style="display: none">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Audio-%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%90%AF%E5%8A%A8"><span class="toc-number">1.</span> <span class="toc-text">Audio 服务的启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AudioTrack"><span class="toc-number">2.</span> <span class="toc-text">AudioTrack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91%E7%AD%96%E7%95%A5"><span class="toc-number">3.</span> <span class="toc-text">音频策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%AA%E5%8F%96%E9%9F%B3%E9%A2%91%E6%95%B0%E6%8D%AE"><span class="toc-number">4.</span> <span class="toc-text">截取音频数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91%E6%95%B0%E6%8D%AE%E6%B5%81%E5%90%91"><span class="toc-number">5.</span> <span class="toc-text">音频数据流向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90"><span class="toc-number">6.</span> <span class="toc-text">配置解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HAL"><span class="toc-number">7.</span> <span class="toc-text">HAL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E8%BF%9E%E6%8E%A5%E4%BE%8B%E5%AD%90"><span class="toc-number">8.</span> <span class="toc-text">蓝牙连接例子</span></a></li></ol>
+        </div>
+
+        <div id="share-footer" style="display: none">
+            <ul>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/&title=Android 音频系统"><i
+                    class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon"
+           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/&title=Android 音频系统"><i
+                    class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/&text=Android 音频系统"><i
+                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+    <li><a class="icon" href="mailto:?subject=Android 音频系统&body=Check out this article: http://example.com/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/"><i
+                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+        </div>
+
+        <div id="actions-footer">
+            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg"
+                        aria-hidden="true"></i> 菜单</a>
+            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg"
+                        aria-hidden="true"></i> 目录</a>
+            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+            <a id="top" style="display:none" class="icon" href="#"
+               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                                                                               aria-hidden="true"></i> 返回顶部
+            </a>
+        </div>
+
+    </div>
+</div>
+    
+    <footer id="footer">
+  <div class="footer-top">
+    &copy; 2022 <i class="fas fa-heart"></i>
+    w.feng 
+  </div>
+
+  <div class="footer-bottom">
+    
+    <!-- tongji -->
+    <script
+      async
+      src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+    ></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+    <br />
+     
+  </div>
+</footer>
+
+</div>
+<!-- styles -->
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://cdn.staticfile.org/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+    
+<script src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            // copy-btn HTML
+            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+            btn += '<i class="far fa-clone"></i>';
+            btn += '</span>';
+            // mount it!
+            $(".highlight .code pre").before(btn);
+            var clip = new ClipboardJS('.btn-copy', {
+                target: function (trigger) {
+                    return trigger.nextElementSibling;
+                }
+            });
+            clip.on('success', function (e) {
+                e.trigger.setAttribute('aria-label', "复制成功!");
+                e.clearSelection();
+            })
+        })
+    </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+</body>
+
+</html>
