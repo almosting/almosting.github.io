@@ -5,15 +5,14 @@ categories: 音视频
 tags: 流媒体协议
 ---
 ## RTSP 协议
-> 实时流协议（Real Time Streaming Protocol，RTSP）是一种网络应用协议，专为娱乐和通信系统的使用，以控制流媒体服务器。该协议用于创建和控制终端之间的媒体会话。媒体服务器的客户端发布 VCR 命令，例如播放，录制和暂停，以便于实时控制从服务器到客户端（视频点播）或从客户端到服务器（语音录音）的媒体流。是 TCP/IP 协议体系中的一个应用层协议, 由哥伦比亚大学, 网景和 RealNetworks 公司提交的 IETF RFC 标准. 对应的 RFC 编号是 2326，可以在这里搜索 [RFC Editor](http://www.rfc-editor.org/search/rfc_search_detail.php)
+> 实时流协议（Real Time Streaming Protocol，RTSP）是一种网络应用协议，专为娱乐和通信系统的使用，以控制流媒体服务器。该协议用于创建和控制终端之间的媒体会话。媒体服务器的客户端发布 VCR 命令，例如播放，录制和暂停，以便于实时控制从服务器到客户端（视频点播）或从客户端到服务器（语音录音）的媒体流。是 TCP/IP 协议体系中的一个应用层协议，由哥伦比亚大学，网景和 RealNetworks 公司提交的 IETF RFC 标准。对应的 RFC 编号是 2326，可以在这里搜索 [RFC Editor](http://www.rfc-editor.org/search/rfc_search_detail.php)
 
-该协议定义了一对多应用程序如何有效地通过 IP 网络传送多媒体数据. RTSP 在体系结构上位于 RTP 和 RTCP 之上, 它使用 TCP 或 RTP 完成数据传输. RTSP 被用于建立的控制媒体流的传输，它为多媒体服务扮演“网络远程控制”的角色。尽管有时**可以把 RTSP 控制信息和媒体数据流交织在一起传送**，但一般情况 RTSP 本身并不用于转送媒体流数据。媒体数据的传送可通过 RTP/RTCP 等协议来完成。
+该协议定义了一对多应用程序如何有效地通过 IP 网络传送多媒体数据。RTSP 在体系结构上位于 RTP 和 RTCP 之上，它使用 TCP 或 RTP 完成数据传输。RTSP 被用于建立的控制媒体流的传输，它为多媒体服务扮演“网络远程控制”的角色。尽管有时**可以把 RTSP 控制信息和媒体数据流交织在一起传送**，但一般情况 RTSP 本身并不用于转送媒体流数据。媒体数据的传送可通过 RTP/RTCP 等协议来完成。
 
-该协议用于 C/S 模型, 是一个基于文本的协议, 用于在客户端和服务器端建立和协商实时流会话.
-
+该协议用于 C/S 模型，是一个基于文本的协议，用于在客户端和服务器端建立和协商实时流会话。
 ### 协议体系
 
-**一次基本的 RTSP 操作过程:**
+**一次基本的 RTSP 操作过程：**
 
 - 首先，客户端连接到流服务器并发送一个 RTSP 描述命令（DESCRIBE）。
 - 流服务器通过一个 SDP 描述来进行反馈，反馈信息包括流数量、媒体类型等信息。
@@ -27,7 +26,7 @@ tags: 流媒体协议
     客户端->服务器：SETUP
     服务器->客户端：200 OK
     客户端->服务器：PLAY
-    服务器->客户端：(RTP 包)
+    服务器->客户端：(RTP 包）
 ```
 
 ### 协议特点
@@ -50,7 +49,7 @@ tags: 流媒体协议
 
 ### RTSP URL
 
-一个终端用户是通过在播放器中输入 URL 地址开始进行观看流媒体业务的第一步，而对于使用RTSP协议的移动流媒体点播而言，URL 的一般写法如下：
+一个终端用户是通过在播放器中输入 URL 地址开始进行观看流媒体业务的第一步，而对于使用 RTSP 协议的移动流媒体点播而言，URL 的一般写法如下：
 
 一个以 “rtsp” 或是 “rtspu” 开始的 URL 链接用于指定当前使用的是 RTSP 协议。RTSP URL 的语法结构如下： `rtsp_url = (“rtsp:”| “rtspu:”) “//” host [“:”port”] /[abs_path]/content_name`
 
@@ -159,7 +158,7 @@ Status-Code 的第一位数字指定了这个回复消息的种类，一共有 5
 
 > Response Header Fields
 
-在响应消息的域中存放的是无法放在 Status-Line 中,而又需要传送给请求者的一些附加信息。
+在响应消息的域中存放的是无法放在 Status-Line 中，而又需要传送给请求者的一些附加信息。
 
 ```wiki
 Response-header = Location
@@ -177,7 +176,7 @@ WWW-Authenticate
 | :------------ | :---------- | :---- | ---- | :----------------------------------------------------------: |
 | DESCRIBE      | C->S        | P   S | 推荐 | 检查演示或媒体对象的描述，DESCRIBE 的答复-响应组成媒体 RTSP 初始阶段 |
 | ANNOUNCE      | C->S   S->C | P  S  | 可选 |  URL 识别的对象发送给服务 ，反之，ANNOUNCE 实时更新连接描述。  |
-| GET_PARAMETER | C->S   S->C | P  S  | 可选 |             请求检查RUL指定的演示与媒体的参数值              |
+| GET_PARAMETER | C->S   S->C | P  S  | 可选 |             请求检查 RUL 指定的演示与媒体的参数值              |
 | OPTIONS       | C->S   S->C | P  S  | 要求 |                 可在任意时刻发出 OPTIONS 请求                  |
 | PAUSE         | C->S        | P  S  | 推荐 |                 PAUSE 请求引起流发送临时中断                  |
 | PLAY          | C->S        | P  S  | 要求 |         PLAY 告诉服务器以 SETUP 指定的机制开始发送数据          |
@@ -187,31 +186,31 @@ WWW-Authenticate
 | SET_PARAMETER | C->S   S->C | P  S  | 可选 |               请求设置演示或 URL 指定流的参数值                |
 | TEARDOWN      | C->S        | P  S  | 要求 |         TEARDOWN 请求停止给定 URL 流发送，释放相关资源          |
 
-注：P---演示，C---客户端,S---服务器，S（对象栏）---流
+注：P---演示，C---客户端，S---服务器，S（对象栏）---流
 
 信令指的是在 Request-URI 中指定的需要被接收者完成的操作。信令（The method）大小写敏感，不能以字符 ”$” 开始，并且一定要是一个标记符。
 
 ## RTSP Header 参数
 
-1. Accept：用于指定客户端可以接受的媒体描述信息类型。比如: `Accept: application/rtsl, application/sdp;level=2`。
+1. Accept：用于指定客户端可以接受的媒体描述信息类型。比如：`Accept: application/rtsl, application/sdp;level=2`。
 2. Bandwidth：用于描述客户端可用的带宽值。
 3. CSeq：指定了 RTSP 请求回应对的序列号，在每个请求或回应中都必须包括这个头字段。对每个包含一个给定序列号的请求消息，都会有一个相同序列号的回应消息。
 4. Range：用于指定一个时间范围，可以使用 SMPTE、NTP 或 clock 时间单元。
 5. Session：Session 头字段标识了一个 RTSP 会话。Session ID 是由服务器在 SETUP 的回应中选择的，客户端一当得到 Session ID 后，在以后的对 Session 的操作请求消息中都要包含 Session ID。
-6. Transport: Transport 头字段包含客户端可以接受的转输选项列表，包括传输协议，地址端口，TTL 等。服务器端也通过这个头字段返回实际选择的具体选项。如: `Transport:RTP/AVP;multicast;ttl=127;mode="PLAY"`, `RTP/AVP;unicast;client_port=1289-1290;mode="PLAY"`
+6. Transport: Transport 头字段包含客户端可以接受的转输选项列表，包括传输协议，地址端口，TTL 等。服务器端也通过这个头字段返回实际选择的具体选项。如：`Transport:RTP/AVP;multicast;ttl=127;mode="PLAY"`, `RTP/AVP;unicast;client_port=1289-1290;mode="PLAY"`
 
 ## 简单的 RTSP 消息交互过程
 
 ```wiki
-C 表示 RTSP 客户端,S 表示 RTSP 服务端
+C 表示 RTSP 客户端，S 表示 RTSP 服务端
 第一步：查询服务器端可用方法 
 C->S OPTION request  	询问 S 有哪些方法可用
 S->C OPTION response 	S 回应信息的 public 头字段中包括提供的所有可用方法
 第二步：得到媒体描述信息 
 C->S DESCRIBE request  	要求得到 S 提供的媒体描述信息
-S->C DESCRIBE response  S 回应媒体描述信息一般是sdp信息
+S->C DESCRIBE response  S 回应媒体描述信息一般是 sdp 信息
 第三步：建立 RTSP 会话 
-C->S SETUP request 	Transport 头字段列出可接受的传输选项，请求S建立会话
+C->S SETUP request 	Transport 头字段列出可接受的传输选项，请求 S 建立会话
 S->C SETUP response S 建立会话通过 Transport 头字段返回选择的具体转输选项，并返回建立的 Session ID
 第四步：请求开始传送数据
 C->S PLAY request 	C 请求 S 开始发送数据
