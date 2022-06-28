@@ -26,27 +26,27 @@
     width: $logo-width
     height: $logo-height
     border-radius: 5px
-    filter: grayscale(100%)
     background-size: $logo-width $logo-height
     background-repeat: no-repeat
-    -webkit-filter: grayscale(100%)
+    if $logo-grayout
+      filter: grayscale(100%)
+      -webkit-filter: grayscale(100%)
 
   #nav
     color: $color-accent-1
     letter-spacing: .01em
-    font-weight: 500
+    font-weight: 200
     font-style: normal
-    font-size: 1rem
+    font-size: .8rem
 
     ul
       margin: 0
       padding: 0
       list-style-type: none
-      line-height: 1rem
-      letter-spacing: -999px
+      line-height: 15px
 
       a
-        margin: 0 1rem
+        margin-right: 15px
         color: $color-accent-1
 
       a:hover
@@ -54,9 +54,10 @@
 
       li
         display: inline-block
-        border-right: 1px dotted $color-accent-1
+        margin-right: 15px
+        border-right: 1px dotted
+        border-color: $color-accent-1
         vertical-align: middle
-        letter-spacing: 0
 
       .icon
         display: none
@@ -68,20 +69,17 @@
         a
           margin-right: 0
 
-      li:nth-child(2) a
-        margin: 0 1rem 0 0
-
-#header:hover
-  #logo
-    filter: none
-    -webkit-filter: none
+if $logo-grayout
+  #header:hover
+    #logo
+      filter: none
+      -webkit-filter: none
 
 @media screen and (max-width: 480px)
   #header #title
     display: table
     margin-right: 5rem
     min-height: $logo-height
-
     h1
       display: table-cell
       vertical-align: middle

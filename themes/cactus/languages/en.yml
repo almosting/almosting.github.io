@@ -1,11 +1,15 @@
 nav:
   home: Home
   about: About
-  articles: Articles
+  articles: Writing
   tag: Tag
   category: Category
   projects: Projects
   search: Search
+
+icons:
+  menu: Menu
+  top: Top
 
 footer:
   copyright: Copyright
@@ -14,9 +18,8 @@ index:
   find_me_on: Find me on
   enum_comma: ','
   enum_and: and
-  articles: Articles
+  articles: Writing
   projects: Projects
-  links: Links
   topics: Topics
   most_recent: Most recent
 

@@ -3,11 +3,35 @@
 @import "_util"
 @import "_mixins"
 @import "_extend"
+@import "_fonts"
 
 global-reset()
 
 *, *:before, *:after
   box-sizing: border-box
+
+/* Scroll bar */
+/* For Firefox */
+*
+  scrollbar-color: $color-scrollbar transparent
+
+/* For Chrome, Edge, and Safari */
+*::-webkit-scrollbar
+  width: 8px
+  height: 6px
+
+*::-webkit-scrollbar-track
+  background: transparent
+
+*::-webkit-scrollbar-thumb
+  background-color: $color-scrollbar
+  border-radius: 6px
+
+*::-webkit-scrollbar-thumb:hover
+  background-color: darken($color-scrollbar, 20%)
+
+*::-webkit-scrollbar-thumb:active
+  background-color: darken($color-scrollbar, 30%)
 
 html
   margin: 0
@@ -18,27 +42,20 @@ html
   -ms-text-size-adjust: 100%
 
 body
-  flex: 1
   margin: 0
   height: 100%
   background-color: $color-background
   color: $color-text
+  font-display: swap // @stylint ignore
   font-weight: 400
   font-size: $font-size
   font-family: $font-family-body
   line-height: $line-height
-  font-display: swap
   text-rendering: geometricPrecision
-
-  h3
-    text-decoration: none
-    font-size: .95rem
-
-  h4
-    text-decoration: none
-    font-size: .9rem
+  flex: 1
 
   antialias()
+
   @extend $base-style
 
 .content
@@ -48,71 +65,6 @@ body
   min-height: 100%
   overflow-wrap: break-word
 
-  // 首页项目样式
-
-  #projects
-    margin-bottom: 1.5rem
-    height: 100%
-
-  // 首页链接样式
-
-  #links
-    ul
-      margin: 0
-      padding: 0
-      list-style-type: none
-      letter-spacing: -999px
-      line-height: 1rem
-
-      li
-        display: inline-block
-        margin-bottom: .8rem
-        border-right: 1px dotted #2bbc8a
-        vertical-align: middle
-        letter-spacing: 0
-
-        a
-          margin: 0 1rem
-
-      li:last-child
-        margin-right: 0
-        border-right: 0
-
-        a
-          margin-right: 0
-
-  // 文章样式
-
-  article.post
-    margin-bottom: 2rem
-
-  article.page
-    margin-bottom: 3rem
-
-    pre
-      code
-        margin: 0
-        font-size: $font-size
-        font-family: $font-family-body
-        font-display: swap
-
-      ::-webkit-scrollbar
-        width: 0
-        height: 0
-
-    ol, ul
-      margin: 0
-
-      li
-        code
-          margin: 0
-          padding: .1rem .4rem
-          border-style: none
-          border-radius: 4px
-          font-weight: 500
-          font-family: $font-family-mono
-          -webkit-border-radius: 4px
-
   p
     hyphens(auto)
 
@@ -120,16 +72,16 @@ body
     hyphens(manual)
 
   a
-    color: #0366d6
+    color: $color-text
     text-decoration: none
 
-  a:hover
-    text-decoration: underline
-    text-decoration-color: #0366d6
+    underline(5px, $color-text)
+
+    &:hover
+      background-image: linear-gradient(transparent, transparent 4px, $color-link 4px, $color-link)
 
   a.icon
     background: none
-    color: $color-text
 
     &:hover
       color: $color-link
@@ -194,96 +146,46 @@ body
 @import "_partial/tags"
 @import "_partial/tooltip"
 @import "_partial/categories"
+// Code
 @import "_highlight/" + $highlight
 
 pre
   overflow-x: auto
-  font-size: 16px
-  line-height: 26px
-  padding: .2em .4em
-  border: $color-border
-  background-color: rgba(27, 31, 35, .05)
+  padding: 10px 15px
+  padding-bottom: 0
+  border: 1px dotted $color-border
+  border-radius: 4px
+  font-size: 13px
+  font-family: $font-family-mono
+  line-height: 22px
   -webkit-border-radius: 4px
 
-  ::-webkit-scrollbar
-    display: none
-
-
   code
-    overflow-x: auto
-    padding-left: 1em
-    border-radius: 4px
-    font-weight: 500
-    font-family: $font-family-mono !important
     display: block
+    padding: 0
     border: none
-    
+
 code
   padding: 0 5px
   border: 1px dotted $color-border
   border-radius: 2px
   -webkit-border-radius: 2px
 
-p,ul>li,ol>li
-  code
-    margin: 0
-    padding: .1rem .4rem
-    border-style: none
-    border-radius: 4px
-    background-color: rgba(200, 200, 200, .3)
-    font-weight: 500
-    font-family: $font-family-mono
-    -webkit-border-radius: 4px
-
-table tr:nth-child(2n)
-  background: #f6f8fa
-
-td
-  code
-    margin: 0
-    padding: .2em .4em
-    border-radius: 4px
-    background-color: rgba(27, 31, 35, .05)
-    font-weight: 500
-    font-family: $font-family-mono
-    -webkit-border-radius: 4px
-
-table
-  font-weight: 400
-  font-size: 16px !important
-  font-family: $font-family-mono
-
-  tr
-    td:not(.gutter):not(.code), th:not(.gutter):not(.code)
-      border: 1px solid #dfe2e5
-
-    .gutter
-      float: left
-      width: 3em
-      background: #505050
-      color: #ddffee
-      text-align: right
-
-    .code
-      pre
-        .line
-          .meta + .bash
-            color: #969896
-
 .highlight
   overflow-x: auto
   margin: 1rem 0
+  padding: 10px 15px
   border-radius: 4px
-  background: #3c3c3c
-  font-weight: 500
+  background: $color-background-code
   font-family: $font-family-mono
+  // color: $color-accent-3
   -webkit-border-radius: 4px
 
   figcaption
     margin: -5px 0 5px
     color: $color-meta-code
     font-size: .9em
-    zoom: 1
+    transform: scale(1)
 
     a
       float: right
@@ -296,46 +198,37 @@ table
     a:hover
       color: lighten($color-meta-code, 20%)
 
-&
-:
-before
-,
-content
-:
-""
-display
-:
-table
+    &:before, content: ""
+      display: table
 
-&:after
-  clear: both
+    &:after
+      clear: both
 
-&:hover
+  &:hover 
+    .btn-copy
+      opacity: 1
+
   .btn-copy
-    opacity: 1
+    font-size: 1.2rem
+    position: absolute
+    right: 20px
+    opacity: 0
+    transition: opacity 0.2s ease-in
+    &:hover
+      color: $color-accent-1
 
-.btn-copy
-  position: absolute
-  right: 20px
-  font-size: 1.2rem
-  opacity: 0
-  transition: opacity .2s ease-in
+  pre
+    margin: 0
+    padding: 0
+    border: none
+    background: none
 
-  &:hover
-    color: $color-accent-1
+  table
+    width: auto
 
-pre
-  margin: 0 5px 10px 0
-  padding: 0
-  border: none
-  background: none
+  td.gutter
+    text-align: right
+    opacity: .2
 
-table
-  width: auto
-  font-weight: 500
-
-td.gutter
-  text-align: right
-
-.line
-  height: 22px
+  .line
+    height: 22px
