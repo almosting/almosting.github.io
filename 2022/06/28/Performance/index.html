@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="分析Android Performance问题CPU问题查看cpu频率： cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpux&#x2F;cpufreq&#x2F;scaling_curfreq TOP信息 查看TOP消息，查看后台是否干净，查看idle是否异常  system 1%(1),IOW 10%(2)  (1)该值高就需要查看进程，看CPU占比 $ adb shell top -d 1 -m 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Performance">
+<meta property="og:url" content="http://example.com/2022/06/28/Performance/index.html">
+<meta property="og:site_name" content="Almosting">
+<meta property="og:description" content="分析Android Performance问题CPU问题查看cpu频率： cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpux&#x2F;cpufreq&#x2F;scaling_curfreq TOP信息 查看TOP消息，查看后台是否干净，查看idle是否异常  system 1%(1),IOW 10%(2)  (1)该值高就需要查看进程，看CPU占比 $ adb shell top -d 1 -m 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-28T12:06:56.000Z">
+<meta property="article:modified_time" content="2022-06-29T01:27:51.374Z">
+<meta property="article:author" content="w.feng">
+<meta property="article:tag" content="性能优化">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android Performance</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2022/03/10/Android%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/06/28/Performance/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/06/28/Performance/&text=Android Performance"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/06/28/Performance/&is_video=false&description=Android Performance"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android Performance&body=Check out this article: http://example.com/2022/06/28/Performance/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/06/28/Performance/&name=Android Performance&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/06/28/Performance/&t=Android Performance"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%90Android-Performance%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">分析Android Performance问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">CPU问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TOP%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.</span> <span class="toc-text">TOP信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Systrace"><span class="toc-number">1.3.</span> <span class="toc-text">Systrace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bugreport"><span class="toc-number">1.4.</span> <span class="toc-text">Bugreport</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vmstat%E5%B7%A5%E5%85%B7"><span class="toc-number">1.5.</span> <span class="toc-text">Vmstat工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pocs"><span class="toc-number">1.5.1.</span> <span class="toc-text">Pocs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory"><span class="toc-number">1.5.2.</span> <span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Swap"><span class="toc-number">1.5.3.</span> <span class="toc-text">Swap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO"><span class="toc-number">1.5.4.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System"><span class="toc-number">1.5.5.</span> <span class="toc-text">System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU"><span class="toc-number">1.5.6.</span> <span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tips"><span class="toc-number">1.5.7.</span> <span class="toc-text">Tips</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android Performance
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">w.feng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-06-28T12:06:56.000Z" itemprop="datePublished">2022-06-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="分析Android-Performance问题"><a href="#分析Android-Performance问题" class="headerlink" title="分析Android Performance问题"></a>分析Android Performance问题</h1><h2 id="CPU问题"><a href="#CPU问题" class="headerlink" title="CPU问题"></a>CPU问题</h2><p>查看cpu频率：</p>
+<p><code>cat /sys/devices/system/cpu/cpux/cpufreq/scaling_curfreq</code></p>
+<h2 id="TOP信息"><a href="#TOP信息" class="headerlink" title="TOP信息"></a>TOP信息</h2><blockquote>
+<p>查看TOP消息，查看后台是否干净，查看idle是否异常</p>
+</blockquote>
+<p><code>system 1%(1),IOW 10%(2)</code></p>
+<ul>
+<li><p>(1)该值高就需要查看进程，看CPU占比</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb shell top -d 1 -m 10 -t</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*&quot;-d 1&quot;: 每一秒刷一次</span><br><span class="line"></span><br><span class="line">*&quot;-m 10&quot;: 输出前10个</span><br><span class="line"></span><br><span class="line">*&quot;-t&quot;: 输出线程</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果需要查看进程的call stack，使用如下命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb shell touch /data/anr/traces.txt</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb shell <span class="built_in">kill</span> -3 [PID](进程号)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>(2)如果IOW偏高，先关闭怀疑的进程，如果还是高，需要查看是否系统IO占用高</p>
+</li>
+</ul>
+<h2 id="Systrace"><a href="#Systrace" class="headerlink" title="Systrace"></a>Systrace</h2><h2 id="Bugreport"><a href="#Bugreport" class="headerlink" title="Bugreport"></a>Bugreport</h2><h2 id="Vmstat工具"><a href="#Vmstat工具" class="headerlink" title="Vmstat工具"></a>Vmstat工具</h2><p><strong>vmstat: virtual Memory Statistics (虚拟内存统计)</strong>, 是一个很有价值的监控工具，可以实时提供memory、block IO和CPU状态信息。它用来对系统整体的情况进行统计，通过它可以快速了解当前系统运行情况及可能碰到的问题。</p>
+<p>使用方式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">vmstat 1 10</span><br><span class="line"></span><br><span class="line">usage: vmstat [-n][DELAY [COUNT]]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">procs -----------memory---------- ---swap-- -----io---- -system-- ----cpu----</span><br><span class="line"></span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa</span><br><span class="line"></span><br><span class="line"> 0  0      0  57080  50060 1429612   0    0   712    67    0  237 10  6 83  0</span><br><span class="line"></span><br><span class="line"> 0  0      0  57064  50060 1429612   0    0     0     0    0  181  0  0 100 0</span><br><span class="line"></span><br><span class="line"> 0  0      0  57064  50060 1429612   0    0     0     0    0  100  0  0 100 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Pocs"><a href="#Pocs" class="headerlink" title="Pocs"></a>Pocs</h3><p>-<strong>r:</strong>(running)运行队列中的进程数，这个值超过CPU的个数就会出现瓶颈</p>
+<p>-<strong>b：</strong>(blocked)被阻塞的进程数，通常是进程等待IO操作</p>
+<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><ul>
+<li>swpd 虚拟内存大小，大于0，表示物理内存不足，可能出现泄漏，或者后台activity或者jobs太多</li>
+<li>free 可用物理内存</li>
+<li>buff 系统用作buffers的内存</li>
+<li>cache 系统用作cache的内存数，可以理解为缓存</li>
+</ul>
+<h3 id="Swap"><a href="#Swap" class="headerlink" title="Swap"></a>Swap</h3><ul>
+<li>si 每秒从磁盘读入内存的大小，如果大于0，表示物理内存不足或者内存泄漏</li>
+<li>so 每秒从内存写入磁盘的大小</li>
+</ul>
+<h3 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h3><ul>
+<li>bi 块设备接收的块数量 代表io操作，如copy</li>
+<li>bo 块设备每秒发送的块数量，如读取文件</li>
+</ul>
+<p>一般bi bo都要接近0，否则io过于频繁</p>
+<h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><ul>
+<li><p>in(interrupts) 在delay(默认为1s)时间内系统产生的中断数，值过大，可以通过 <code>cat /proc/interrupts</code>查看哪个模块中断产生过多</p>
+</li>
+<li><p>cs(context switch) 在delay时间内，系统上下文切换次数，这个值越小越好，太大证明</p>
+<p>CPU大部分时间浪费在上下文切换去了，一般需要查看中断和线程调度</p>
+</li>
+</ul>
+<h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><ul>
+<li>us 用户占用的CPU时间比，占比高，需要查看进程是否有闭环代码</li>
+<li>sy 系统时间占用CPU时间比，太高，表示系统调用时间长，需要关心IO等操作</li>
+<li>id idle闲置CPU时间比</li>
+<li>wa IO wait CPU等待IO完成的时间占比，值太大，对系统负担大</li>
+</ul>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ol>
+<li>如果r值经常大于1或者更大，并且id常小于40%，说明CPU负荷过重。</li>
+<li>当手机正常使用时，有较小的free是好事，说明cache使用更有效率, 除非此时有不断的写入swap，disk (so, bo). cache值如果偏大，且bi值小，表示data存于cache中不必块读取，使用效率高。Android中当内存不够时会由oom killer来根据优先级顺序将不太重要的后台cached进程杀掉来释放这段内存。当该值忽大忽小时，需要注意是否有cache被清理出去，cache对系统的性能和流畅性影响很大。</li>
+<li>如果swapd值大于0，而si，so都显示0，此时系统性能还是正常的。</li>
+<li>如果free值很少或者接近0并不代表内存不够用，此时如果si，so也很少（大多时候是0）系统性能不会受到影响的。</li>
+<li>如果bi，bo出现较大值，而si，so却维持在0值，表示系统IO负载过重，要查看IO处理或者Rom是否有异常。</li>
+<li>如果bi，bo和si，so同时为较大数值，表示内存swapping频繁，RAM太小。</li>
+<li>bi或bo出现0的次数太过频繁，除非是系统处于闲置状态，否则需要查看I/O方面是否出现问题</li>
+<li>进程kswapd是负责确保闲置内存可被释放，每次启动扫描会尝试释放32个pages，并且一直在重复这个程序直到限制内存数值高于pages_high（核心参数）</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%90Android-Performance%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">分析Android Performance问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">CPU问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TOP%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.</span> <span class="toc-text">TOP信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Systrace"><span class="toc-number">1.3.</span> <span class="toc-text">Systrace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bugreport"><span class="toc-number">1.4.</span> <span class="toc-text">Bugreport</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vmstat%E5%B7%A5%E5%85%B7"><span class="toc-number">1.5.</span> <span class="toc-text">Vmstat工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pocs"><span class="toc-number">1.5.1.</span> <span class="toc-text">Pocs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory"><span class="toc-number">1.5.2.</span> <span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Swap"><span class="toc-number">1.5.3.</span> <span class="toc-text">Swap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO"><span class="toc-number">1.5.4.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System"><span class="toc-number">1.5.5.</span> <span class="toc-text">System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU"><span class="toc-number">1.5.6.</span> <span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tips"><span class="toc-number">1.5.7.</span> <span class="toc-text">Tips</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/06/28/Performance/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/06/28/Performance/&text=Android Performance"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/06/28/Performance/&is_video=false&description=Android Performance"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android Performance&body=Check out this article: http://example.com/2022/06/28/Performance/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/06/28/Performance/&title=Android Performance"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/06/28/Performance/&name=Android Performance&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/06/28/Performance/&t=Android Performance"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2018-2022
+    w.feng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

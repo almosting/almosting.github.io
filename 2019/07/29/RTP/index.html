@@ -5,24 +5,41 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="RTP 协议介绍实时传输协议 RTP（Real-time Transport Protocol）是一个网络传输协议，它是由 IETF 的多媒体传输工作小组 1996 年在 RFC 1889 中公布的，后在 RFC3550 中进行更新。 它作为因特网标准在  RFC 3550  有详细说明。RTP 协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RTP">
+<meta property="og:url" content="http://example.com/2019/07/29/RTP/index.html">
+<meta property="og:site_name" content="Almosting">
+<meta property="og:description" content="RTP 协议介绍实时传输协议 RTP（Real-time Transport Protocol）是一个网络传输协议，它是由 IETF 的多媒体传输工作小组 1996 年在 RFC 1889 中公布的，后在 RFC3550 中进行更新。 它作为因特网标准在  RFC 3550  有详细说明。RTP 协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2019/07/29/RTP/transport.png">
+<meta property="og:image" content="http://example.com/2019/07/29/RTP/3.png">
+<meta property="og:image" content="http://example.com/2019/07/29/RTP/2.png">
+<meta property="og:image" content="http://example.com/2019/07/29/RTP/1.png">
+<meta property="article:published_time" content="2019-07-29T09:45:43.000Z">
+<meta property="article:modified_time" content="2022-06-29T01:27:51.374Z">
+<meta property="article:author" content="w.feng">
+<meta property="article:tag" content="流媒体协议">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/07/29/RTP/transport.png">
     
     
+      
         
-            
-                <link rel="shortcut icon" href="/images/favicon.ico">
-            
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
+      
+      
         
-            
-                <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-            
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
         
+      
+      
         
-            
-                <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-            
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
         
+      
     
     <!-- title -->
     <title>RTP</title>
@@ -30,59 +47,48 @@
     
 <link rel="stylesheet" href="/css/style.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css" rel="stylesheet">
+    <!-- persian styles -->
+    
     <!-- rss -->
     
     
+	<!-- mathjax -->
+	
 <meta name="generator" content="Hexo 6.0.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
-
-    <div id="header-post">
-    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
-                class="fas fa-chevron-up fa-lg"></i></a>
-    <span id="menu">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
     <span id="nav">
       <ul>
-          
-              <li><a href="/">首页</a></li>
-          
-              <li><a href="/archives/">归档</a></li>
-          
-              <li><a href="/categories/">分类</a></li>
-          
-              <li><a href="/tags/">标签</a></li>
-          
-              <li><a href="/about/">关于</a></li>
-          
-              <li><a href="/search/">搜索</a></li>
-          
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
       </ul>
     </span>
     <br/>
     <span id="actions">
       <ul>
-          
-              <li><a class="icon" href="/2019/08/10/RTSP/"><i class="fas fa-chevron-left"
-                                                                           aria-hidden="true"
-                                                                           onmouseover="$('#i-prev').toggle();"
-                                                                           onmouseout="$('#i-prev').toggle();"></i></a></li>
-          
-          
-              <li><a class="icon" href="/2019/04/30/APK%E7%98%A6%E8%BA%AB/"><i class="fas fa-chevron-right"
-                                                                           aria-hidden="true"
-                                                                           onmouseover="$('#i-next').toggle();"
-                                                                           onmouseout="$('#i-next').toggle();"></i></a></li>
-          
-          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i
-                          class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();"
-                          onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true"
-                                        onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
-                                        onclick="$('#share').toggle();return false;"></i></a></li>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2019/08/10/RTSP/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2019/04/30/APK%E7%98%A6%E8%BA%AB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">上一篇</span>
       <span id="i-next" class="info" style="display:none;">下一篇</span>
@@ -92,17 +98,19 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-    <li><a class="icon"
-           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2019/07/29/RTP/&title=RTP"><i
-                    class="fab fa-qq " aria-hidden="true"></i></a></li>
-    <li><a class="icon"
-           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2019/07/29/RTP/&title=RTP"><i
-                    class="fab fa-weibo " aria-hidden="true"></i></a></li>
-    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/29/RTP/&text=RTP"><i
-                    class="fab fa-twitter " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=RTP&body=Check out this article: http://example.com/2019/07/29/RTP/"><i
-                    class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/07/29/RTP/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/29/RTP/&text=RTP"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/07/29/RTP/&is_video=false&description=RTP"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RTP&body=Check out this article: http://example.com/2019/07/29/RTP/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/07/29/RTP/&name=RTP&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/07/29/RTP/&t=RTP"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
+
     </div>
     <div id="toc">
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">RTP 协议介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%92%8C-RTCP"><span class="toc-number">1.1.</span> <span class="toc-text">RTP 和 RTCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.</span> <span class="toc-text">RTP 的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E7%9A%84%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1"><span class="toc-number">1.3.</span> <span class="toc-text">RTP 的协议层次</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">RTP 工作机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.</span> <span class="toc-text">RTP 报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTP-%E6%89%A9%E5%B1%95%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.1.</span> <span class="toc-text">RTP 扩展头结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.</span> <span class="toc-text">RTP 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">RTP 发送过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-profile-%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">RTP profile 机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTCP"><span class="toc-number">5.</span> <span class="toc-text">RTCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">6.</span> <span class="toc-text">RTP 时间戳</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">代码</span></a></li></ol>
@@ -110,52 +118,51 @@
   </span>
 </div>
 
-<div class="content index py4">
     
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
+    <div class="content index py4">
         
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
     <h1 class="posttitle" itemprop="name headline">
         RTP
     </h1>
 
-        <div class="meta">
+
+
+    <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">
-            w.feng
-            
-        </span>
+        <span itemprop="name">w.feng</span>
       </span>
-            
+      
     <div class="postdate">
+      
+        <time datetime="2019-07-29T09:45:43.000Z" itemprop="datePublished">2019-07-29</time>
         
-            <time datetime="2019-07-29T09:45:43.000Z"
-                  itemprop="datePublished">2019-07-29</time>
-            
-                (Updated:
-                <time datetime="2022-01-26T03:25:04.156Z"
-                      itemprop="dateModified">2022-01-26</time>)
-            
-        
+      
     </div>
 
-            
+
+      
     <div class="article-category">
         <i class="fas fa-archive"></i>
         <a class="category-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
     </div>
 
-            
+
+      
     <div class="article-tag">
         <i class="fas fa-tag"></i>
         <a class="tag-link-link" href="/tags/%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE/" rel="tag">流媒体协议</a>
     </div>
 
-        </div>
-    </header>
-    
-    <div class="content" itemprop="articleBody">
-        <h2 id="RTP-协议介绍"><a href="#RTP-协议介绍" class="headerlink" title="RTP 协议介绍"></a>RTP 协议介绍</h2><p>实时传输协议 RTP（Real-time Transport Protocol）是一个网络传输协议，它是由 IETF 的多媒体传输工作小组 1996 年在 RFC 1889 中公布的，后在 RFC3550 中进行更新。</p>
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="RTP-协议介绍"><a href="#RTP-协议介绍" class="headerlink" title="RTP 协议介绍"></a>RTP 协议介绍</h2><p>实时传输协议 RTP（Real-time Transport Protocol）是一个网络传输协议，它是由 IETF 的多媒体传输工作小组 1996 年在 RFC 1889 中公布的，后在 RFC3550 中进行更新。</p>
 <p>它作为因特网标准在 <a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc3550.txt"> RFC 3550 </a> 有详细说明。<br>RTP 协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多单播应用中。RTP 协议常用于流媒体系统（配合 RTSP 协议），视频会议和一键通（Push toTalk）系统（配合 H.323 或 SIP），使它成为 IP 电话产业的技术基础。RTP 协议和 RTP 控制协议 RTCP 一起使用，而且它是建立在用户数据报协议上的（UDP）。</p>
 <h3 id="RTP-和-RTCP"><a href="#RTP-和-RTCP" class="headerlink" title="RTP 和 RTCP"></a>RTP 和 RTCP</h3><ul>
 <li><p>数据传输协议 RTP 用于实时传输数据。该协议提供的信息包括：时间戳（用于同步）、序列号（用于丢包和重排序检测）、以及负载格式（用于说明数据的编码格式）。</p>
@@ -292,238 +299,147 @@
 </blockquote>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * RTCP common header word</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0   <span class="comment">//BIG_ENDIA</span></span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> version:<span class="number">2</span>;   <span class="comment">/* protocol version */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> p:<span class="number">1</span>;         <span class="comment">/* padding flag */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> count:<span class="number">5</span>;     <span class="comment">/* varies by packet type */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> count:<span class="number">5</span>;     <span class="comment">/* varies by packet type */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> p:<span class="number">1</span>;         <span class="comment">/* padding flag */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> version:<span class="number">2</span>;   <span class="comment">/* protocol version */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> pt:<span class="number">8</span>;        <span class="comment">/* RTCP packet type */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> length;           <span class="comment">/* pkt len in words, w/o this word */</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">rtcp_common_t</span>;</span><br></pre></td></tr></table></figure>
 
-    </div>
+
+  </div>
 </article>
 
 
 
-<script>
-    //检测推送
-    var pushType = "";
-    var pushLink = "";
-    var siteName = "Almosting";
-  
-    var ValineButton = document.getElementsByClassName("vsubmit vbtn")[0];
-    //分情况推送
-    if (pushType === "sc") {
-      var title = "text=" + siteName + "上又有新评论啦~!";
-      function send_valine_Server() {
-        //获取元素信息
-        var pagename = document.title;
-        var wz = pagename.indexOf("|");
-        var res = pagename.substring(0, wz);
-        var pageurl = document.URL;
-        var ptime = new Date();
-        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
-        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
-        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
-        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
-        var text = "desp=";
-        var data =
-          text +
-          "|昵称：" +
-          "|邮箱：" +
-          "|网站地址：" +
-          "|当前页面：" +
-          "|评论内容：" +
-          "|跳转链接：" +
-          "|评论时间" +
-          "\n" +
-          "|----|----|----|----|" +
-          "\n" +
-          "|   " +
-          vnick +
-          "   |   " +
-          vmail +
-          "  |  " +
-          vlink +
-          "|   " +
-          res +
-          "| " +
-          veditor +
-          "| " +
-          pageurl +
-          "|" +
-          ptime.toLocaleString() +
-          "|";
-        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
-        httpRequest.open("POST", pushLink, true); //第二步：打开连接
-        httpRequest.setRequestHeader(
-          "Content-type",
-          "application/x-www-form-urlencoded"
-        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-        httpRequest.send(title + "&" + data); //发送请求 将情头体写在send中
-      }
-      ValineButton.onclick = send_valine_Server;
-    } else if (pushType === "qmsg") {
-      var title = "msg=" + siteName + "上又有新评论啦~!\n";
-      function send_valine_Qmsg() {
-        //获取元素信息
-        var pagename = document.title;
-        var wz = pagename.indexOf("|");
-        var res = pagename.substring(0, wz);
-        var pageurl = document.URL;
-        var ptime = new Date();
-        var vnick = document.getElementsByClassName("vnick vinput")[0].value;
-        var vmail = document.getElementsByClassName("vmail vinput")[0].value;
-        var vlink = document.getElementsByClassName("vlink vinput")[0].value;
-        var veditor = document.getElementsByClassName("veditor vinput")[0].value;
-        var data =
-          "昵称：" +
-          vnick +
-          "\n邮箱：" +
-          vmail +
-          "\n网站地址：" +
-          vlink +
-          "\n当前页面：" +
-          pagename +
-          "\n评论内容：" +
-          veditor +
-          "\n跳转链接：" +
-          pageurl +
-          "\n评论时间" +
-          ptime.toLocaleString();
-        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
-        httpRequest.open("POST", pushLink, true); //第二步：打开连接
-        httpRequest.setRequestHeader(
-          "Content-type",
-          "application/x-www-form-urlencoded"
-        ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-        httpRequest.send(title + data); //发送请求 将情头体写在send中
-      }
-      ValineButton.onclick = send_valine_Qmsg;
-    }
-  </script>
-    
-        <div id="footer-post-container">
-    <div id="footer-post">
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-        <div id="nav-footer" style="display: none">
-            <ul>
-                
-                    <li><a href="/">首页</a></li>
-                
-                    <li><a href="/archives/">归档</a></li>
-                
-                    <li><a href="/categories/">分类</a></li>
-                
-                    <li><a href="/tags/">标签</a></li>
-                
-                    <li><a href="/about/">关于</a></li>
-                
-                    <li><a href="/search/">搜索</a></li>
-                
-            </ul>
-        </div>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
 
-        <div id="toc-footer" style="display: none">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">RTP 协议介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%92%8C-RTCP"><span class="toc-number">1.1.</span> <span class="toc-text">RTP 和 RTCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.</span> <span class="toc-text">RTP 的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E7%9A%84%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1"><span class="toc-number">1.3.</span> <span class="toc-text">RTP 的协议层次</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">RTP 工作机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.</span> <span class="toc-text">RTP 报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTP-%E6%89%A9%E5%B1%95%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.1.</span> <span class="toc-text">RTP 扩展头结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.</span> <span class="toc-text">RTP 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">RTP 发送过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-profile-%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">RTP profile 机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTCP"><span class="toc-number">5.</span> <span class="toc-text">RTCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">6.</span> <span class="toc-text">RTP 时间戳</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">代码</span></a></li></ol>
-        </div>
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">RTP 协议介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%92%8C-RTCP"><span class="toc-number">1.1.</span> <span class="toc-text">RTP 和 RTCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.</span> <span class="toc-text">RTP 的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E7%9A%84%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1"><span class="toc-number">1.3.</span> <span class="toc-text">RTP 的协议层次</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">RTP 工作机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.</span> <span class="toc-text">RTP 报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTP-%E6%89%A9%E5%B1%95%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.1.</span> <span class="toc-text">RTP 扩展头结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.</span> <span class="toc-text">RTP 会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">RTP 发送过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-profile-%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">RTP profile 机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTCP"><span class="toc-number">5.</span> <span class="toc-text">RTCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RTP-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">6.</span> <span class="toc-text">RTP 时间戳</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">代码</span></a></li></ol>
+    </div>
 
-        <div id="share-footer" style="display: none">
-            <ul>
-    <li><a class="icon"
-           target="_blank" rel="noopener" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2019/07/29/RTP/&title=RTP"><i
-                    class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon"
-           target="_blank" rel="noopener" href="https://service.weibo.com/share/share.php?url=http://example.com/2019/07/29/RTP/&title=RTP"><i
-                    class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/29/RTP/&text=RTP"><i
-                    class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=RTP&body=Check out this article: http://example.com/2019/07/29/RTP/"><i
-                    class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/07/29/RTP/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/07/29/RTP/&text=RTP"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/07/29/RTP/&is_video=false&description=RTP"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RTP&body=Check out this article: http://example.com/2019/07/29/RTP/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/07/29/RTP/&title=RTP"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/07/29/RTP/&name=RTP&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/07/29/RTP/&t=RTP"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
-        </div>
-
-        <div id="actions-footer">
-            <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
-                        class="fas fa-bars fa-lg"
-                        aria-hidden="true"></i> 菜单</a>
-            <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
-                        class="fas fa-list fa-lg"
-                        aria-hidden="true"></i> 目录</a>
-            <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
-                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-            <a id="top" style="display:none" class="icon" href="#"
-               onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
-                                                                               aria-hidden="true"></i> 返回顶部
-            </a>
-        </div>
 
     </div>
-</div>
-    
-    <footer id="footer">
-  <div class="footer-top">
-    &copy; 2022 <i class="fas fa-heart"></i>
-    w.feng 
-  </div>
 
-  <div class="footer-bottom">
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-    <!-- tongji -->
-    <script
-      async
-      src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
-    ></script>
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人数
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 访问总量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-    <br />
-     
+    
+    2018-2022
+    w.feng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
   </div>
 </footer>
 
-</div>
-<!-- styles -->
-
-<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+    </div>
+    <!-- styles -->
 
 
-<link rel="stylesheet" href="https://cdn.staticfile.org/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
 
-<!-- jquery -->
-
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-<script src="https://cdn.staticfile.org/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
 
 <!-- clipboard -->
 
-    
-<script src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            // copy-btn HTML
-            var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
-            btn += '<i class="far fa-clone"></i>';
-            btn += '</span>';
-            // mount it!
-            $(".highlight .code pre").before(btn);
-            var clip = new ClipboardJS('.btn-copy', {
-                target: function (trigger) {
-                    return trigger.nextElementSibling;
-                }
-            });
-            clip.on('success', function (e) {
-                e.trigger.setAttribute('aria-label', "复制成功!");
-                e.clearSelection();
-            })
-        })
-    </script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
 <script src="/js/main.js"></script>
 
 <!-- search -->
 
-</body>
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
 </html>
