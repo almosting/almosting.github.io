@@ -9,7 +9,7 @@ tags: 系统
 音频应用软件
 
 - Framework
-MediaPlayer 和 MediaRecorder，以及 AudioTrack、AudioRecorder、AudioMannager、AudioService 以及 AudioSystem 。
+MediaPlayer 和 MediaRecorder，以及 AudioTrack、AudioRecorder、AudioMannager、AudioService 以及 AudioSystem。
 
 - Libraries
 frameorks/av/media/libmedia、libaudioflinger、libmediaplayerservice
@@ -168,4 +168,4 @@ Audio HAL 大致的类图，hal 采用工厂模式，分为 Local 和 HIDL 模�
 
 AudioService 的 handleDeviceConnection 调用 AudioPolicyManager 的 setDeviceConnectionStateInt。
 
-checkOutputsForDevice 会检测所有的 profile（output），查找每个 profile 是否都存在对应的线程，如果没有则进行创建checkOutputForAllStrategies 切换 AudioTrack 的写入数据源。
+checkOutputsForDevice 会检测所有的 profile（output），查找每个 profile 是否都存在对应的线程，如果没有则进行创建 checkOutputForAllStrategies 切换 AudioTrack 的写入数据源。

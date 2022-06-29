@@ -14,8 +14,8 @@ tags: Linux
 
 而在 linux 下当我们执行 close 操作之后阻塞的 recv 会出现不能立即返回的现象。后来在网上一搜发现很多遇到类似这种现象的情况，大致意思应该是
 
-当 socket 被动被 close 的时候进入了 “CLOSE_WAIT（被动关闭一方）”的情况。
-解决方法就是在你 close 之前调用一下 ：
+当 socket 被动被 close 的时候进入了“CLOSE_WAIT（被动关闭一方）”的情况。
+解决方法就是在你 close 之前调用一下：
 
 `shutdown(socket, SHUT_RDWR)`
 
@@ -23,7 +23,7 @@ tags: Linux
 
 ## Shutdown 和 Close
 
-> 下面是对譬如 “CLOSE_WAIT” 现象的一些解释
+> 下面是对譬如“CLOSE_WAIT”现象的一些解释
 
 主动关闭方和被动方经历的状态：
 

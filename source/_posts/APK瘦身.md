@@ -4,12 +4,12 @@ date: 2019-04-30 17:06:19
 categories: Android
 tags: 优化
 ---
-
 ## APK 结构
 
 在讨论如何减小应用的大小之前，了解应用 APK 的结构会很有帮助。APK 文件由 Zip 压缩文件（其中包含构成应用的所有文件）组成。这些文件包括 Java 类文件、资源文件和包含已编译资源的文件。
 
 APK 包含以下目录：
+
 - `META-INF/`：包含 `CERT.SF` 和 `CERT.RSA` 签名文件，以及 `MANIFEST.MF` 清单文件。
 - `assets/`：包含应用的资源；应用可以使用 [AssetManager](https://developer.android.com/reference/android/content/res/AssetManager.html?hl=zh-CN) 对象检索这些资源。
 - `res/`：包含未编译到 `resources.arsc` 中的资源。
@@ -84,6 +84,7 @@ Android 支持数量非常广泛的设备（包含各种屏幕密度）。在 An
 Android 提供了一些实用程序来更改资源的颜色，每个实用程序在 Android 5.0（API 级别 21）及更高版本上都使用 `android:tint` 和 `tintMode` 属性。对于较低版本的平台，则使用 [ColorFilter](https://developer.android.com/reference/android/graphics/ColorFilter.html?hl=zh-CN) 类。
 
 您还可以省略仅是另一个资源的旋转等效项的资源。以下代码段提供了一个示例，展示了通过绕图片中心位置旋转 180 度，将“拇指向上”变为“拇指向下”：
+
 ```xml
     <?xml version="1.0" encoding="utf-8"?> 
     <rotate xmlns:android="http://schemas.android.com/apk/res/android" 
@@ -107,7 +108,7 @@ Android 提供了一些实用程序来更改资源的颜色，每个实用程序
 - 图片文件需要使用 256 种或更少的颜色才可供 `aapt` 工具进行优化。
 - `aapt` 工具可能会增大已压缩 PNG 文件。为防止出现这种情况，您可以使用 Gradle 中的 `cruncherEnabled` 标记为 PNG 文件停用此过程：
 
-   ` aaptOptions { cruncherEnabled = false }`
+  ` aaptOptions { cruncherEnabled = false }`
 
 ### 压缩 PNG 和 JPEG 文件
 
@@ -119,7 +120,7 @@ Android 提供了一些实用程序来更改资源的颜色，每个实用程序
 
 ### 使用 WebP 文件格式
 
-如果以 Android 3.2（API 级别 13）及更高版本为目标，您还可以使用 [WebP](https://developers.google.com/speed/webp/?hl=zh-CN) 文件格式的图片（而不是使用 PNG 或 JPEG 文件）。WebP 格式提供有损压缩（如 JPEG ）以及透明度（如 PNG ），不过与 JPEG 或 PNG 相比，这种格式可以提供更好的压缩效果。
+如果以 Android 3.2（API 级别 13）及更高版本为目标，您还可以使用 [WebP](https://developers.google.com/speed/webp/?hl=zh-CN) 文件格式的图片（而不是使用 PNG 或 JPEG 文件）。WebP 格式提供有损压缩（如 JPEG）以及透明度（如 PNG），不过与 JPEG 或 PNG 相比，这种格式可以提供更好的压缩效果。
 
 您可以使用 Android Studio 将现有 BMP、JPG、PNG 或静态 GIF 图片转换为 WebP 格式。有关详情，请参见 [使用 Android Studio 创建 WebP 图片](https://developer.android.com/studio/write/convert-webp.html?hl=zh-CN)。
 
@@ -198,4 +199,3 @@ android {
   
 }
 ```
-
