@@ -17,7 +17,8 @@ frameorks/av/media/libmedia、libaudioflinger、libmediaplayerservice
 - HAL
 AudioFlinger、AudioPolicyService。
 
-{% asset_img 音频系统框架全图.png 音频系统框架全图 %}
+![](Android音频系统/2022-06-29-21-57-07.png)
+
 - AudioPolicyService：APS 是音频框架的服务，main_audioserver 启动，会创建 AudioCommandThread 和 AudioPolicyClient、AudioPolicyManager。它主要由 AudioSystem 通过 binder 调用，也可以由 AudioPolicyClient，AudioPolicyManager 直接调用。它的大部分操作都交给 AudioPolicyManager 来做
 - AudioPolicyClient：APC 是 AudioPolicyService 的内部类。它用于打开关闭输入输出，设置流音量，传递参数给 hal 层（如 audio_hw.cpp）等；它主要是通过 binder 跨进程调用 AudioFlinger 去完成真正的操作。可以由 AudioManager 通过 mpClientInterface 去调用它。
 - AudioPolicyManager：APM 是 AudioPolicyService 的主要工作类，AudioPolicyService 的大部分操作都由他来执行
@@ -32,11 +33,11 @@ AudioFlinger、AudioPolicyService。
 
   附上一张重要的类图：
 
-  {% asset_img audio_architecture.jpg audio_architecture %}
+  ![](Android音频系统/2022-06-29-21-57-45.png)
 
 ## Audio 服务的启动
 
-{% asset_img audio_service.png audio_service %}
+![](Android音频系统/2022-06-29-21-58-13.png)
 
 1. 创建 AudioFlinger 和 AudioPolicyService。
 2. 解析 Audio Config 文件（audio_policy_configuration.xml），获取支持的音频外设列表及各输入输出通路详细参数。
@@ -46,7 +47,7 @@ AudioFlinger、AudioPolicyService。
 
 ## AudioTrack
 
-{% asset_img audiotrack.png audiotrack %}
+![](Android音频系统/2022-06-29-21-58-33.png)
 
 Android 声音播放都是通过 AudioTrack 进行，包括 MediaPlayer 最终也是创建 AudioTrack 来播放的。通过 AudioTrack 播放声音主要包括下面几步：
 1. 创建 AudioTrack。
@@ -126,17 +127,17 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer, si
 Android 系统 audio 框架中主要有三种播放模式：low latency playback、deep buffer playback 和 compressed offload playback。
 - low latency / deep buffer 模式下的音频数据流向
 
-{% asset_img ap-audio.png ap_audio %}
+![](Android音频系统/2022-06-29-21-59-01.png)
 
 - compressed offload 模式下的音频数据流向
 
-{% asset_img offload.png offload %}
+![](Android音频系统/2022-06-29-21-59-35.png)
 
 - 音频录制
-{% asset_img recorder.png recorder %}
+![](Android音频系统/2022-06-29-21-59-56.png)
 
 - 打电话
-{% asset_img phone.png phone %}
+![](Android音频系统/2022-06-29-22-00-13.png)
 
 ## 配置解析
 
@@ -147,24 +148,24 @@ mixPorts(source)：为经过 AudioFlinger 之后的流类型，也称“输出�
 mixPorts(sink)：为进入 AudioFlinger 之前的流类型，也称“输入流设备”，是个逻辑设备而非物理设备，对应 AudioFlinger 里面的一个 RecordThread；
 routes：定义 devicePort 和 mixPorts 的路由策略。
 
-{% asset_img module.jpg module %}
+![](Android音频系统/2022-06-29-22-00-30.png)
 
 profile 参数包含音频流一些信息，比如位数、采样率、通道数，它将被构建为 AudioProfile 对象，保存到 mixPort，然后在存储到 module。对于 xml 里面的 devicePort，一般没有 profile 参数，则会创建一个默认的 profile。当把 mixPort 加入到 Moudle 时，会进行分类：
 
 即 source 角色保存到 OutputProfileCollection mOutputProfiles，sink 角色保存到 InputProfileCollection mInputProfiles。
 而 devicePort 则调用 HwModule::setDeclaredDevices() 保存到 module 的 mDeclaredDevices。
 
-{% asset_img hwmodule.jpg hwmodule %}
+![](Android音频系统/2022-06-29-22-00-49.png)
 
 ## HAL
 
-{% asset_img hal.png hal %}
+![](Android音频系统/2022-06-29-22-01-05.png)
 
 Audio HAL 大致的类图，hal 采用工厂模式，分为 Local 和 HIDL 模式，最后都会调用到 audio_stream_out 或者 audio_stream_in 中，对应调用到 audio_hw.c（由各个厂商实现）中。
 
 ## 蓝牙连接例子
 
-{% asset_img bluetooth.png bluetooth %}
+![](Android音频系统/2022-06-29-22-01-16.png)
 
 AudioService 的 handleDeviceConnection 调用 AudioPolicyManager 的 setDeviceConnectionStateInt。
 
