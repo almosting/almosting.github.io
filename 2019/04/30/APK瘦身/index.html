@@ -14,7 +14,7 @@
 <meta property="og:description" content="APK 结构在讨论如何减小应用的大小之前，了解应用 APK 的结构会很有帮助。APK 文件由 Zip 压缩文件（其中包含构成应用的所有文件）组成。这些文件包括 Java 类文件、资源文件和包含已编译资源的文件。 APK 包含以下目录：  META-INF&#x2F;：包含 CERT.SF 和 CERT.RSA 签名文件，以及 MANIFEST.MF 清单文件。 assets&#x2F;：包含应用的资源；应用可以使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-04-30T09:06:19.000Z">
-<meta property="article:modified_time" content="2022-06-29T01:27:51.374Z">
+<meta property="article:modified_time" content="2022-06-30T01:20:01.577Z">
 <meta property="article:author" content="w.feng">
 <meta property="article:tag" content="优化">
 <meta name="twitter:card" content="summary">
@@ -204,13 +204,13 @@
 <li><p>图片文件需要使用 256 种或更少的颜色才可供 <code>aapt</code> 工具进行优化。</p>
 </li>
 <li><p><code>aapt</code> 工具可能会增大已压缩 PNG 文件。为防止出现这种情况，您可以使用 Gradle 中的 <code>cruncherEnabled</code> 标记为 PNG 文件停用此过程：</p>
-<p> <code> aaptOptions &#123; cruncherEnabled = false &#125;</code></p>
+<p><code> aaptOptions &#123; cruncherEnabled = false &#125;</code></p>
 </li>
 </ul>
 <h3 id="压缩-PNG-和-JPEG-文件"><a href="#压缩-PNG-和-JPEG-文件" class="headerlink" title="压缩 PNG 和 JPEG 文件"></a>压缩 PNG 和 JPEG 文件</h3><p>您可以使用 <a target="_blank" rel="noopener" href="http://pmt.sourceforge.net/pngcrush/">pngcrush</a>、<a target="_blank" rel="noopener" href="https://pngquant.org/">pngquant</a> 或 <a target="_blank" rel="noopener" href="https://github.com/google/zopfli">zopflipng</a> 等工具减小 PNG 文件的大小，同时不损失画质。所有这些工具都可以减小 PNG 文件的大小，同时保持肉眼感知的画质不变。</p>
 <p><code>pngcrush</code> 工具尤为有效：该工具会迭代 PNG 过滤器和 zlib(Deflate) 参数，使用过滤器和参数的每个组合来压缩图片。然后，它会选择可产生最小压缩输出的配置。</p>
 <p>要压缩 JPEG 文件，您可以使用 <a target="_blank" rel="noopener" href="http://www.elektronik.htw-aalen.de/packjpg/">packJPG</a> 和 <a target="_blank" rel="noopener" href="https://github.com/google/guetzli">guetzli</a> 等工具。</p>
-<h3 id="使用-WebP-文件格式"><a href="#使用-WebP-文件格式" class="headerlink" title="使用 WebP 文件格式"></a>使用 WebP 文件格式</h3><p>如果以 Android 3.2（API 级别 13）及更高版本为目标，您还可以使用 <a target="_blank" rel="noopener" href="https://developers.google.com/speed/webp/?hl=zh-CN">WebP</a> 文件格式的图片（而不是使用 PNG 或 JPEG 文件）。WebP 格式提供有损压缩（如 JPEG ）以及透明度（如 PNG ），不过与 JPEG 或 PNG 相比，这种格式可以提供更好的压缩效果。</p>
+<h3 id="使用-WebP-文件格式"><a href="#使用-WebP-文件格式" class="headerlink" title="使用 WebP 文件格式"></a>使用 WebP 文件格式</h3><p>如果以 Android 3.2（API 级别 13）及更高版本为目标，您还可以使用 <a target="_blank" rel="noopener" href="https://developers.google.com/speed/webp/?hl=zh-CN">WebP</a> 文件格式的图片（而不是使用 PNG 或 JPEG 文件）。WebP 格式提供有损压缩（如 JPEG）以及透明度（如 PNG），不过与 JPEG 或 PNG 相比，这种格式可以提供更好的压缩效果。</p>
 <p>您可以使用 Android Studio 将现有 BMP、JPG、PNG 或静态 GIF 图片转换为 WebP 格式。有关详情，请参见 <a target="_blank" rel="noopener" href="https://developer.android.com/studio/write/convert-webp.html?hl=zh-CN">使用 Android Studio 创建 WebP 图片</a>。</p>
 <p><strong>注意</strong>：仅当 <a target="_blank" rel="noopener" href="https://material.io/guidelines/style/icons.html#icons-product-icons">启动器图标</a> 使用 PNG 格式时，Google Play 才会接受 APK。</p>
 <h3 id="使用矢量图形"><a href="#使用矢量图形" class="headerlink" title="使用矢量图形"></a>使用矢量图形</h3><p>您可以使用矢量图形创建与分辨率无关的图标和其他可伸缩媒体。使用这些图形可以极大地减少 APK 占用的空间。矢量图片在 Android 中以 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/graphics/drawable/VectorDrawable.html?hl=zh-CN">VectorDrawable</a> 对象的形式表示。借助 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/graphics/drawable/VectorDrawable.html?hl=zh-CN">VectorDrawable</a> 对象，100 字节的文件可以生成与屏幕大小相同的清晰图片。</p>
@@ -233,7 +233,6 @@
 <p>当用户下载您的应用时，他们的设备会根据设备的功能和设置接收正确的 APK。这样，设备不会接收用于设备所不具备的功能的资源。例如，如果用户具有 <code>hdpi</code> 设备，则不需要您可能会为具有更高密度显示器的设备提供的 <code>xxxhdpi</code> 资源。</p>
 <p>有关详情，请参见 <a target="_blank" rel="noopener" href="https://developer.android.com/studio/build/configure-apk-splits.html?hl=zh-CN">配置 APK 拆分</a> 和 <a target="_blank" rel="noopener" href="https://developer.android.com/training/multiple-apks/index.html?hl=zh-CN">维持多个 APK</a>。</p>
 <h2 id="减少-Native-体积"><a href="#减少-Native-体积" class="headerlink" title="减少 Native 体积"></a>减少 Native 体积</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">//在 defaultConfig 节点下配置 externalNativeBuild 块</span></span><br><span class="line">        externalNativeBuild &#123;</span><br><span class="line">            <span class="comment">// For ndk-build, instead use ndkBuild &#123;&#125;</span></span><br><span class="line">            cmake &#123; <span class="comment">//指定 cmake 的编译选项</span></span><br><span class="line">                <span class="comment">// Sets optional flags for the C compiler.</span></span><br><span class="line">                cFlags <span class="string">&quot;-fvisibility=hidden  -ffunction-sections -fdata-sections&quot;</span></span><br><span class="line">                <span class="comment">// Sets optional flags for the C++ compiler.</span></span><br><span class="line">                cppFlags <span class="string">&quot;-fvisibility=hidden  -ffunction-sections -fdata-sections -std=c++11&quot;</span></span><br><span class="line"></span><br><span class="line">                arguments <span class="string">&quot;-DANDROID_TOOLCHAIN=gcc&quot;</span><span class="comment">//设置使用 gcc 编译，cmake 默认使用 clang 编译</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buildTypes &#123;...&#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
   </div>
 </article>

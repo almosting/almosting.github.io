@@ -14,7 +14,7 @@
 <meta property="og:description" content="现象转载自：http:&#x2F;&#x2F;www.cnblogs.com&#x2F;wainiwann&#x2F;p&#x2F;3942203.html 在开发的一个基于 rtmp 聊天的程序时发现了一个很奇怪的现象。 在 windows 下当我们执行 closesocket 的操作之后，阻塞的 recv 会立即返回 -1 。 而在 linux 下当我们执行 close 操作之后阻塞的 recv 会出现不能立即返回的现象。后来在网上一搜发现很">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-03-15T06:41:21.000Z">
-<meta property="article:modified_time" content="2022-01-26T03:25:15.138Z">
+<meta property="article:modified_time" content="2022-06-30T01:20:01.593Z">
 <meta property="article:author" content="w.feng">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -159,11 +159,11 @@
 <p>在开发的一个基于 rtmp 聊天的程序时发现了一个很奇怪的现象。</p>
 <p>在 windows 下当我们执行 closesocket 的操作之后，阻塞的 recv 会立即返回 -1 。</p>
 <p>而在 linux 下当我们执行 close 操作之后阻塞的 recv 会出现不能立即返回的现象。后来在网上一搜发现很多遇到类似这种现象的情况，大致意思应该是</p>
-<p>当 socket 被动被 close 的时候进入了 “CLOSE_WAIT（被动关闭一方）”的情况。<br>解决方法就是在你 close 之前调用一下 ：</p>
+<p>当 socket 被动被 close 的时候进入了“CLOSE_WAIT（被动关闭一方）”的情况。<br>解决方法就是在你 close 之前调用一下：</p>
 <p><code>shutdown(socket, SHUT_RDWR)</code></p>
 <p>就是关闭 socket 的读写功能。</p>
 <h2 id="Shutdown-和-Close"><a href="#Shutdown-和-Close" class="headerlink" title="Shutdown 和 Close"></a>Shutdown 和 Close</h2><blockquote>
-<p>下面是对譬如 “CLOSE_WAIT” 现象的一些解释</p>
+<p>下面是对譬如“CLOSE_WAIT”现象的一些解释</p>
 </blockquote>
 <p>主动关闭方和被动方经历的状态：</p>
 <p>FIN_WAIT_1（主动关闭一方）：当 SOCKET 在 ESTABLISHED 状态时，它想主动关闭连接，向对方发送了 FIN 报文，此时该 SOCKET 即进入到 FIN_WAIT_1 状态。而当对方回应 ACK 报文后，则进入到 FIN_WAIT_2 状态，</p>
