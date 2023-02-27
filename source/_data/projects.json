@@ -1,0 +1,12 @@
+[
+    {
+       "name":"ComposeStudy",
+       "url":"https://github.com/almosting/ComposeStudy",
+       "desc":"JetPack Compose学习项目"
+    },
+    {
+       "name":"MVI Architecture",
+       "url":"https://github.com/almosting/CleanAndroidArchitecture",
+       "desc":"MVI Architecture"
+    }
+]
